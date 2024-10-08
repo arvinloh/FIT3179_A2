@@ -1,0 +1,73 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": "Monthly births by state in Australia with filter and tooltip.",
+  "width": 700,
+  "height": 400,
+  "data": {
+    "url": "https://raw.githubusercontent.com/arvinloh/w10-homework/refs/heads/main/data/method_of_birth.csv",
+    "format": { "type": "csv" }
+  },
+  "transform": [
+    {
+      "filter": "datum.Month != 'Total'"
+    },
+    {
+      "fold": ["NSW", "Vic", "Qld", "WA", "SA", "Tas", "ACT", "NT"],
+      "as": ["State", "Births"]
+    },
+    {
+      "filter": { "selection": "state_filter" }
+    }
+  ],
+  "mark": "bar",
+  "encoding": {
+    "x": {
+      "field": "Month",
+      "type": "ordinal",
+      "title": "Month",
+      "sort": [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December"
+      ]
+    },
+    "y": {
+      "field": "Births",
+      "type": "quantitative",
+      "title": "Number of Births",
+      "scale": { "domain": [0, 30000] }
+    },
+    "color": {
+      "field": "State",
+      "type": "nominal",
+      "title": "State",
+      "legend": { "title": "State" }
+    },
+    "tooltip": [
+      { "field": "Month", "type": "ordinal", "title": "Month" },
+      { "field": "State", "type": "nominal", "title": "State" },
+      { "field": "Births", "type": "quantitative", "title": "Number of Births" }
+    ]
+  },
+  "selection": {
+    "state_filter": {
+      "type": "multi",
+      "fields": ["State"],
+      "bind": {
+        "input": "select",
+        "options": ["NSW", "Vic", "Qld", "WA", "SA", "Tas", "ACT", "NT"],
+        "name": "Select State: ",
+        "default": "NSW"
+      }
+    }
+  }
+}
