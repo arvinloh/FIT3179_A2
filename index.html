@@ -31,6 +31,15 @@
     }).catch(console.error);
   </script>
 
+
+  <div id="donut"></div>
+  <script type="text/javascript">
+    var spec2 = "js/donut.vg.json";
+    vegaEmbed('#donut', spec2).then(function(result) {
+      // Access the Vega view instance
+    }).catch(console.error);
+  </script>
+
   <footer>
     Data from the Australian Bureau of Statistics. Visualisation powered by Vega-Lite.
   </footer>

@@ -1,0 +1,101 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "description": "Donut charts showing the method of birth distribution, color-coded by maternal age in 2021.",
+    "data": {
+      "values": [
+        {"Method": "Non-instrumental vaginal", "Maternal_age": "Under 20", "Births": 3085},
+        {"Method": "Non-instrumental vaginal", "Maternal_age": "20–24", "Births": 18182},
+        {"Method": "Non-instrumental vaginal", "Maternal_age": "25–29", "Births": 42153},
+        {"Method": "Non-instrumental vaginal", "Maternal_age": "30–34", "Births": 56281},
+        {"Method": "Non-instrumental vaginal", "Maternal_age": "35–39", "Births": 29895},
+        {"Method": "Non-instrumental vaginal", "Maternal_age": "40 and older", "Births": 5205},
+        {"Method": "Non-instrumental vaginal", "Maternal_age": "Not stated", "Births": 12},
+  
+        {"Method": "Forceps", "Maternal_age": "Under 20", "Births": 252},
+        {"Method": "Forceps", "Maternal_age": "20–24", "Births": 1416},
+        {"Method": "Forceps", "Maternal_age": "25–29", "Births": 4337},
+        {"Method": "Forceps", "Maternal_age": "30–34", "Births": 6166},
+        {"Method": "Forceps", "Maternal_age": "35–39", "Births": 2712},
+        {"Method": "Forceps", "Maternal_age": "40 and older", "Births": 420},
+        {"Method": "Forceps", "Maternal_age": "Not stated", "Births": 1},
+  
+        {"Method": "Vacuum extraction", "Maternal_age": "Under 20", "Births": 400},
+        {"Method": "Vacuum extraction", "Maternal_age": "20–24", "Births": 2150},
+        {"Method": "Vacuum extraction", "Maternal_age": "25–29", "Births": 6156},
+        {"Method": "Vacuum extraction", "Maternal_age": "30–34", "Births": 8941},
+        {"Method": "Vacuum extraction", "Maternal_age": "35–39", "Births": 4003},
+        {"Method": "Vacuum extraction", "Maternal_age": "40 and older", "Births": 624},
+        {"Method": "Vacuum extraction", "Maternal_age": "Not stated", "Births": 1},
+  
+        {"Method": "Caesarean section", "Maternal_age": "Under 20", "Births": 1023},
+        {"Method": "Caesarean section", "Maternal_age": "20–24", "Births": 7853},
+        {"Method": "Caesarean section", "Maternal_age": "25–29", "Births": 25633},
+        {"Method": "Caesarean section", "Maternal_age": "30–34", "Births": 45377},
+        {"Method": "Caesarean section", "Maternal_age": "35–39", "Births": 31134},
+        {"Method": "Caesarean section", "Maternal_age": "40 and older", "Births": 7859},
+        {"Method": "Caesarean section", "Maternal_age": "Not stated", "Births": 8},
+  
+        {"Method": "Not stated", "Maternal_age": "Under 20", "Births": 9},
+        {"Method": "Not stated", "Maternal_age": "20–24", "Births": 18},
+        {"Method": "Not stated", "Maternal_age": "25–29", "Births": 21},
+        {"Method": "Not stated", "Maternal_age": "30–34", "Births": 14},
+        {"Method": "Not stated", "Maternal_age": "35–39", "Births": 14},
+        {"Method": "Not stated", "Maternal_age": "40 and older", "Births": 5},
+        {"Method": "Not stated", "Maternal_age": "Not stated", "Births": 0}
+      ]
+    },
+    "facet": {
+      "column": {
+        "field": "Method",
+        "type": "nominal",
+        "sort": ["Non-instrumental vaginal", "Forceps", "Vacuum extraction", "Caesarean section", "Not stated"],
+        "header": {
+          "title": "Method of Birth",
+          "labelFontSize": 12,
+          "titleFontSize": 14
+        }
+      }
+    },
+    "spec": {
+      "width": 120,
+      "height": 120,
+      "mark": {
+        "type": "arc",
+        "innerRadius": 60,
+        "outerRadius": 100
+      },
+      "encoding": {
+        "theta": {
+          "field": "Births",
+          "type": "quantitative"
+        },
+        "color": {
+          "field": "Maternal_age",
+          "type": "nominal",
+          "title": "Maternal Age Group",
+          "scale": {
+            "scheme": "category10"
+          }
+        },
+        "tooltip": [
+          {"field": "Maternal_age", "type": "nominal", "title": "Maternal Age Group"},
+          {"field": "Births", "type": "quantitative", "title": "Number of Births"}
+        ]
+      },
+      "config": {
+        "view": {
+          "stroke": "transparent"
+        },
+        "legend": {
+          "titleFontSize": 12,
+          "labelFontSize": 10
+        }
+      }
+    },
+    "resolve": {
+      "scale": {
+        "color": "shared"
+      }
+    }
+  }
+  
