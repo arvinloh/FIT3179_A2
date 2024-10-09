@@ -83,8 +83,7 @@
           "Australian Capital Territory",
           "Northern Territory"
         ],
-        "name": "Select States: ",
-        "multiple": true
+        "name": "Select States: "
       }
     }
   ],

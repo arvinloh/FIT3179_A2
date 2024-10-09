@@ -31,7 +31,7 @@ p {
 }
 
 
-#choropleth_map, #visualisation {
+#choropleth_map, #bar_chart {
   display: flex;
   justify-content: center;
   margin: 20px 0;
