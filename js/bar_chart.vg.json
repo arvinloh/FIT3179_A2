@@ -18,53 +18,118 @@
       "as": ["State", "Births"]
     },
     {
+      "filter": "datum.Month != null && datum.Month != '' && datum.Month != 'undefined'"
+    },
+    {
       "filter": "indexof(selected_states, 'All') >= 0 || indexof(selected_states, datum.State) >= 0"
     }
   ],
-  "mark": {
-    "type": "bar",
-    "tooltip": true
-  },
-  "encoding": {
-    "x": {
-      "field": "Month",
-      "type": "ordinal",
-      "title": "Month of Birth",
-      "sort": [
-        "January", "February", "March", "April", "May", "June",
-        "July", "August", "September", "October", "November", "December"
+  "layer": [
+    {
+      "mark": {
+        "type": "bar",
+        "tooltip": true
+      },
+      "encoding": {
+        "x": {
+          "field": "Month",
+          "type": "ordinal",
+          "title": "Month of Birth",
+          "sort": [
+            "January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December"
+          ],
+          "axis": {
+            "labelAngle": -45,
+            "titleFontSize": 14,
+            "labelFontSize": 12
+          }
+        },
+        "y": {
+          "field": "Births",
+          "type": "quantitative",
+          "title": "Number of Births",
+          "axis": {
+            "titleFontSize": 14,
+            "labelFontSize": 12
+          }
+        },
+        "color": {
+          "field": "State",
+          "type": "nominal",
+          "title": "State",
+          "scale": { "scheme": "category10" },
+          "legend": {
+            "titleFontSize": 14,
+            "labelFontSize": 12
+          }
+        },
+        "tooltip": [
+          { "field": "Month", "type": "ordinal", "title": "Month" },
+          { "field": "State", "type": "nominal", "title": "State" },
+          { "field": "Births", "type": "quantitative", "title": "Number of Births" }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "rule",
+        "color": "red",
+        "strokeWidth": 3,
+        "tooltip": true
+      },
+      "transform": [
+        {
+          "aggregate": [{"op": "sum", "field": "Births", "as": "TotalBirths"}],
+          "groupby": ["Month"]
+        },
+        {
+          "aggregate": [{"op": "mean", "field": "TotalBirths", "as": "MeanBirths"}]
+        }
       ],
-      "axis": {
-        "labelAngle": -45,
-        "titleFontSize": 14,
-        "labelFontSize": 12
+      "encoding": {
+        "y": {
+          "field": "MeanBirths",
+          "type": "quantitative"
+        },
+        "tooltip": [
+          { "field": "MeanBirths", "type": "quantitative", "title": "Average Births" }
+        ]
       }
     },
-    "y": {
-      "field": "Births",
-      "type": "quantitative",
-      "title": "Number of Births",
-      "axis": {
-        "titleFontSize": 14,
-        "labelFontSize": 12
+    {
+      "mark": {
+        "type": "text",
+        "color": "red",
+        "align": "left",
+        "dx": 5,  
+        "dy": -10,  
+        "fontSize": 12,
+        "fontStyle": "italic"
+      },
+      "transform": [
+        {
+          "aggregate": [{"op": "sum", "field": "Births", "as": "TotalBirths"}],
+          "groupby": ["Month"]
+        },
+        {
+          "aggregate": [{"op": "mean", "field": "TotalBirths", "as": "MeanBirths"}]
+        }
+      ],
+      "encoding": {
+        "y": {
+          "field": "MeanBirths",
+          "type": "quantitative"
+        },
+        "x": {
+          "value": 11  
+        },
+        "text": {
+          "value": "Average Births"
+        }
       }
-    },
-    "color": {
-      "field": "State",
-      "type": "nominal",
-      "title": "State",
-      "scale": { "scheme": "category10" },
-      "legend": {
-        "titleFontSize": 14,
-        "labelFontSize": 12
-      }
-    },
-    "tooltip": [
-      { "field": "Month", "type": "ordinal", "title": "Month" },
-      { "field": "State", "type": "nominal", "title": "State" },
-      { "field": "Births", "type": "quantitative", "title": "Number of Births" }
-    ]
-  },
+    }
+  ],
   "params": [
     {
       "name": "selected_states",
