@@ -2,11 +2,19 @@
 
 /* General styles */
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Roboto', serif;
   margin: 0;
   padding: 0;
-  background-color: white;
+  background-color: #f4f4f9;
   color: #333;
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin: 20px auto;
 }
 
 h1 {
@@ -22,22 +30,28 @@ p {
   color: #7f8c8d;
 }
 
+
+#choropleth_map, #visualisation {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
 #choropleth_map {
   display: flex;
   justify-content: center;
   align-items: center;
   margin: 20px auto;
-  width: 90%;
-  max-width: 800px;
-  height: 500px;
-  border: 1px solid #ddd;
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 900px;
+  height: 594px;
+  /* Reduce padding or adjust dimensions in Vega-Lite spec */
+  padding: 0px;
+  box-shadow: 0 0 10px rgba(1, 1, 1, 0.317);
 }
 
-#visualisation {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 100px;
+footer {
+  text-align: center;
+  font-size: 12px;
+  color: #999;
+  margin-top: 20px;
 }
