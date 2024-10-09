@@ -1,10 +1,10 @@
-﻿State,mothers,fetal deaths,live births,not stated,total
-New South Wales,97999,644,98628,37,99309
-Victoria,80661,636,81153,0,81789
-Queensland,62452,510,62873,0,63383
-Western Australia,34201,196,34480,0,34676
-South Australia,19909,144,20037,0,20181
-Tasmania,6004,28,6053,0,6081
-Australian Capital Territory,6352,41,6419,0,6460
-Northern Territory,3782,62,3764,0,3826
-Australia,311360,2261,313407,37,315705
+﻿State,mothers,fetal deaths,live births,not stated,total,male,female
+New South Wales,97999,644,98628,37,99309,50779,47835
+Victoria,80661,636,81153,0,81789,41436,39713
+Queensland,62452,510,62873,0,63383,32259,30613
+Western Australia,34201,196,34480,0,34676,17712,16764
+South Australia,19909,144,20037,0,20181,10298,9738
+Tasmania,6004,28,6053,0,6081,3116,2937
+Australian Capital Territory,6352,41,6419,0,6460,3334,3085
+Northern Territory,3782,62,3764,0,3826,1899,1865
+Australia,311360,2261,313407,37,315705,160833,152550
