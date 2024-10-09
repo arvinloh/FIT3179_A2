@@ -1,0 +1,106 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Monthly Births by State in Australia",
+    "fontSize": 18,
+    "anchor": "start",
+    "color": "#333"
+  },
+  "width": 800,
+  "height": 500,
+  "data": {
+    "url": "https://raw.githubusercontent.com/arvinloh/FIT3179_A2/main/data/month_of_birth.csv",
+    "format": { "type": "csv" }
+  },
+  "transform": [
+    {
+      "fold": ["NSW", "Vic", "Qld", "WA", "SA", "Tas", "ACT", "NT"],
+      "as": ["State", "Births"]
+    },
+    {
+      "filter": "indexof(selected_states, 'All') >= 0 || indexof(selected_states, datum.State) >= 0"
+    }
+  ],
+  "mark": {
+    "type": "bar",
+    "tooltip": true
+  },
+  "encoding": {
+    "x": {
+      "field": "Month",
+      "type": "ordinal",
+      "title": "Month of Birth",
+      "sort": [
+        "January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+      ],
+      "axis": {
+        "labelAngle": -45,
+        "titleFontSize": 14,
+        "labelFontSize": 12
+      }
+    },
+    "y": {
+      "field": "Births",
+      "type": "quantitative",
+      "title": "Number of Births",
+      "axis": {
+        "titleFontSize": 14,
+        "labelFontSize": 12
+      }
+    },
+    "color": {
+      "field": "State",
+      "type": "nominal",
+      "title": "State",
+      "scale": { "scheme": "category10" },
+      "legend": {
+        "titleFontSize": 14,
+        "labelFontSize": 12
+      }
+    },
+    "tooltip": [
+      { "field": "Month", "type": "ordinal", "title": "Month" },
+      { "field": "State", "type": "nominal", "title": "State" },
+      { "field": "Births", "type": "quantitative", "title": "Number of Births" }
+    ]
+  },
+  "params": [
+    {
+      "name": "selected_states",
+      "value": ["All"],
+      "bind": {
+        "input": "select",
+        "options": ["All", "NSW", "Vic", "Qld", "WA", "SA", "Tas", "ACT", "NT"],
+        "labels": [
+          "All",
+          "New South Wales",
+          "Victoria",
+          "Queensland",
+          "Western Australia",
+          "South Australia",
+          "Tasmania",
+          "Australian Capital Territory",
+          "Northern Territory"
+        ],
+        "name": "Select States: ",
+        "multiple": true
+      }
+    }
+  ],
+  "config": {
+    "background": "#ffffff",
+    "view": {
+      "stroke": "transparent"
+    },
+    "axis": {
+      "grid": true,
+      "domainWidth": 1
+    },
+    "legend": {
+      "orient": "right",
+      "titleFontSize": 14,
+      "labelFontSize": 12
+    }
+  }
+}
