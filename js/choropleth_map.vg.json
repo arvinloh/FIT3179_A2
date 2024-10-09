@@ -1,8 +1,15 @@
 ﻿{
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "title": "Map of Australia",
+  "title": {
+    "text": "Live Births in Australian States",
+    "subtitle": "Data on Mothers, Fetal Deaths, and Live Births",
+    "fontSize": 16,
+    "anchor": "start",
+    "color": "black"
+  },
   "width": 800,
   "height": 500,
+  "background": "lightblue",
   "projection": {
     "type": "mercator"
   },
@@ -22,45 +29,55 @@
           "format": { "type": "csv" }
         },
         "key": "State",
-        "fields": ["live births", "mothers", "fetal deaths"]
+        "fields": ["live births", "mothers", "fetal deaths", "not stated", "total"]
       }
     },
     {
       "calculate": "datum['live births']",
-      "as": "live births"
+      "as": "live_births"
     },
     {
       "calculate": "datum['live births'] / 313407 * 100",
-      "as": "percentage of live births"
+      "as": "percentage_live_births"
     }
   ],
-  "mark": { "type": "geoshape" },
-  "encoding": {
-    "color": {
-      "field": "live births",
-      "type": "quantitative",
-      "scale": { "scheme": "blues" },
-      "legend": { "title": "Live Births of Babies" }
-    },
-    "tooltip": [
-      { "field": "properties.name", "type": "nominal", "title": "State" },
-      {
-        "field": "live births",
-        "type": "quantitative",
-        "title": "Live Births"
+  "layer": [
+    {
+      "mark": {
+        "type": "geoshape",
+        "stroke": "white",
+        "strokeWidth": 1
       },
-      { "field": "mothers", "type": "quantitative", "title": "New Mothers" },
-      {
-        "field": "fetal deaths",
-        "type": "quantitative",
-        "title": "Fetal Deaths"
-      },
-      {
-        "field": "percentage of live births",
-        "type": "quantitative",
-        "title": "Percentage of Live Births",
-        "format": ".2f"
+      "encoding": {
+        "color": {
+          "field": "live_births",
+          "type": "quantitative",
+          "scale": { "scheme": "blues" },
+          "legend": { "title": "Live Births" }
+        },
+        "tooltip": [
+          { "field": "properties.name", "type": "nominal", "title": "State" },
+          { "field": "live_births", "type": "quantitative", "title": "Live Births" },
+          { "field": "mothers", "type": "quantitative", "title": "New Mothers" },
+          { "field": "fetal deaths", "type": "quantitative", "title": "Fetal Deaths" },
+          { "field": "not stated", "type": "quantitative", "title": "Not Stated" },
+          { "field": "total", "type": "quantitative", "title": "Total" },
+          { 
+            "field": "percentage_live_births", 
+            "type": "quantitative", 
+            "title": "Percentage of Live Births", 
+            "format": ".2f" 
+          }
+        ]
       }
-    ]
-  }
+    },
+    {
+      "mark": {
+        "type": "geoshape",
+        "stroke": "lightgray",
+        "strokeWidth": 0.5,
+        "fill": null
+      }
+    }
+  ]
 }
