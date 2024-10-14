@@ -1,25 +1,15 @@
-﻿,,,,,,,,,
-,,,,,,,,,
-,,,,,,,,,
-"Table 2.38: Method of birth, by maternal age, 2021",,,,,,,,,
-,Maternal age (years),,,,,,,,
-Method of birth,Under 20,20–24,25–29,30–34,35–39,40 and older,Not stated,Total,
- ,Number,,,,,,,,
-Non-instrumental vaginal(a),"3,085","18,182","42,153","56,281","29,895","5,205",12,"154,813",
-Forceps,252,"1,416","4,337","6,166","2,712",420,1,"15,304",
-Vacuum extraction,400,"2,150","6,156","8,941","4,003",624,1,"22,275",
-Caesarean section,"1,023","7,853","25,633","45,377","31,134","7,859",8,"118,887",
-Not stated,9,18,21,14,14,5,0,81,
-Total,"4,769","29,619","78,300","116,779","67,758","14,113",22,"311,360",
- ,Per cent,,,,,,,,
-Non-instrumental vaginal(a),64.7,61.4,53.8,48.2,44.1,36.9,54.5,49.7,
-Forceps,5.3,4.8,5.5,5.3,4.0,3.0,4.5,4.9,
-Vacuum extraction,8.4,7.3,7.9,7.7,5.9,4.4,4.5,7.2,
-Caesarean section,21.5,26.5,32.7,38.9,45.9,55.7,36.4,38.2,
-Not stated,0.2,0.1,0.0,0.0,0.0,0.0,0.0,0.0,
-Total,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,
-"(a) For NSW and the NT, ‘Non-instrumental vaginal’ includes all women who had a vaginal breech birth, whether or not instruments were used. For the remaining jurisdictions, ‘Non-instrumental vaginal’ includes vaginal breech births only where instruments were not used.",,,,,,,,,
-"Note:For multiple births, the method of birth of the first-born baby was used.",,,,,,,,,
-,,,,,,,,,
-Source: AIHW analysis of National Perinatal Data Collection.,,,,,,,,,
-,,,,,,,,,
+﻿Maternal age (years),Under 20,20–24,25–29,30–34,35–39,40 and older,Not stated,Total
+Method of birth,Number,,,,,,,,
+Non-instrumental vaginal(a),3085,18182,42153,56281,29895,5205,12,154813
+Forceps,252,1416,4337,6166,2712,420,1,15304
+Vacuum extraction,400,2150,6156,8941,4003,624,1,22275
+Caesarean section,1023,7853,25633,45377,31134,7859,8,118887
+Not stated,9,18,21,14,14,5,0,81
+Total,4769,29619,78300,116779,67758,14113,22,311360
+,Per cent,,,,,,,,
+Non-instrumental vaginal(a),64.7,61.4,53.8,48.2,44.1,36.9,54.5,49.7
+Forceps,5.3,4.8,5.5,5.3,4.0,3.0,4.5,4.9
+Vacuum extraction,8.4,7.3,7.9,7.7,5.9,4.4,4.5,7.2
+Caesarean section,21.5,26.5,32.7,38.9,45.9,55.7,36.4,38.2
+Not stated,0.2,0.1,0.0,0.0,0.0,0.0,0.0,0.0
+Total,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0
