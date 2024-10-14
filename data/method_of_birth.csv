@@ -1,15 +1,31 @@
-﻿Maternal age (years),Under 20,20–24,25–29,30–34,35–39,40 and older,Not stated,Total
-Method of birth,Number,,,,,,,,
-Non-instrumental vaginal(a),3085,18182,42153,56281,29895,5205,12,154813
-Forceps,252,1416,4337,6166,2712,420,1,15304
-Vacuum extraction,400,2150,6156,8941,4003,624,1,22275
-Caesarean section,1023,7853,25633,45377,31134,7859,8,118887
-Not stated,9,18,21,14,14,5,0,81
-Total,4769,29619,78300,116779,67758,14113,22,311360
-,Per cent,,,,,,,,
-Non-instrumental vaginal(a),64.7,61.4,53.8,48.2,44.1,36.9,54.5,49.7
-Forceps,5.3,4.8,5.5,5.3,4.0,3.0,4.5,4.9
-Vacuum extraction,8.4,7.3,7.9,7.7,5.9,4.4,4.5,7.2
-Caesarean section,21.5,26.5,32.7,38.9,45.9,55.7,36.4,38.2
-Not stated,0.2,0.1,0.0,0.0,0.0,0.0,0.0,0.0
-Total,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0
+﻿MethodOfBirth,MaternalAge,Number
+Non-instrumental vaginal,Under 20,3085
+Non-instrumental vaginal,20–24,18182
+Non-instrumental vaginal,25–29,42153
+Non-instrumental vaginal,30–34,56281
+Non-instrumental vaginal,35–39,29895
+Non-instrumental vaginal,40 and older,5205
+Forceps,Under 20,252
+Forceps,20–24,1416
+Forceps,25–29,4337
+Forceps,30–34,6166
+Forceps,35–39,2712
+Forceps,40 and older,420
+Vacuum extraction,Under 20,400
+Vacuum extraction,20–24,2150
+Vacuum extraction,25–29,6156
+Vacuum extraction,30–34,8941
+Vacuum extraction,35–39,4003
+Vacuum extraction,40 and older,624
+Caesarean section,Under 20,1023
+Caesarean section,20–24,7853
+Caesarean section,25–29,25633
+Caesarean section,30–34,45377
+Caesarean section,35–39,31134
+Caesarean section,40 and older,7859
+Not stated,Under 20,9
+Not stated,20–24,18
+Not stated,25–29,21
+Not stated,30–34,14
+Not stated,35–39,14
+Not stated,40 and older,5
