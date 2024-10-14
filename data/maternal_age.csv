@@ -1,73 +1,49 @@
-State,AgeGroup,Number,Percentage
-NSW,Under 20,1357,1.4
-NSW,20–24,8897,9.1
-NSW,25–29,24142,24.6
-NSW,30–34,36755,37.5
-NSW,35–39,22080,22.5
-NSW,40 and older,4753,4.9
-NSW,Not stated,15,0.0
-NSW,Total,97999,100.0
-Vic,Under 20,684,0.8
-Vic,20–24,5380,6.7
-Vic,25–29,18583,23.0
-Vic,30–34,32578,40.4
-Vic,35–39,19384,24.0
-Vic,40 and older,4045,5.0
-Vic,Not stated,7,0.0
-Vic,Total,80661,100.0
-Qld,Under 20,1482,2.4
-Qld,20–24,8178,13.1
-Qld,25–29,17253,27.6
-Qld,30–34,21349,34.2
-Qld,35–39,11757,18.8
-Qld,40 and older,2433,3.9
-Qld,Not stated,0,0.0
-Qld,Total,62452,100.0
-WA,Under 20,595,1.7
-WA,20–24,3456,10.1
-WA,25–29,8595,25.1
-WA,30–34,12834,37.5
-WA,35–39,7284,21.3
-WA,40 and older,1437,4.2
-WA,Not stated,0,0.0
-WA,Total,34201,100.0
-SA,Under 20,286,1.4
-SA,20–24,1932,9.7
-SA,25–29,5490,27.6
-SA,30–34,7390,37.1
-SA,35–39,4001,20.1
-SA,40 and older,810,4.1
-SA,Not stated,0,0.0
-SA,Total,19909,100.0
-Tas,Under 20,111,1.8
-Tas,20–24,800,13.3
-Tas,25–29,1762,29.3
-Tas,30–34,2097,34.9
-Tas,35–39,1044,17.4
-Tas,40 and older,190,3.2
-Tas,Not stated,0,0.0
-Tas,Total,6004,100.0
-ACT,Under 20,53,0.8
-ACT,20–24,386,6.1
-ACT,25–29,1476,23.2
-ACT,30–34,2562,40.3
-ACT,35–39,1563,24.6
-ACT,40 and older,312,4.9
-ACT,Not stated,0,0.0
-ACT,Total,6352,100.0
-NT,Under 20,201,5.3
-NT,20–24,590,15.6
-NT,25–29,999,26.4
-NT,30–34,1214,32.1
-NT,35–39,645,17.1
-NT,40 and older,133,3.5
-NT,Not stated,0,0.0
-NT,Total,3782,100.0
-Australia,Under 20,4769,1.5
-Australia,20–24,29619,9.5
-Australia,25–29,78300,25.1
-Australia,30–34,116779,37.5
-Australia,35–39,67758,21.8
-Australia,40 and older,14113,4.5
-Australia,Not stated,22,0.0
-Australia,Total,311360,100.0
+State,MaternalAge,Number
+NSW,Under 20,1357
+NSW,20–24,8897
+NSW,25–29,24142
+NSW,30–34,36755
+NSW,35–39,22080
+NSW,40 and older,4753
+Vic,Under 20,684
+Vic,20–24,5380
+Vic,25–29,18583
+Vic,30–34,32578
+Vic,35–39,19384
+Vic,40 and older,4045
+Qld,Under 20,1482
+Qld,20–24,8178
+Qld,25–29,17253
+Qld,30–34,21349
+Qld,35–39,11757
+Qld,40 and older,2433
+WA,Under 20,595
+WA,20–24,3456
+WA,25–29,8595
+WA,30–34,12834
+WA,35–39,7284
+WA,40 and older,1437
+SA,Under 20,286
+SA,20–24,1932
+SA,25–29,5490
+SA,30–34,7390
+SA,35–39,4001
+SA,40 and older,810
+Tas,Under 20,111
+Tas,20–24,800
+Tas,25–29,1762
+Tas,30–34,2097
+Tas,35–39,1044
+Tas,40 and older,190
+ACT,Under 20,53
+ACT,20–24,386
+ACT,25–29,1476
+ACT,30–34,2562
+ACT,35–39,1563
+ACT,40 and older,312
+NT,Under 20,201
+NT,20–24,590
+NT,25–29,999
+NT,30–34,1214
+NT,35–39,645
+NT,40 and older,133
