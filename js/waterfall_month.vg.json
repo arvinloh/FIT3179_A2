@@ -82,7 +82,7 @@
       "x": {
         "field": "label",
         "type": "ordinal",
-        "axis": {"labelAngle": 0, "title": "Months", "labelFontSize": 12, "titleFontSize": 14},
+        "axis": {"labelAngle": -45, "title": "Months", "labelFontSize": 12, "titleFontSize": 14},
         "sort": [
           "January",
           "February",

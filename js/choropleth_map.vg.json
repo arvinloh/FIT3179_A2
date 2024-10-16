@@ -10,7 +10,7 @@
   },
   "width": 815,
   "height": 540,
-  "background": "lightblue",
+  "background": "#f0f0f0",
   "config": {
     "font": "Roboto",
     "title": {
@@ -18,7 +18,9 @@
     },
     "axis": {
       "labelFont": "Roboto",
-      "titleFont": "Roboto"
+      "titleFont": "Roboto",
+      "grid": true,
+      "gridColor": "#e0e0e0"
     },
     "legend": {
       "labelFont": "Roboto",
@@ -63,23 +65,20 @@
     {
       "mark": {
         "type": "geoshape",
-        "stroke": "white",
+        "stroke": "#b3b3b3",
         "strokeWidth": 1
       },
       "encoding": {
         "color": {
           "field": "live_births",
           "type": "quantitative",
-          "scale": { "scheme": "blues" },
+          "scale": { "scheme": "reds" },
           "legend": { "title": "Live Births" }
         },
         "tooltip": [
           { "field": "properties.name", "type": "nominal", "title": "State" },
           { "field": "live_births", "type": "quantitative", "title": "Live Births" },
           { "field": "mothers", "type": "quantitative", "title": "New Mothers" },
-          { "field": "fetal deaths", "type": "quantitative", "title": "Fetal Deaths" },
-          { "field": "male", "type": "quantitative", "title": "Male Live Births" },
-          { "field": "female", "type": "quantitative", "title": "Female Live Births" },
           { "field": "not stated", "type": "quantitative", "title": "Not Stated" },
           { "field": "total", "type": "quantitative", "title": "Total Live Births" },
           { 

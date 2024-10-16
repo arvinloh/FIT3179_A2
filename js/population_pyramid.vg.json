@@ -1,174 +1,66 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "description": "Population Pyramid of Births by Gender and State",
     "title": {
-      "text": "Monthly Births by State in Australia",
-      "fontSize": 18,
-      "anchor": "start",
-      "color": "#333"
-    },
-    "width": 800,
+        "text": "Population Pyramid of Births by Gender and State",
+        "fontSize": 20,
+        "font": "Roboto",
+        "anchor": "middle",
+        "color": "black"
+      },
+    "width": 700,
     "height": 500,
     "data": {
-      "url": "https://raw.githubusercontent.com/arvinloh/FIT3179_A2/main/data/month_of_birth.csv",
+      "url": "https://raw.githubusercontent.com/arvinloh/FIT3179_A2/main/data/gender_ratio.csv",
       "format": { "type": "csv" }
     },
     "transform": [
+      { "filter": "datum.Sex == 'Male' || datum.Sex == 'Female'" },
       {
         "fold": ["NSW", "Vic", "Qld", "WA", "SA", "Tas", "ACT", "NT"],
-        "as": ["State", "Births"]
+        "as": ["State", "Number"]
       },
+      { "calculate": "toNumber(replace(datum.Number, ',', ''))", "as": "Number" },
       {
-        "filter": "datum.Month != null && datum.Month != '' && datum.Month != 'undefined'"
-      },
-      {
-        "filter": "indexof(selected_states, 'All') >= 0 || indexof(selected_states, datum.State) >= 0"
+        "calculate": "datum.Sex == 'Female' ? -datum.Number : datum.Number",
+        "as": "Value"
       }
     ],
-    "layer": [
-      {
-        "mark": {
-          "type": "bar",
-          "tooltip": true
+    "mark": "bar",
+    "encoding": {
+      "y": {
+        "field": "State",
+        "type": "ordinal",
+        "title": "State",
+        "axis": { "labelAngle": 0 },
+        "sort": "x"
+      },
+      "x": {
+        "field": "Value",
+        "type": "quantitative",
+        "title": "Number of Births",
+        "axis": {
+          "format": "s",
+          "labelExpr": "abs(datum.value)"
         },
-        "encoding": {
-          "x": {
-            "field": "Month",
-            "type": "ordinal",
-            "title": "Month of Birth",
-            "sort": [
-              "January", "February", "March", "April", "May", "June",
-              "July", "August", "September", "October", "November", "December"
-            ],
-            "axis": {
-              "labelAngle": -45,
-              "titleFontSize": 14,
-              "labelFontSize": 12
-            }
-          },
-          "y": {
-            "field": "Births",
-            "type": "quantitative",
-            "title": "Number of Births",
-            "axis": {
-              "titleFontSize": 14,
-              "labelFontSize": 12
-            }
-          },
-          "color": {
-            "field": "State",
-            "type": "nominal",
-            "title": "State",
-            "scale": {
-              "domain": ["NSW", "Vic", "Qld", "WA", "SA", "Tas", "ACT", "NT"],
-              "range": ["#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7", "#999999"]
-            },
-            "legend": {
-              "titleFontSize": 14,
-              "labelFontSize": 12
-            }
-          },
-          "tooltip": [
-            { "field": "Month", "type": "ordinal", "title": "Month" },
-            { "field": "State", "type": "nominal", "title": "State" },
-            { "field": "Births", "type": "quantitative", "title": "Number of Births" }
-          ]
+        "scale": {
+          "domain": [-51000, 51000]
         }
       },
-      {
-        "mark": {
-          "type": "rule",
-          "color": "#0072B2",
-          "strokeWidth": 3,
-          "tooltip": true
-        },
-        "transform": [
-          {
-            "aggregate": [{"op": "sum", "field": "Births", "as": "TotalBirths"}],
-            "groupby": ["Month"]
-          },
-          {
-            "aggregate": [{"op": "mean", "field": "TotalBirths", "as": "MeanBirths"}]
-          }
-        ],
-        "encoding": {
-          "y": {
-            "field": "MeanBirths",
-            "type": "quantitative"
-          },
-          "tooltip": [
-            { "field": "MeanBirths", "type": "quantitative", "title": "Average Births" }
-          ]
-        }
+      "color": {
+        "field": "Sex",
+        "type": "nominal",
+        "scale": { "range": ["#1f77b4", "#ff7f0e"] },
+        "legend": { "title": "Sex",
+                    "labelFontSize": 12,
+                    "titleFontSize": 14,
+                    "symbolType": "circle"
+                }
       },
-      {
-        "mark": {
-          "type": "text",
-          "color": "#0072B2",
-          "align": "left",
-          "dx": 5,  
-          "dy": -10,  
-          "fontSize": 12,
-          "fontStyle": "italic"
-        },
-        "transform": [
-          {
-            "aggregate": [{"op": "sum", "field": "Births", "as": "TotalBirths"}],
-            "groupby": ["Month"]
-          },
-          {
-            "aggregate": [{"op": "mean", "field": "TotalBirths", "as": "MeanBirths"}]
-          }
-        ],
-        "encoding": {
-          "y": {
-            "field": "MeanBirths",
-            "type": "quantitative"
-          },
-          "x": {
-            "value": 11  
-          },
-          "text": {
-            "value": "Average Births"
-          }
-        }
-      }
-    ],
-    "params": [
-      {
-        "name": "selected_states",
-        "value": ["All"],
-        "bind": {
-          "input": "select",
-          "options": ["All", "NSW", "Vic", "Qld", "WA", "SA", "Tas", "ACT", "NT"],
-          "labels": [
-            "All",
-            "New South Wales",
-            "Victoria",
-            "Queensland",
-            "Western Australia",
-            "South Australia",
-            "Tasmania",
-            "Australian Capital Territory",
-            "Northern Territory"
-          ],
-          "name": "Select States: "
-        }
-      }
-    ],
-    "config": {
-      "background": "#ffffff",
-      "view": {
-        "stroke": "transparent"
-      },
-      "axis": {
-        "grid": true,
-        "domainWidth": 1
-      },
-      "legend": {
-        "orient": "right",
-        "titleFontSize": 14,
-        "labelFontSize": 12,
-        "symbolType": "circle"
-      }
+      "tooltip": [
+        { "field": "State", "type": "nominal" },
+        { "field": "Sex", "type": "nominal" },
+        { "field": "Number", "type": "quantitative" }
+      ]
     }
   }

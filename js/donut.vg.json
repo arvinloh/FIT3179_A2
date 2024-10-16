@@ -1,101 +1,86 @@
 {
-    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "description": "Donut charts showing the method of birth distribution, color-coded by maternal age in 2021.",
-    "data": {
-      "values": [
-        {"Method": "Non-instrumental vaginal", "Maternal_age": "Under 20", "Births": 3085},
-        {"Method": "Non-instrumental vaginal", "Maternal_age": "20–24", "Births": 18182},
-        {"Method": "Non-instrumental vaginal", "Maternal_age": "25–29", "Births": 42153},
-        {"Method": "Non-instrumental vaginal", "Maternal_age": "30–34", "Births": 56281},
-        {"Method": "Non-instrumental vaginal", "Maternal_age": "35–39", "Births": 29895},
-        {"Method": "Non-instrumental vaginal", "Maternal_age": "40 and older", "Births": 5205},
-        {"Method": "Non-instrumental vaginal", "Maternal_age": "Not stated", "Births": 12},
-  
-        {"Method": "Forceps", "Maternal_age": "Under 20", "Births": 252},
-        {"Method": "Forceps", "Maternal_age": "20–24", "Births": 1416},
-        {"Method": "Forceps", "Maternal_age": "25–29", "Births": 4337},
-        {"Method": "Forceps", "Maternal_age": "30–34", "Births": 6166},
-        {"Method": "Forceps", "Maternal_age": "35–39", "Births": 2712},
-        {"Method": "Forceps", "Maternal_age": "40 and older", "Births": 420},
-        {"Method": "Forceps", "Maternal_age": "Not stated", "Births": 1},
-  
-        {"Method": "Vacuum extraction", "Maternal_age": "Under 20", "Births": 400},
-        {"Method": "Vacuum extraction", "Maternal_age": "20–24", "Births": 2150},
-        {"Method": "Vacuum extraction", "Maternal_age": "25–29", "Births": 6156},
-        {"Method": "Vacuum extraction", "Maternal_age": "30–34", "Births": 8941},
-        {"Method": "Vacuum extraction", "Maternal_age": "35–39", "Births": 4003},
-        {"Method": "Vacuum extraction", "Maternal_age": "40 and older", "Births": 624},
-        {"Method": "Vacuum extraction", "Maternal_age": "Not stated", "Births": 1},
-  
-        {"Method": "Caesarean section", "Maternal_age": "Under 20", "Births": 1023},
-        {"Method": "Caesarean section", "Maternal_age": "20–24", "Births": 7853},
-        {"Method": "Caesarean section", "Maternal_age": "25–29", "Births": 25633},
-        {"Method": "Caesarean section", "Maternal_age": "30–34", "Births": 45377},
-        {"Method": "Caesarean section", "Maternal_age": "35–39", "Births": 31134},
-        {"Method": "Caesarean section", "Maternal_age": "40 and older", "Births": 7859},
-        {"Method": "Caesarean section", "Maternal_age": "Not stated", "Births": 8},
-  
-        {"Method": "Not stated", "Maternal_age": "Under 20", "Births": 9},
-        {"Method": "Not stated", "Maternal_age": "20–24", "Births": 18},
-        {"Method": "Not stated", "Maternal_age": "25–29", "Births": 21},
-        {"Method": "Not stated", "Maternal_age": "30–34", "Births": 14},
-        {"Method": "Not stated", "Maternal_age": "35–39", "Births": 14},
-        {"Method": "Not stated", "Maternal_age": "40 and older", "Births": 5},
-        {"Method": "Not stated", "Maternal_age": "Not stated", "Births": 0}
-      ]
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "A donut chart for visualizing births by gestational age with a filter to select each week.",
+  "data": {
+    "values": [
+      {"Gestational_age": 20, "Live_births_Number": 71, "Fetal_deaths_Number": 336},
+      {"Gestational_age": 21, "Live_births_Number": 91, "Fetal_deaths_Number": 341},
+      {"Gestational_age": 22, "Live_births_Number": 128, "Fetal_deaths_Number": 269},
+      {"Gestational_age": 23, "Live_births_Number": 136, "Fetal_deaths_Number": 192},
+      {"Gestational_age": 24, "Live_births_Number": 169, "Fetal_deaths_Number": 110},
+      {"Gestational_age": 25, "Live_births_Number": 192, "Fetal_deaths_Number": 112},
+      {"Gestational_age": 26, "Live_births_Number": 227, "Fetal_deaths_Number": 79},
+      {"Gestational_age": 27, "Live_births_Number": 267, "Fetal_deaths_Number": 78},
+      {"Gestational_age": 28, "Live_births_Number": 378, "Fetal_deaths_Number": 56},
+      {"Gestational_age": 29, "Live_births_Number": 406, "Fetal_deaths_Number": 35},
+      {"Gestational_age": 30, "Live_births_Number": 531, "Fetal_deaths_Number": 38},
+      {"Gestational_age": 31, "Live_births_Number": 747, "Fetal_deaths_Number": 36},
+      {"Gestational_age": 32, "Live_births_Number": 1108, "Fetal_deaths_Number": 50},
+      {"Gestational_age": 33, "Live_births_Number": 1551, "Fetal_deaths_Number": 47},
+      {"Gestational_age": 34, "Live_births_Number": 2880, "Fetal_deaths_Number": 63},
+      {"Gestational_age": 35, "Live_births_Number": 4742, "Fetal_deaths_Number": 48},
+      {"Gestational_age": 36, "Live_births_Number": 10197, "Fetal_deaths_Number": 83},
+      {"Gestational_age": 37, "Live_births_Number": 28091, "Fetal_deaths_Number": 84},
+      {"Gestational_age": 38, "Live_births_Number": 73523, "Fetal_deaths_Number": 98},
+      {"Gestational_age": 39, "Live_births_Number": 98495, "Fetal_deaths_Number": 44},
+      {"Gestational_age": 40, "Live_births_Number": 61854, "Fetal_deaths_Number": 44},
+      {"Gestational_age": 41, "Live_births_Number": 26056, "Fetal_deaths_Number": 14}
+    ]
+  },
+  "transform": [
+    {
+      "filter": {"param": "gestational_age_selector"}
     },
-    "facet": {
-      "column": {
-        "field": "Method",
-        "type": "nominal",
-        "sort": ["Non-instrumental vaginal", "Forceps", "Vacuum extraction", "Caesarean section", "Not stated"],
-        "header": {
-          "title": "Method of Birth",
-          "labelFontSize": 12,
-          "titleFontSize": 14
-        }
-      }
+    {
+      "calculate": "'Live birth number'", "as": "Live_births"
     },
-    "spec": {
-      "width": 120,
-      "height": 120,
-      "mark": {
-        "type": "arc",
-        "innerRadius": 60,
-        "outerRadius": 100
+    {
+      "calculate": "'Fetal death'", "as": "Fetal_deaths"
+    },
+    {
+      "fold": ["Live_births_Number", "Fetal_deaths_Number"],
+      "as": ["Birth_Type", "Number"]
+    },
+    {
+      "calculate": "datum.Birth_Type == 'Live_births_Number' ? 'Live birth number' : 'Fetal death'",
+      "as": "Birth_Type"
+    }
+  ],
+  "params": [
+    {
+      "name": "gestational_age_selector",
+      "select": {
+        "type": "point",
+        "fields": ["Gestational_age"],
+        "toggle": false,
+        "clear": "none"
       },
-      "encoding": {
-        "theta": {
-          "field": "Births",
-          "type": "quantitative"
-        },
-        "color": {
-          "field": "Maternal_age",
-          "type": "nominal",
-          "title": "Maternal Age Group",
-          "scale": {
-            "scheme": "category10"
-          }
-        },
-        "tooltip": [
-          {"field": "Maternal_age", "type": "nominal", "title": "Maternal Age Group"},
-          {"field": "Births", "type": "quantitative", "title": "Number of Births"}
-        ]
-      },
-      "config": {
-        "view": {
-          "stroke": "transparent"
-        },
-        "legend": {
-          "titleFontSize": 12,
-          "labelFontSize": 10
-        }
-      }
-    },
-    "resolve": {
-      "scale": {
-        "color": "shared"
+      "bind": {
+        "input": "range",
+        "min": 20,
+        "max": 41,
+        "step": 1,
+        "name": "Select Gestational Age: "
       }
     }
+  ],
+  "mark": {"type": "arc", "innerRadius": 50},
+  "encoding": {
+    "theta": {"field": "Number", "type": "quantitative"},
+    "color": {
+      "field": "Birth_Type",
+      "type": "nominal",
+      "scale": {
+        "domain": ["Live birth number", "Fetal death"],
+        "range": ["#1f77b4", "#ff7f0e"]
+      },
+      "legend": {
+        "title": "Birth Type"
+      }
+    },
+    "tooltip": [
+      {"field": "Birth_Type", "type": "nominal", "title": "Type"},
+      {"field": "Number", "type": "quantitative", "title": "Number"}
+    ]
   }
-  
+}
