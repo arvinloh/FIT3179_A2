@@ -1,34 +1,128 @@
 {
-    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "description": "Interactive Radial Bar Chart of Births per Month by State",
-    "width": 500,
-    "height": 500,
-    "data": {
-      "url": "https://raw.githubusercontent.com/arvinloh/FIT3179_A2/main/data/month_of_birth.csv",
-      "format": {"type": "csv"}
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Interactive Radial Bar Chart of Births per Month by State",
+  "width": 500,
+  "height": 500,
+  "data": {
+    "url": "https://raw.githubusercontent.com/arvinloh/FIT3179_A2/main/data/month_of_birth.csv",
+    "format": { "type": "csv" }
+  },
+  "transform": [
+    {
+      "fold": ["NSW", "Vic", "Qld", "WA", "SA", "Tas", "ACT", "NT"],
+      "as": ["State", "Births"]
     },
-    "transform": [
-      {"fold": ["NSW", "Vic", "Qld", "WA", "SA", "Tas", "ACT", "NT"], "as": ["State", "Births"]},
-      {"calculate": "month(datum.Month + ' 1, 2020')", "as": "monthNum"},
-      {"calculate": "(datum.monthNum - 1) * (360 / 12)", "as": "angle"},
-      {"calculate": "toNumber(datum.Births)", "as": "Births"}
-    ],
-    "mark": {
-      "type": "arc",
-      "innerRadius": 50,
-      "stroke": "#fff"
+    {
+      "filter": "datum.State === Select_States"
+    }
+  ],
+  "params": [
+    {
+      "name": "Select_States",
+      "value": "NSW",
+      "bind": {
+        "input": "select",
+        "options": ["NSW", "Vic", "Qld", "WA", "SA", "Tas", "ACT", "NT"],
+        "labels": ["NSW", "Vic", "Qld", "WA", "SA", "Tas", "ACT", "NT"],
+        "name": "Select a state: "
+      }
+    }
+  ],
+  "layer": [
+    {
+      "mark": {
+        "type": "arc",
+        "innerRadius": 50,
+        "stroke": "#fff"
+      },
+      "encoding": {
+        "theta": {
+          "field": "Month",
+          "type": "ordinal",
+          "sort": [
+            "January",
+            "February",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+            "August",
+            "September",
+            "October",
+            "November",
+            "December"
+          ]
+        },
+        "radius": {
+          "field": "Births",
+          "type": "quantitative",
+          "scale": { "type": "sqrt", "zero": true, "rangeMin": 50 }
+        },
+        "color": {
+          "field": "State",
+          "type": "nominal",
+          "scale": {
+            "domain": ["NSW", "Vic", "Qld", "WA", "SA", "Tas", "ACT", "NT"],
+            "range": [
+              "#E69F00",
+              "#56B4E9",
+              "#009E73",
+              "#F0E442",
+              "#0072B2",
+              "#D55E00",
+              "#CC79A7",
+              "#999999"
+            ]
+          },
+          "legend": { "title": "State" }
+        },
+        "tooltip": [
+          { "field": "Month", "type": "ordinal" },
+          { "field": "State", "type": "nominal" },
+          { "field": "Births", "type": "quantitative" }
+        ]
+      }
     },
-    "encoding": {
-      "theta": {"field": "Births", "type": "quantitative", "stack": true},
-      "radius": {"field": "Births", "type": "quantitative"},
-      "color": {"field": "State", "type": "nominal", "legend": {"title": "State"}},
-      "tooltip": [
-        {"field": "Month", "type": "nominal"},
-        {"field": "State", "type": "nominal"},
-        {"field": "Births", "type": "quantitative"}
-      ],
-      "order": {"field": "State", "type": "nominal"}
-    },
-    "view": {"stroke": null}
-  }
-  
+    {
+      "mark": {
+        "type": "text",
+        "radiusOffset": 10,
+        "fontSize": 10
+      },
+      "encoding": {
+        "theta": {
+          "field": "Month",
+          "type": "ordinal",
+          "sort": [
+            "January",
+            "February",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+            "August",
+            "September",
+            "October",
+            "November",
+            "December"
+          ]
+        },
+        "radius": {
+          "field": "Births",
+          "type": "quantitative",
+          "scale": { "type": "sqrt", "zero": true, "rangeMin": 50 }
+        },
+        "text": {
+          "field": "Births",
+          "type": "quantitative"
+        },
+        "color": { "value": "black" },
+        "align": { "value": "center" },
+        "baseline": { "value": "middle" }
+      }
+    }
+  ],
+  "view": { "stroke": null }
+}
