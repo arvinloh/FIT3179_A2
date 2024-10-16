@@ -1,0 +1,190 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "width": 800,
+    "height": 450,
+    "title": {
+      "text": "Monthly Waterfall Chart by State",
+      "fontSize": 20,
+      "fontWeight": "bold",
+      "anchor": "start",
+      "color": "#404040"
+    },
+    "params": [
+      {
+        "name": "state",
+        "value": "Australia",
+        "bind": {
+          "input": "select",
+          "options": ["Australia", "NSW", "Vic", "Qld", "WA", "SA", "Tas", "ACT", "NT"],
+          "labels": [
+            "Australia",
+            "NSW",
+            "Victoria",
+            "Queensland",
+            "Western Australia",
+            "South Australia",
+            "Tasmania",
+            "Australian Capital Territory",
+            "Northern Territory"
+          ]
+        }
+      }
+    ],
+    "data": {
+      "values": [
+        {"label": "January", "NSW": 8106, "Vic": 6622, "Qld": 5130, "WA": 2851, "SA": 1771, "Tas": 496, "ACT": 551, "NT": 344, "Australia": 25871},
+        {"label": "February", "NSW": 7984, "Vic": 6904, "Qld": 5177, "WA": 2860, "SA": 1636, "Tas": 466, "ACT": 507, "NT": 338, "Australia": 25872},
+        {"label": "March", "NSW": 9092, "Vic": 7482, "Qld": 5829, "WA": 3140, "SA": 1827, "Tas": 543, "ACT": 584, "NT": 338, "Australia": 28835},
+        {"label": "April", "NSW": 8465, "Vic": 6820, "Qld": 5478, "WA": 2958, "SA": 1701, "Tas": 474, "ACT": 518, "NT": 354, "Australia": 26768},
+        {"label": "May", "NSW": 8541, "Vic": 7084, "Qld": 5418, "WA": 2941, "SA": 1746, "Tas": 513, "ACT": 558, "NT": 351, "Australia": 25826},
+        {"label": "June", "NSW": 8443, "Vic": 6648, "Qld": 5407, "WA": 2912, "SA": 1656, "Tas": 527, "ACT": 546, "NT": 305, "Australia": 25429},
+        {"label": "July", "NSW": 8397, "Vic": 6872, "Qld": 5514, "WA": 2813, "SA": 1611, "Tas": 504, "ACT": 530, "NT": 305, "Australia": 25036},
+        {"label": "August", "NSW": 8227, "Vic": 6649, "Qld": 5328, "WA": 2767, "SA": 1651, "Tas": 501, "ACT": 539, "NT": 303, "Australia": 25554},
+        {"label": "September", "NSW": 8104, "Vic": 6701, "Qld": 5227, "WA": 2916, "SA": 1636, "Tas": 508, "ACT": 541, "NT": 281, "Australia": 25898},
+        {"label": "October", "NSW": 8349, "Vic": 6924, "Qld": 5120, "WA": 2917, "SA": 1701, "Tas": 502, "ACT": 509, "NT": 325, "Australia": 25827},
+        {"label": "November", "NSW": 7850, "Vic": 6374, "Qld": 4817, "WA": 2775, "SA": 1587, "Tas": 539, "ACT": 519, "NT": 283, "Australia": 25854},
+        {"label": "December", "NSW": 7751, "Vic": 6709, "Qld": 4938, "WA": 2826, "SA": 1658, "Tas": 508, "ACT": 558, "NT": 299, "Australia": 25857},
+        {"label": "Total", "NSW": 0, "Vic": 0, "Qld": 0, "WA": 0, "SA": 0, "Tas": 0, "ACT": 0, "NT": 0, "Australia": 0}
+      ]
+    },
+    "transform": [
+      {"calculate": "datum[state]", "as": "amount"},
+      {"window": [{"op": "sum", "field": "amount", "as": "cumulative_sum"}]},
+      {"window": [{"op": "max", "field": "cumulative_sum", "as": "total_sum"}]},
+      {
+        "calculate": "datum.label === 'Total' ? 0 : datum.cumulative_sum - datum.amount",
+        "as": "previous_sum"
+      },
+      {
+        "calculate": "datum.label === 'Total' ? datum.total_sum : datum.cumulative_sum",
+        "as": "sum"
+      },
+      {
+        "calculate": "datum.label === 'Total' ? datum.total_sum : datum.amount",
+        "as": "amount"
+      },
+      {
+        "calculate": "datum.label !== 'Total' && datum.amount > 0 ? '+' + datum.amount : datum.amount",
+        "as": "text_amount"
+      },
+      {"calculate": "(datum.sum + datum.previous_sum) / 2", "as": "center"},
+      {
+        "calculate": "state == 'NSW' ? '#E69F00' : state == 'Vic' ? '#56B4E9' : state == 'Qld' ? '#009E73' : state == 'WA' ? '#F0E442' : state == 'SA' ? '#0072B2' : state == 'Tas' ? '#D55E00' : state == 'ACT' ? '#CC79A7' : state == 'NT' ? '#999999' : '#93c4aa'",
+        "as": "state_color"
+      },
+      {"window": [{"op": "lead", "field": "label", "as": "lead"}]},
+      {
+        "calculate": "datum.lead === null ? datum.label : datum.lead",
+        "as": "lead"
+      },
+    ],
+    "encoding": {
+      "x": {
+        "field": "label",
+        "type": "ordinal",
+        "axis": {"labelAngle": 0, "title": "Months", "labelFontSize": 12, "titleFontSize": 14},
+        "sort": [
+          "January",
+          "February",
+          "March",
+          "April",
+          "May",
+          "June",
+          "July",
+          "August",
+          "September",
+          "October",
+          "November",
+          "December",
+          "Total"
+        ]
+      }
+    },
+    "layer": [
+      {
+        "mark": {"type": "bar", "size": 45},
+        "encoding": {
+          "y": {
+            "field": "previous_sum",
+            "type": "quantitative",
+            "title": "Amount",
+            "axis": {"labelFontSize": 12, "titleFontSize": 14}
+          },
+          "y2": {"field": "sum"},
+          "color": {
+            "condition": [
+              {
+                "test": "datum.label === 'Total'",
+                "value": "#f7e0b6"
+              }
+            ],
+            "value": {"expr": "datum.state_color"}
+          }
+        }
+      },
+      {
+        "mark": {
+          "type": "rule",
+          "color": "#404040",
+          "opacity": 1,
+          "strokeWidth": 2,
+          "xOffset": -22.5,
+          "x2Offset": 22.5
+        },
+        "encoding": {
+          "x": {"field": "label"},
+          "x2": {"field": "lead"},
+          "y": {"field": "sum", "type": "quantitative"}
+        }
+      },
+      {
+        "mark": {
+          "type": "text",
+          "dy": {"expr": "datum.amount >= 0 ? -4 : 14"},
+          "baseline": {"expr": "datum.amount >= 0 ? 'bottom' : 'top'"},
+          "fontWeight": "bold",
+          "color": "#404040",
+          "fontSize": 12
+        },
+        "encoding": {
+          "x": {"field": "label"},
+          "y": {"field": "sum", "type": "quantitative"},
+          "text": {"field": "sum", "type": "quantitative"}
+        }
+      },
+      {
+        "mark": {"type": "text", "fontWeight": "bold", "baseline": "middle", "fontSize": 12},
+        "encoding": {
+          "x": {"field": "label"},
+          "y": {"field": "center", "type": "quantitative"},
+          "text": {"field": "text_amount", "type": "nominal"},
+          "color": {
+            "condition": [
+              {
+                "test": "datum.label === 'Total'",
+                "value": "#725a30"
+              }
+            ],
+            "value": "white"
+          }
+        }
+      }
+    ],
+    "config": {
+      "axis": {
+        "labelFontSize": 12,
+        "titleFontSize": 14
+      },
+      "title": {
+        "fontSize": 20,
+        "fontWeight": "bold",
+        "anchor": "start",
+        "color": "#404040"
+      },
+      "text": {
+        "fontWeight": "bold",
+        "color": "#404040"
+      }
+    }
+  }
+  

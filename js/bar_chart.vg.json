@@ -58,7 +58,10 @@
           "field": "State",
           "type": "nominal",
           "title": "State",
-          "scale": { "scheme": "category10" },
+          "scale": {
+            "domain": ["NSW", "Vic", "Qld", "WA", "SA", "Tas", "ACT", "NT"],
+            "range": ["#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7", "#999999"]
+          },
           "legend": {
             "titleFontSize": 14,
             "labelFontSize": 12
@@ -74,7 +77,7 @@
     {
       "mark": {
         "type": "rule",
-        "color": "red",
+        "color": "#0072B2",
         "strokeWidth": 3,
         "tooltip": true
       },
@@ -100,7 +103,7 @@
     {
       "mark": {
         "type": "text",
-        "color": "red",
+        "color": "#0072B2",
         "align": "left",
         "dx": 5,  
         "dy": -10,  
