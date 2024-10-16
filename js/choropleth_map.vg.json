@@ -2,7 +2,7 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "title": {
     "text": "Live Births in Australian States",
-    "subtitle": "Data on Mothers, Fetal Deaths, Live Births, Males, and Females",
+    "subtitle": "Data on New Mothers and Live Births in Australia",
     "fontSize": 20,
     "font": "Roboto",
     "anchor": "start",
@@ -28,10 +28,12 @@
     }
   },
   "projection": {
-    "type": "equirectangular"
+    "type": "equirectangular",
+    "scale": 800,
+    "center": [133.7751, -25.2744]  // Centering on Australia
   },
   "data": {
-    "url": "https://raw.githubusercontent.com/arvinloh/FIT3179_A2/refs/heads/main/data/ne_50m_admin_1_states_provinces.json?token=GHSAT0AAAAAACXMFL3Z24WAVIF3WCL5ITHYZYF4S2Q",
+    "url": "https://raw.githubusercontent.com/arvinloh/FIT3179_A2/refs/heads/main/data/ne.json",
     "format": {
       "type": "topojson",
       "feature": "ne_50m_admin_1_states_provinces"
@@ -42,7 +44,7 @@
       "lookup": "properties.name",
       "from": {
         "data": {
-          "url": "https://raw.githubusercontent.com/arvinloh/FIT3179_A2/refs/heads/main/data/data.csv?token=GHSAT0AAAAAACXMFL3YXYBML4EGG27YG3R2ZYF4R6A",
+          "url": "https://raw.githubusercontent.com/arvinloh/FIT3179_A2/refs/heads/main/data/data.csv",
           "format": { "type": "csv" }
         },
         "key": "State",
@@ -63,6 +65,16 @@
   ],
   "layer": [
     {
+      "data": {
+        "graticule": true
+      },
+      "mark": {
+        "type": "geoshape",
+        "stroke": "gray",
+        "strokeWidth": 0.5
+      }
+    },
+    {
       "mark": {
         "type": "geoshape",
         "stroke": "#b3b3b3",
@@ -72,14 +84,13 @@
         "color": {
           "field": "live_births",
           "type": "quantitative",
-          "scale": { "scheme": "reds" },
+          "scale": { "scheme": "blues" },
           "legend": { "title": "Live Births" }
         },
         "tooltip": [
           { "field": "properties.name", "type": "nominal", "title": "State" },
           { "field": "live_births", "type": "quantitative", "title": "Live Births" },
           { "field": "mothers", "type": "quantitative", "title": "New Mothers" },
-          { "field": "not stated", "type": "quantitative", "title": "Not Stated" },
           { "field": "total", "type": "quantitative", "title": "Total Live Births" },
           { 
             "field": "percentage_live_births", 
