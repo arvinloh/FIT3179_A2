@@ -1,0 +1,175 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "description": "Age Group Distribution by State - Radial Bar Chart",
+    "width": 500,
+    "height": 500,
+    "title": {
+      "text": "Age Group Distribution by State",
+      "fontSize": 20,
+      "fontWeight": "bold",
+      "anchor": "middle",
+      "color": "#333"
+    },
+    "data": {
+      "values": [
+        {"AgeGroup": "Under 20", "State": "NSW", "Value": 1357},
+        {"AgeGroup": "Under 20", "State": "Vic", "Value": 684},
+        {"AgeGroup": "Under 20", "State": "Qld", "Value": 1482},
+        {"AgeGroup": "Under 20", "State": "WA", "Value": 595},
+        {"AgeGroup": "Under 20", "State": "SA", "Value": 286},
+        {"AgeGroup": "Under 20", "State": "Tas", "Value": 111},
+        {"AgeGroup": "Under 20", "State": "ACT", "Value": 53},
+        {"AgeGroup": "Under 20", "State": "NT", "Value": 201},
+        {"AgeGroup": "Under 20", "State": "Australia", "Value": 4769},
+        {"AgeGroup": "20–24", "State": "NSW", "Value": 8897},
+        {"AgeGroup": "20–24", "State": "Vic", "Value": 5380},
+        {"AgeGroup": "20–24", "State": "Qld", "Value": 8178},
+        {"AgeGroup": "20–24", "State": "WA", "Value": 3456},
+        {"AgeGroup": "20–24", "State": "SA", "Value": 1932},
+        {"AgeGroup": "20–24", "State": "Tas", "Value": 800},
+        {"AgeGroup": "20–24", "State": "ACT", "Value": 386},
+        {"AgeGroup": "20–24", "State": "NT", "Value": 590},
+        {"AgeGroup": "20–24", "State": "Australia", "Value": 29619},
+        {"AgeGroup": "25–29", "State": "NSW", "Value": 24142},
+        {"AgeGroup": "25–29", "State": "Vic", "Value": 18583},
+        {"AgeGroup": "25–29", "State": "Qld", "Value": 17253},
+        {"AgeGroup": "25–29", "State": "WA", "Value": 8595},
+        {"AgeGroup": "25–29", "State": "SA", "Value": 5490},
+        {"AgeGroup": "25–29", "State": "Tas", "Value": 1762},
+        {"AgeGroup": "25–29", "State": "ACT", "Value": 1476},
+        {"AgeGroup": "25–29", "State": "NT", "Value": 999},
+        {"AgeGroup": "25–29", "State": "Australia", "Value": 78300},
+        {"AgeGroup": "30–34", "State": "NSW", "Value": 36755},
+        {"AgeGroup": "30–34", "State": "Vic", "Value": 32578},
+        {"AgeGroup": "30–34", "State": "Qld", "Value": 21349},
+        {"AgeGroup": "30–34", "State": "WA", "Value": 12834},
+        {"AgeGroup": "30–34", "State": "SA", "Value": 7390},
+        {"AgeGroup": "30–34", "State": "Tas", "Value": 2097},
+        {"AgeGroup": "30–34", "State": "ACT", "Value": 2562},
+        {"AgeGroup": "30–34", "State": "NT", "Value": 1214},
+        {"AgeGroup": "30–34", "State": "Australia", "Value": 116779},
+        {"AgeGroup": "35–39", "State": "NSW", "Value": 22080},
+        {"AgeGroup": "35–39", "State": "Vic", "Value": 19384},
+        {"AgeGroup": "35–39", "State": "Qld", "Value": 11757},
+        {"AgeGroup": "35–39", "State": "WA", "Value": 7284},
+        {"AgeGroup": "35–39", "State": "SA", "Value": 4001},
+        {"AgeGroup": "35–39", "State": "Tas", "Value": 1044},
+        {"AgeGroup": "35–39", "State": "ACT", "Value": 1563},
+        {"AgeGroup": "35–39", "State": "NT", "Value": 645},
+        {"AgeGroup": "35–39", "State": "Australia", "Value": 67758},
+        {"AgeGroup": "40 and older", "State": "NSW", "Value": 4753},
+        {"AgeGroup": "40 and older", "State": "Vic", "Value": 4045},
+        {"AgeGroup": "40 and older", "State": "Qld", "Value": 2433},
+        {"AgeGroup": "40 and older", "State": "WA", "Value": 1437},
+        {"AgeGroup": "40 and older", "State": "SA", "Value": 810},
+        {"AgeGroup": "40 and older", "State": "Tas", "Value": 190},
+        {"AgeGroup": "40 and older", "State": "ACT", "Value": 312},
+        {"AgeGroup": "40 and older", "State": "NT", "Value": 133},
+        {"AgeGroup": "40 and older", "State": "Australia", "Value": 14113}
+      ]
+    },
+    "params": [
+      {
+        "name": "SelectedState",
+        "value": "Australia",
+        "bind": {
+          "input": "select",
+          "options": ["Australia", "NSW", "Vic", "Qld", "WA", "SA", "Tas", "ACT", "NT"],
+          "labels": [
+            "Australia",
+            "New South Wales",
+            "Victoria",
+            "Queensland",
+            "Western Australia",
+            "South Australia",
+            "Tasmania",
+            "Australian Capital Territory",
+            "Northern Territory"
+          ],
+          "name": "Select a state: "
+        }
+      }
+    ],
+    "transform": [
+      {"filter": "datum.State == SelectedState"}
+    ],
+    "layer": [
+      {
+        "mark": {
+          "type": "arc",
+          "innerRadius": 50,
+          "stroke": "#fff",
+          "strokeWidth": 1
+        },
+        "encoding": {
+          "theta": {
+            "field": "AgeGroup",
+            "type": "nominal",
+            "sort": [
+              "Under 20",
+              "20–24",
+              "25–29",
+              "30–34",
+              "35–39",
+              "40 and older",
+              "Not stated"
+            ]
+          },
+          "radius": {
+            "field": "Value",
+            "type": "quantitative",
+            "scale": {"type": "linear", "zero": true, "rangeMin": 50}
+          },
+          "color": {
+            "field": "AgeGroup",
+            "type": "nominal",
+            "legend": {
+              "title": "Age Group",
+              "orient": "right",
+              "titleFontSize": 14,
+              "labelFontSize": 12
+            },
+            "scale": {
+              "scheme": "category20b"
+            }
+          },
+          "tooltip": [
+            {"field": "AgeGroup", "type": "nominal", "title": "Age Group"},
+            {"field": "Value", "type": "quantitative", "title": "Count"}
+          ]
+        }
+      },
+      {
+        "mark": {
+          "type": "text",
+          "radiusOffset": 20,
+          "fontSize": 12
+        },
+        "encoding": {
+          "text": {"field": "Value", "type": "quantitative"},
+          "theta": {
+            "field": "AgeGroup",
+            "type": "nominal",
+            "sort": [
+              "Under 20",
+              "20–24",
+              "25–29",
+              "30–34",
+              "35–39",
+              "40 and older",
+              "Not stated"
+            ]
+          },
+          "radius": {
+            "field": "Value",
+            "type": "quantitative",
+            "scale": {"type": "linear", "zero": true, "rangeMin": 50},
+            "offset": 10
+          },
+          "color": {"value": "#000"}
+        }
+      }
+    ],
+    "view": {"stroke": null}
+  }
+  
