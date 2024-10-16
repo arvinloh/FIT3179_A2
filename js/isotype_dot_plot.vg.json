@@ -1,37 +1,118 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "description": "Isotype Dot Plot of Maternal Age Distribution by State",
+    "config": {"view": {"stroke": ""}},
     "width": 800,
-    "height": 500,
+    "height": 200,
     "data": {
-      "url": "https://raw.githubusercontent.com/arvinloh/FIT3179_A2/refs/heads/main/data/give_birth_age.csv",
-      "format": {"type": "csv"}
+      "values": [
+        {"Maternal_age": "Under 20", "State": "NSW", "Number": 1357},
+        {"Maternal_age": "Under 20", "State": "Vic", "Number": 684},
+        {"Maternal_age": "Under 20", "State": "Qld", "Number": 1482},
+        {"Maternal_age": "Under 20", "State": "WA", "Number": 595},
+        {"Maternal_age": "Under 20", "State": "SA", "Number": 286},
+        {"Maternal_age": "Under 20", "State": "Tas", "Number": 111},
+        {"Maternal_age": "Under 20", "State": "ACT", "Number": 53},
+        {"Maternal_age": "Under 20", "State": "NT", "Number": 201},
+        {"Maternal_age": "20–24", "State": "NSW", "Number": 8897},
+        {"Maternal_age": "20–24", "State": "Vic", "Number": 5380},
+        {"Maternal_age": "20–24", "State": "Qld", "Number": 8178},
+        {"Maternal_age": "20–24", "State": "WA", "Number": 3456},
+        {"Maternal_age": "20–24", "State": "SA", "Number": 1932},
+        {"Maternal_age": "20–24", "State": "Tas", "Number": 800},
+        {"Maternal_age": "20–24", "State": "ACT", "Number": 386},
+        {"Maternal_age": "20–24", "State": "NT", "Number": 590},
+        {"Maternal_age": "25–29", "State": "NSW", "Number": 24142},
+        {"Maternal_age": "25–29", "State": "Vic", "Number": 18583},
+        {"Maternal_age": "25–29", "State": "Qld", "Number": 17253},
+        {"Maternal_age": "25–29", "State": "WA", "Number": 8595},
+        {"Maternal_age": "25–29", "State": "SA", "Number": 5490},
+        {"Maternal_age": "25–29", "State": "Tas", "Number": 1762},
+        {"Maternal_age": "25–29", "State": "ACT", "Number": 1476},
+        {"Maternal_age": "25–29", "State": "NT", "Number": 999},
+        {"Maternal_age": "30–34", "State": "NSW", "Number": 36755},
+        {"Maternal_age": "30–34", "State": "Vic", "Number": 32578},
+        {"Maternal_age": "30–34", "State": "Qld", "Number": 21349},
+        {"Maternal_age": "30–34", "State": "WA", "Number": 12834},
+        {"Maternal_age": "30–34", "State": "SA", "Number": 7390},
+        {"Maternal_age": "30–34", "State": "Tas", "Number": 2097},
+        {"Maternal_age": "30–34", "State": "ACT", "Number": 2562},
+        {"Maternal_age": "30–34", "State": "NT", "Number": 1214},
+        {"Maternal_age": "35–39", "State": "NSW", "Number": 22080},
+        {"Maternal_age": "35–39", "State": "Vic", "Number": 19384},
+        {"Maternal_age": "35–39", "State": "Qld", "Number": 11757},
+        {"Maternal_age": "35–39", "State": "WA", "Number": 7284},
+        {"Maternal_age": "35–39", "State": "SA", "Number": 4001},
+        {"Maternal_age": "35–39", "State": "Tas", "Number": 1044},
+        {"Maternal_age": "35–39", "State": "ACT", "Number": 1563},
+        {"Maternal_age": "35–39", "State": "NT", "Number": 645},
+        {"Maternal_age": "40 and older", "State": "NSW", "Number": 4753},
+        {"Maternal_age": "40 and older", "State": "Vic", "Number": 4045},
+        {"Maternal_age": "40 and older", "State": "Qld", "Number": 2433},
+        {"Maternal_age": "40 and older", "State": "WA", "Number": 1437},
+        {"Maternal_age": "40 and older", "State": "SA", "Number": 810},
+        {"Maternal_age": "40 and older", "State": "Tas", "Number": 190},
+        {"Maternal_age": "40 and older", "State": "ACT", "Number": 312},
+        {"Maternal_age": "40 and older", "State": "NT", "Number": 133}
+      ]
     },
     "transform": [
-      {"calculate": "floor(datum.Number / 1000)", "as": "Icons"},
-      {"filter": "datum.Icons > 0"}
+      {
+        "filter": "datum.State != 'Not stated' && datum.State != 'Australia'"
+      },
+      {
+        "filter": {"selection": "StateSelector"}
+      },
+      {
+        "calculate": "ceil(datum.Number / 2000)",
+        "as": "symbolCount"
+      },
+      {
+        "calculate": "sequence(1, datum.symbolCount, 1)",
+        "as": "symbolArray"
+      },
+      {
+        "flatten": ["symbolArray"]
+      },
+      {
+        "calculate": "datum.symbolArray - 1",
+        "as": "symbolIndex"
+      },
+      {
+          "calculate": "datum.symbolCount < 10 ? datum.symbolIndex : datum.symbolIndex % 10",
+          "as": "col"
+        },
+        {
+          "calculate": "datum.symbolCount < 10 ? 0 : floor(datum.symbolIndex / 10)",
+          "as": "rowInGrid"
+        }
     ],
-    "mark": "text",
+    "selection": {
+      "StateSelector": {
+        "type": "single",
+        "fields": ["State"],
+        "bind": {
+          "input": "select",
+          "options": ["NSW", "Vic", "Qld", "WA", "SA", "Tas", "ACT", "NT"],
+          "name": "Select a State: "
+        },
+        "init": {"State": "NSW"}
+      }
+    },
+    "mark": {"type": "text", "baseline": "middle", "align": "center"},
     "encoding": {
-      "y": {
-        "field": "Maternal age",
+      "row": {
+        "field": "Maternal_age",
         "type": "ordinal",
-        "title": "Maternal Age Group",
-        "sort": ["Under 20", "20–24", "25–29", "30–34", "35–39", "40 and older"]
+        "header": {"title": ""}
       },
-      "x": {
-        "aggregate": "sum",
-        "field": "Icons",
-        "type": "quantitative",
-        "title": "Number of Mothers (Each Icon Represents 1,000)"
-      },
-      "text": {"value": "👤"},
-      "color": {"field": "State", "type": "nominal", "legend": {"title": "State"}},
+      "x": {"field": "col", "type": "ordinal", "axis": null},
+      "y": {"field": "rowInGrid", "type": "ordinal", "axis": null},
+      "text": {"value": "🤰"},
+      "size": {"value": 30},
       "tooltip": [
-        {"field": "State", "type": "nominal"},
-        {"field": "Maternal age", "type": "nominal", "title": "Age Group"},
-        {"field": "Number", "type": "quantitative", "title": "Number of Mothers"}
+        {"field": "Number", "type": "quantitative", "title": "Number of Mothers"},
+        {"field": "Maternal_age", "type": "nominal", "title": "Maternal Age"},
+        {"field": "State", "type": "nominal", "title": "State"}
       ]
     }
   }
-  
