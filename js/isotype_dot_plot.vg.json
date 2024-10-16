@@ -1,5 +1,12 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": {
+        "text": "Isotype Dot Plot of Maternal Age Distribution by State",
+        "fontSize": 20,
+        "font": "Roboto",
+        "anchor": "middle",
+        "color": "black"
+      },
     "config": {"view": {"stroke": ""}},
     "width": 800,
     "height": 200,
