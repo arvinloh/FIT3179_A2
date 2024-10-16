@@ -1,0 +1,119 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Birth Weight Distribution by Category - Radial Bar Chart",
+  "width": 500,
+  "height": 500,
+  "title": {
+    "text": "Birth Weight Distribution by Category",
+    "fontSize": 20,
+    "font": "Roboto",
+    "anchor": "middle",
+    "color": "black"
+  },
+  "data": {
+    "values": [
+      { "Category": "Low Birth Weight", "SubCategory": "Less than 1,000 grams", "Value": 2766 },
+      { "Category": "Low Birth Weight", "SubCategory": "1,000–1,499 grams", "Value": 1800 },
+      { "Category": "Low Birth Weight", "SubCategory": "1,500–1,999 grams", "Value": 3799 },
+      { "Category": "Low Birth Weight", "SubCategory": "2,000–2,499 grams", "Value": 13126 },
+      { "Category": "Normal Birth Weight", "SubCategory": "2,500–2,999 grams", "Value": 51377 },
+      { "Category": "Normal Birth Weight", "SubCategory": "3,000–3,499 grams", "Value": 118040 },
+      { "Category": "Normal Birth Weight", "SubCategory": "3,500–3,999 grams", "Value": 93887 },
+      { "Category": "Normal Birth Weight", "SubCategory": "4,000–4,499 grams", "Value": 26890 },
+      { "Category": "High Birth Weight", "SubCategory": "4,500 and over", "Value": 3785 }
+    ]
+  },
+  "transform": [
+    {
+      "window": [{"op": "sum", "field": "Value", "as": "TotalValue"}],
+      "frame": [null, null]
+    },
+    {
+      "calculate": "datum.Value / datum.TotalValue * 100",
+      "as": "Percentage"
+    }
+  ],
+  "layer": [
+    {
+      "mark": {
+        "type": "arc",
+        "innerRadius": 50,
+        "stroke": "#fff",
+        "strokeWidth": 1
+      },
+      "encoding": {
+        "theta": {
+          "field": "SubCategory",
+          "type": "nominal",
+          "sort": [
+            "Less than 1,000 grams",
+            "1,000–1,499 grams",
+            "1,500–1,999 grams",
+            "2,000–2,499 grams",
+            "2,500–2,999 grams",
+            "3,000–3,499 grams",
+            "3,500–3,999 grams",
+            "4,000–4,499 grams",
+            "4,500 and over"
+          ]
+        },
+        "radius": {
+          "field": "Value",
+          "type": "quantitative",
+          "scale": { "type": "linear", "zero": true, "rangeMin": 50 }
+        },
+        "color": {
+          "field": "SubCategory",
+          "type": "nominal",
+          "legend": {
+            "title": "Birth Weight Category",
+            "orient": "right",
+            "titleFontSize": 14,
+            "labelFontSize": 12
+          },
+          "scale": {
+            "scheme": "tableau10"
+          }
+        },
+        "tooltip": [
+          { "field": "SubCategory", "type": "nominal", "title": "Birth Weight Category" },
+          { "field": "Value", "type": "quantitative", "title": "Total" },
+          { "field": "Percentage", "type": "quantitative", "title": "Percentage", "format": ".2f" }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "radiusOffset": 20,
+        "fontSize": 12
+      },
+      "encoding": {
+        "text": { "field": "Value", "type": "quantitative" },
+        "theta": {
+          "field": "SubCategory",
+          "type": "nominal",
+          "sort": [
+            "Less than 1,000 grams",
+            "1,000–1,499 grams",
+            "1,500–1,999 grams",
+            "2,000–2,499 grams",
+            "2,500–2,999 grams",
+            "3,000–3,499 grams",
+            "3,500–3,999 grams",
+            "4,000–4,499 grams",
+            "4,500 and over"
+          ]
+        },
+        "radius": {
+          "field": "Value",
+          "type": "quantitative",
+          "scale": { "type": "linear", "zero": true, "rangeMin": 50 },
+          "offset": 10
+        },
+        "color": { "value": "#000" }
+      }
+    }
+  ],
+  "view": { "stroke": null }
+}

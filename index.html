@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <!-- Import Vega & Vega-Lite (does not have to be from CDN) -->
   <script src="https://cdn.jsdelivr.net/npm/vega@5.22.1"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.5.0"></script>
@@ -10,11 +12,16 @@
   <link rel="stylesheet" type="text/css" href="css/styles.css" media="all">
 </head>
 <body>
-  
-<div class="container">
-  <h1>The trends around mothers and babies across Australian states and territories</h1>
-  <p>Hover over the map to see the number of mothers and babies in each state and territory.</p>
 
+  <!-- We aim to be magazine style -->
+
+<div class="container">
+  <!-- Header -->
+  <h1>The trends around mothers and babies across Australian states and territories</h1>
+  <!-- Concise Subtitle: What/Who is this useful for?-->
+  <h2>Explore the trends around mothers and babies across Australian states and territories in 2021</h2>
+
+  <!-- Maps -->
   <div id="choropleth_map"></div>
   <script type="text/javascript">
     var spec1 = "js/choropleth_map.vg.json";
@@ -23,6 +30,34 @@
     }).catch(console.error);
   </script>
 
+  <!-- Describe -->
+  <p>New South Wales has the highest total number of births (99,309), followed by Victoria (81,789) and Queensland (63,383).</p>
+
+
+  <div id="bar_chart"></div>
+  <script type="text/javascript">
+    var spec3 = "js/bar_chart.vg.json";
+    vegaEmbed('#bar_chart', spec3).then(function(result) {
+      // Access the Vega view instance
+    }).catch(console.error);
+  </script>
+  <!-- Describe -->
+  <p> The most common birth month in 2021 is March! There is a pattern in births during March and a dip in December across most states </p>
+  
+
+  <div id="isotype_dot_plot"></div>
+  <script type="text/javascript">
+    var spec4 = "js/isotype_dot_plot.vg.json";
+    vegaEmbed('#isotype_dot_plot', spec4).then(function(result) {
+      // Access the Vega view instance
+    }).catch(console.error);
+  </script>
+  <!-- Describe -->
+  <p> The age group 30-34 has the highest number of births in 2021, with a total of 116,779 births. </p>
+  <p> While the age 25-29 years old is significantly lower, with a total of 78,300 births</p>
+  <p> This could indicate a societal trend towards having children later in life. </p>
+  <p> It is extremely alarming that in Queensland, the number of births for the age group under 20 years old is the highest compared to other states, with 1,482 births out of the total of 4,769 births in the whole Australia </p>
+  <p> Even though the number of births is generally lower in Queensland compared to other states </p>
 
   <div id="donut"></div>
   <script type="text/javascript">
@@ -31,6 +66,74 @@
       // Access the Vega view instance
     }).catch(console.error);
   </script>
+  <!-- Describe -->
+  <strong>Peak Live Births</strong>
+  <li>The majority of live births occur at gestational ages 39 weeks (98,495 live births, 31.4%) and 38 weeks (73,523 live births, 23.5%).</li>
+  <li>These two gestational ages together account for over half of all live births. </li>
+
+  <strong>Fetal Deaths</strong>
+  <li>The highest number of fetal deaths occurs at very early gestational ages, particularly at 20 weeks (336 fetal deaths, 14.9%) and 21 weeks (341 fetal deaths, 15.1%).</li>
+  <li>Fetal deaths significantly decrease as gestational age increases, with very few fetal deaths occurring at 39 and 40 weeks (44 fetal deaths each, 1.9%).</li>
+
+  <strong>Gestational Age 39 Weeks</strong>
+  <li>Gestational age 39 weeks has the highest percentage of live births (31.4%) and a very low percentage of fetal deaths (1.9%).</li>
+  <li>This indicates that gestational age 39 weeks is the safest gestational age for live births.</li>
+
+  <div id="waterfall_duration"></div>
+  <script type="text/javascript">
+    var spec4 = "js/waterfall_duration.vg.json";
+    vegaEmbed('#waterfall_duration', spec4).then(function(result) {
+      // Access the Vega view instance
+    }).catch(console.error);
+  </script>
+  <!-- Describe -->
+  <strong>Normal BMI Range (18.5-24.9)</strong>
+  <li>For mothers with a normal BMI range, the majority of live births occur at gestational ages 39 weeks and 38 weeks.</li>
+  <li>The majority of mothers fall within the normal BMI range (18.5–24.9), with a total of 140,985 mothers in Australia.</li>
+
+  <div id = "radial_chart_bw"></div>
+  <script type="text/javascript">
+    var spec5 = "js/radial_chart_bw.vg.json";
+    vegaEmbed('#radial_chart_bw', spec5).then(function(result) {
+      // Access the Vega view instance
+    }).catch(console.error);
+  </script>
+  <!-- Describe -->
+  <strong>Birth Weight</strong>
+  <li>Birthweight is an important indicator of an infant’s health. </li>
+  <li>In 2021, over 9 in 10 babies (91.99%) were born with a normal birthweight (birthweight between 2,500 and 4,499 grams); also referred to as 'healthy birthweight'.</li>
+  <li>The majority of live births have a birth weight between 3,000 and 3,499 grams (37.42%).</li>
+  <li>Very few live births have a birth weight below 2,500 grams (6.81%) or above 4,500 grams (1.2%).</li>
+
+  <div id = "donut"></div>
+  <script type="text/javascript">
+    var spec5 = "js/donut.vg.json";
+    vegaEmbed('#donut', spec5).then(function(result) {
+      // Access the Vega view instance
+    }).catch(console.error);
+  </script>
+  <!-- Describe -->
+  <strong>Gestrational Age</strong>
+  <li>Investigate the correlation between gestational age and fetal deaths in 2021.</li>
+  <li>There is a significant increase in fetal deaths at gestational ages 20 and 21 weeks.</li>
+  <li>There is a significant decrease in fetal deaths as gestational age increases, with very few fetal deaths occurring at 39 and 40 weeks.</li>
+
+
+  <div id = "population_pyramid"></div>
+  <script type="text/javascript">
+    var spec5 = "js/population_pyramid.vg.json";
+    vegaEmbed('#population_pyramid', spec5).then(function(result) {
+      // Access the Vega view instance
+    }).catch(console.error);
+  </script>
+
+  <!-- Describe -->
+   <strong>Population Pyramid</strong>
+  <li>The population pyramid shows the distribution of gender births in 2021.</li>
+  <li>There are more males born than females in every state and territory in Australia.</li>
+  <li>The state with the highest percentage difference is the Australian Capital Territory, with 3.88%. </li>
+  <li>The state with the lowest percentage difference is the Northern Territory, with 0.98%.</li>
+
 
   <footer>
     Data from the Australian Bureau of Statistics. Visualisation powered by Vega-Lite.

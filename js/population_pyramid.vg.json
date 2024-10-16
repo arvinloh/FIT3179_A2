@@ -1,67 +1,111 @@
 {
-  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "Population Pyramid of Births by Gender and State",
-  "title": {
-    "text": "Population Pyramid of Births by Gender and State",
-    "fontSize": 20,
-    "font": "Roboto",
-    "anchor": "middle",
-    "color": "black"
-  },
-  "width": 700,
-  "height": 500,
-  "data": {
-    "url": "https://raw.githubusercontent.com/arvinloh/FIT3179_A2/main/data/gender_ratio.csv",
-    "format": { "type": "csv" }
-  },
-  "transform": [
-    { "filter": "datum.Sex == 'Male' || datum.Sex == 'Female'" },
-    {
-      "fold": ["NSW", "Vic", "Qld", "WA", "SA", "Tas", "ACT", "NT"],
-      "as": ["State", "Number"]
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "description": "Population Pyramid of Births by Gender and State",
+    "title": {
+      "text": "Population Pyramid of Births by Gender and State",
+      "fontSize": 20,
+      "font": "Roboto",
+      "anchor": "middle",
+      "color": "black"
     },
-    { "calculate": "toNumber(replace(datum.Number, ',', ''))", "as": "Number" },
-    {
-      "calculate": "datum.Sex == 'Female' ? -datum.Number : datum.Number",
-      "as": "Value"
-    }
-  ],
-  "mark": "bar",
-  "encoding": {
-    "y": {
-      "field": "State",
-      "type": "ordinal",
-      "title": "State",
-      "axis": { "labelAngle": 0 },
-      "sort": "x"
+    "width": 700,
+    "height": 500,
+    "data": {
+      "url": "https://raw.githubusercontent.com/arvinloh/FIT3179_A2/main/data/gender_ratio.csv",
+      "format": { "type": "csv" }
     },
-    "x": {
-      "field": "Value",
-      "type": "quantitative",
-      "title": "Number of Births",
-      "axis": {
-        "format": "s",
-        "labelExpr": "abs(datum.value)"
+    "transform": [
+      { "filter": "datum.Sex == 'Male' || datum.Sex == 'Female'" },
+      {
+        "fold": ["NSW", "Vic", "Qld", "WA", "SA", "Tas", "ACT", "NT"],
+        "as": ["State", "Number"]
       },
-      "scale": {
-        "domain": [-51000, 51000]
+      { "calculate": "toNumber(replace(datum.Number, ',', ''))", "as": "Number" },
+      {
+        "calculate": "datum.Sex == 'Female' ? -datum.Number : datum.Number",
+        "as": "Value"
+      },
+      {
+        "window": [
+          {
+            "op": "sum",
+            "field": "Number",
+            "as": "TotalBirths"
+          }
+        ],
+        "frame": [null, null],
+        "groupby": ["State"]
+      },
+      {
+        "calculate": "datum.Number / datum.TotalBirths * 100",
+        "as": "Percentage"
+      },
+      {
+        "window": [
+          {
+            "op": "sum",
+            "field": "Percentage",
+            "as": "TotalPercentage"
+          }
+        ],
+        "frame": [null, null],
+        "groupby": ["State"]
+      },
+      {
+        "calculate": "datum.Sex == 'Male' ? datum.Percentage : -datum.Percentage",
+        "as": "PercentageValue"
+      },
+      {
+        "window": [
+          {
+            "op": "sum",
+            "field": "PercentageValue",
+            "as": "PercentageDifference"
+          }
+        ],
+        "frame": [null, null],
+        "groupby": ["State"]
       }
-    },
-    "color": {
-      "field": "Sex",
-      "type": "nominal",
-      "scale": { "range": ["#1f77b4", "#ff7f0e"] },
-      "legend": {
-        "title": "Sex",
-        "labelFontSize": 12,
-        "titleFontSize": 14,
-        "symbolType": "circle"
-      }
-    },
-    "tooltip": [
-      { "field": "State", "type": "nominal" },
-      { "field": "Sex", "type": "nominal" },
-      { "field": "Number", "type": "quantitative" }
-    ]
+    ],
+    "mark": "bar",
+    "encoding": {
+      "y": {
+        "field": "State",
+        "type": "ordinal",
+        "title": "State",
+        "axis": { "labelAngle": 0 },
+        "sort": "x"
+      },
+      "x": {
+        "field": "Value",
+        "type": "quantitative",
+        "title": "Number of Births",
+        "axis": {
+          "format": "s",
+          "labelExpr": "abs(datum.value)"
+        },
+        "scale": {
+          "domain": [-51000, 51000]
+        }
+      },
+      "color": {
+        "field": "Sex",
+        "type": "nominal",
+        "scale": { "range": ["#1f77b4", "#ff7f0e"] },
+        "legend": {
+          "title": "Sex",
+          "labelFontSize": 12,
+          "titleFontSize": 14,
+          "symbolType": "circle"
+        }
+      },
+      "tooltip": [
+        { "field": "State", "type": "nominal" },
+        { "field": "Sex", "type": "nominal" },
+        { "field": "Number", "type": "quantitative", "title": "Number of Births" },
+        { "field": "Percentage", "type": "quantitative", "title": "Percentage", "format": ".2f" },
+        { "field": "PercentageDifference", "type": "quantitative", "title": "Percentage Difference", "format": ".2f" }
+      ]
+    }
   }
-}
+  
