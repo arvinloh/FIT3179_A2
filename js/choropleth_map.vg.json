@@ -30,7 +30,7 @@
   "projection": {
     "type": "equirectangular",
     "scale": 800,
-    "center": [133.7751, -25.2744]  // Centering on Australia
+    "center": [133.7751, -25.2744]
   },
   "data": {
     "url": "https://raw.githubusercontent.com/arvinloh/FIT3179_A2/refs/heads/main/data/ne.json",
@@ -48,7 +48,15 @@
           "format": { "type": "csv" }
         },
         "key": "State",
-        "fields": ["live births", "mothers", "fetal deaths", "not stated", "total", "male", "female"]
+        "fields": [
+          "live births",
+          "mothers",
+          "fetal deaths",
+          "not stated",
+          "total",
+          "male",
+          "female"
+        ]
       }
     },
     {
@@ -89,14 +97,26 @@
         },
         "tooltip": [
           { "field": "properties.name", "type": "nominal", "title": "State" },
-          { "field": "live_births", "type": "quantitative", "title": "Live Births" },
-          { "field": "mothers", "type": "quantitative", "title": "New Mothers" },
-          { "field": "total", "type": "quantitative", "title": "Total Live Births" },
-          { 
-            "field": "percentage_live_births", 
-            "type": "quantitative", 
-            "title": "Percentage of Live Births", 
-            "format": ".2f" 
+          {
+            "field": "live_births",
+            "type": "quantitative",
+            "title": "Live Births"
+          },
+          {
+            "field": "mothers",
+            "type": "quantitative",
+            "title": "New Mothers"
+          },
+          {
+            "field": "total",
+            "type": "quantitative",
+            "title": "Total Live Births"
+          },
+          {
+            "field": "percentage_live_births",
+            "type": "quantitative",
+            "title": "Percentage of Live Births",
+            "format": ".2f"
           }
         ]
       }

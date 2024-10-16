@@ -36,8 +36,18 @@
           "type": "ordinal",
           "title": "Month of Birth",
           "sort": [
-            "January", "February", "March", "April", "May", "June",
-            "July", "August", "September", "October", "November", "December"
+            "January",
+            "February",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+            "August",
+            "September",
+            "October",
+            "November",
+            "December"
           ],
           "axis": {
             "labelAngle": -45,
@@ -60,7 +70,16 @@
           "title": "State",
           "scale": {
             "domain": ["NSW", "Vic", "Qld", "WA", "SA", "Tas", "ACT", "NT"],
-            "range": ["#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7", "#999999"]
+            "range": [
+              "#E69F00",
+              "#56B4E9",
+              "#009E73",
+              "#F0E442",
+              "#0072B2",
+              "#D55E00",
+              "#CC79A7",
+              "#999999"
+            ]
           },
           "legend": {
             "titleFontSize": 14,
@@ -70,7 +89,11 @@
         "tooltip": [
           { "field": "Month", "type": "ordinal", "title": "Month" },
           { "field": "State", "type": "nominal", "title": "State" },
-          { "field": "Births", "type": "quantitative", "title": "Number of Births" }
+          {
+            "field": "Births",
+            "type": "quantitative",
+            "title": "Number of Births"
+          }
         ]
       }
     },
@@ -83,11 +106,15 @@
       },
       "transform": [
         {
-          "aggregate": [{"op": "sum", "field": "Births", "as": "TotalBirths"}],
+          "aggregate": [
+            { "op": "sum", "field": "Births", "as": "TotalBirths" }
+          ],
           "groupby": ["Month"]
         },
         {
-          "aggregate": [{"op": "mean", "field": "TotalBirths", "as": "MeanBirths"}]
+          "aggregate": [
+            { "op": "mean", "field": "TotalBirths", "as": "MeanBirths" }
+          ]
         }
       ],
       "encoding": {
@@ -96,7 +123,11 @@
           "type": "quantitative"
         },
         "tooltip": [
-          { "field": "MeanBirths", "type": "quantitative", "title": "Average Births" }
+          {
+            "field": "MeanBirths",
+            "type": "quantitative",
+            "title": "Average Births"
+          }
         ]
       }
     },
@@ -105,18 +136,22 @@
         "type": "text",
         "color": "#0072B2",
         "align": "left",
-        "dx": 5,  
-        "dy": -10,  
+        "dx": 5,
+        "dy": -10,
         "fontSize": 12,
         "fontStyle": "italic"
       },
       "transform": [
         {
-          "aggregate": [{"op": "sum", "field": "Births", "as": "TotalBirths"}],
+          "aggregate": [
+            { "op": "sum", "field": "Births", "as": "TotalBirths" }
+          ],
           "groupby": ["Month"]
         },
         {
-          "aggregate": [{"op": "mean", "field": "TotalBirths", "as": "MeanBirths"}]
+          "aggregate": [
+            { "op": "mean", "field": "TotalBirths", "as": "MeanBirths" }
+          ]
         }
       ],
       "encoding": {
@@ -125,7 +160,7 @@
           "type": "quantitative"
         },
         "x": {
-          "value": 11  
+          "value": 11
         },
         "text": {
           "value": "Average Births"

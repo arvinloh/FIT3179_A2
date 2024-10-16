@@ -1,199 +1,222 @@
 {
-    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "description": "Waterfall Chart of Counts by Age Group with Dropdown Filter",
-    "width": 800,
-    "height": 450,
-    "data": {
-      "values": [
-        {"method": "Non-instrumental vaginal", "label": "Under 20", "amount": 3085},
-        {"method": "Non-instrumental vaginal", "label": "20–24", "amount": 18182},
-        {"method": "Non-instrumental vaginal", "label": "25–29", "amount": 42153},
-        {"method": "Non-instrumental vaginal", "label": "30–34", "amount": 56281},
-        {"method": "Non-instrumental vaginal", "label": "35–39", "amount": 29895},
-        {"method": "Non-instrumental vaginal", "label": "40 and older", "amount": 5205},
-        {"method": "Forceps", "label": "Under 20", "amount": 252},
-        {"method": "Forceps", "label": "20–24", "amount": 1416},
-        {"method": "Forceps", "label": "25–29", "amount": 4337},
-        {"method": "Forceps", "label": "30–34", "amount": 6166},
-        {"method": "Forceps", "label": "35–39", "amount": 2712},
-        {"method": "Forceps", "label": "40 and older", "amount": 420},
-        {"method": "Vacuum extraction", "label": "Under 20", "amount": 400},
-        {"method": "Vacuum extraction", "label": "20–24", "amount": 2150},
-        {"method": "Vacuum extraction", "label": "25–29", "amount": 6156},
-        {"method": "Vacuum extraction", "label": "30–34", "amount": 8941},
-        {"method": "Vacuum extraction", "label": "35–39", "amount": 4003},
-        {"method": "Vacuum extraction", "label": "40 and older", "amount": 624},
-        {"method": "Caesarean section", "label": "Under 20", "amount": 1023},
-        {"method": "Caesarean section", "label": "20–24", "amount": 7853},
-        {"method": "Caesarean section", "label": "25–29", "amount": 25633},
-        {"method": "Caesarean section", "label": "30–34", "amount": 45377},
-        {"method": "Caesarean section", "label": "35–39", "amount": 31134},
-        {"method": "Caesarean section", "label": "40 and older", "amount": 7859},
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Waterfall Chart of Counts by Age Group with Dropdown Filter",
+  "width": 800,
+  "height": 450,
+  "data": {
+    "values": [
+      {
+        "method": "Non-instrumental vaginal",
+        "label": "Under 20",
+        "amount": 3085
+      },
+      {
+        "method": "Non-instrumental vaginal",
+        "label": "20–24",
+        "amount": 18182
+      },
+      {
+        "method": "Non-instrumental vaginal",
+        "label": "25–29",
+        "amount": 42153
+      },
+      {
+        "method": "Non-instrumental vaginal",
+        "label": "30–34",
+        "amount": 56281
+      },
+      {
+        "method": "Non-instrumental vaginal",
+        "label": "35–39",
+        "amount": 29895
+      },
+      {
+        "method": "Non-instrumental vaginal",
+        "label": "40 and older",
+        "amount": 5205
+      },
+      { "method": "Forceps", "label": "Under 20", "amount": 252 },
+      { "method": "Forceps", "label": "20–24", "amount": 1416 },
+      { "method": "Forceps", "label": "25–29", "amount": 4337 },
+      { "method": "Forceps", "label": "30–34", "amount": 6166 },
+      { "method": "Forceps", "label": "35–39", "amount": 2712 },
+      { "method": "Forceps", "label": "40 and older", "amount": 420 },
+      { "method": "Vacuum extraction", "label": "Under 20", "amount": 400 },
+      { "method": "Vacuum extraction", "label": "20–24", "amount": 2150 },
+      { "method": "Vacuum extraction", "label": "25–29", "amount": 6156 },
+      { "method": "Vacuum extraction", "label": "30–34", "amount": 8941 },
+      { "method": "Vacuum extraction", "label": "35–39", "amount": 4003 },
+      { "method": "Vacuum extraction", "label": "40 and older", "amount": 624 },
+      { "method": "Caesarean section", "label": "Under 20", "amount": 1023 },
+      { "method": "Caesarean section", "label": "20–24", "amount": 7853 },
+      { "method": "Caesarean section", "label": "25–29", "amount": 25633 },
+      { "method": "Caesarean section", "label": "30–34", "amount": 45377 },
+      { "method": "Caesarean section", "label": "35–39", "amount": 31134 },
+      { "method": "Caesarean section", "label": "40 and older", "amount": 7859 }
     ]
-    },
-    "params": [
-      {
-        "name": "selectedMethod",
-        "value": "Non-instrumental vaginal",
-        "bind": {
-          "input": "select",
-          "options": [
-            "Non-instrumental vaginal",
-            "Forceps",
-            "Vacuum extraction",
-            "Caesarean section"
-          ],
-          "name": "Select a method: "
-        }
-      }
-    ],
-    "transform": [
-      {"filter": "datum.method === selectedMethod"},
-      {
-        "calculate": "'Begin'",
-        "as": "beginLabel"
-      },
-      {
-        "calculate": "'End'",
-        "as": "endLabel"
-      },
-      {
-        "calculate": "0",
-        "as": "beginAmount"
-      },
-      {
-        "window": [{"op": "sum", "field": "amount", "as": "totalAmount"}]
-      },
-      {
-        "pivot": "label",
-        "value": "amount",
-        "groupby": ["method"],
-        "op": "sum"
-      },
-      {
-        "fold": ["Under 20", "20–24", "25–29", "30–34", "35–39", "40 and older"],
-        "as": ["label", "amount"]
-      },
-      {
-        "calculate": "datum.amount",
-        "as": "amount"
-      },
-      {
-        "union": [
-          {"label": "Begin", "amount": 0},
-          {"label": "End", "amount": 0}
-        ]
-      },
-      {
-        "window": [{"op": "sum", "field": "amount", "as": "cumulative"}],
-        "frame": [null, 0]
-      },
-      {
-        "calculate": "datum.cumulative - datum.amount",
-        "as": "previous_cumulative"
-      },
-      {
-        "calculate": "(datum.label !== 'Begin' && datum.label !== 'End' && datum.amount > 0 ? '+' : '') + datum.amount",
-        "as": "text_amount"
-      },
-      {
-        "calculate": "(datum.cumulative + datum.previous_cumulative) / 2",
-        "as": "center"
-      },
-      {
-        "window": [{"op": "lead", "field": "label", "as": "leadLabel"}]
-      },
-      {
-        "calculate": "datum.leadLabel === null ? datum.label : datum.leadLabel",
-        "as": "leadLabel"
-      }
-    ],
-    "encoding": {
-      "x": {
-        "field": "label",
-        "type": "ordinal",
-        "sort": [
-          "Begin",
-          "Under 20",
-          "20–24",
-          "25–29",
-          "30–34",
-          "35–39",
-          "40 and older",
-          "End"
+  },
+  "params": [
+    {
+      "name": "selectedMethod",
+      "value": "Non-instrumental vaginal",
+      "bind": {
+        "input": "select",
+        "options": [
+          "Non-instrumental vaginal",
+          "Forceps",
+          "Vacuum extraction",
+          "Caesarean section"
         ],
-        "axis": {"labelAngle": 0, "title": "Age Groups"}
+        "name": "Select a method: "
+      }
+    }
+  ],
+  "transform": [
+    { "filter": "datum.method === selectedMethod" },
+    {
+      "calculate": "'Begin'",
+      "as": "beginLabel"
+    },
+    {
+      "calculate": "'End'",
+      "as": "endLabel"
+    },
+    {
+      "calculate": "0",
+      "as": "beginAmount"
+    },
+    {
+      "window": [{ "op": "sum", "field": "amount", "as": "totalAmount" }]
+    },
+    {
+      "pivot": "label",
+      "value": "amount",
+      "groupby": ["method"],
+      "op": "sum"
+    },
+    {
+      "fold": ["Under 20", "20–24", "25–29", "30–34", "35–39", "40 and older"],
+      "as": ["label", "amount"]
+    },
+    {
+      "calculate": "datum.amount",
+      "as": "amount"
+    },
+    {
+      "union": [
+        { "label": "Begin", "amount": 0 },
+        { "label": "End", "amount": 0 }
+      ]
+    },
+    {
+      "window": [{ "op": "sum", "field": "amount", "as": "cumulative" }],
+      "frame": [null, 0]
+    },
+    {
+      "calculate": "datum.cumulative - datum.amount",
+      "as": "previous_cumulative"
+    },
+    {
+      "calculate": "(datum.label !== 'Begin' && datum.label !== 'End' && datum.amount > 0 ? '+' : '') + datum.amount",
+      "as": "text_amount"
+    },
+    {
+      "calculate": "(datum.cumulative + datum.previous_cumulative) / 2",
+      "as": "center"
+    },
+    {
+      "window": [{ "op": "lead", "field": "label", "as": "leadLabel" }]
+    },
+    {
+      "calculate": "datum.leadLabel === null ? datum.label : datum.leadLabel",
+      "as": "leadLabel"
+    }
+  ],
+  "encoding": {
+    "x": {
+      "field": "label",
+      "type": "ordinal",
+      "sort": [
+        "Begin",
+        "Under 20",
+        "20–24",
+        "25–29",
+        "30–34",
+        "35–39",
+        "40 and older",
+        "End"
+      ],
+      "axis": { "labelAngle": 0, "title": "Age Groups" }
+    }
+  },
+  "layer": [
+    {
+      "mark": { "type": "bar", "size": 45 },
+      "encoding": {
+        "y": {
+          "field": "previous_cumulative",
+          "type": "quantitative",
+          "title": "Cumulative Count"
+        },
+        "y2": { "field": "cumulative" },
+        "color": {
+          "condition": [
+            {
+              "test": "datum.label === 'Begin' || datum.label === 'End'",
+              "value": "#f7e0b6"
+            },
+            { "test": "datum.amount < 0", "value": "#f78a64" }
+          ],
+          "value": "#93c4aa"
+        }
       }
     },
-    "layer": [
-      {
-        "mark": {"type": "bar", "size": 45},
-        "encoding": {
-          "y": {
-            "field": "previous_cumulative",
-            "type": "quantitative",
-            "title": "Cumulative Count"
-          },
-          "y2": {"field": "cumulative"},
-          "color": {
-            "condition": [
-              {
-                "test": "datum.label === 'Begin' || datum.label === 'End'",
-                "value": "#f7e0b6"
-              },
-              {"test": "datum.amount < 0", "value": "#f78a64"}
-            ],
-            "value": "#93c4aa"
-          }
-        }
+    {
+      "mark": {
+        "type": "rule",
+        "color": "#404040",
+        "opacity": 1,
+        "strokeWidth": 2,
+        "xOffset": -22.5,
+        "x2Offset": 22.5
       },
-      {
-        "mark": {
-          "type": "rule",
-          "color": "#404040",
-          "opacity": 1,
-          "strokeWidth": 2,
-          "xOffset": -22.5,
-          "x2Offset": 22.5
-        },
-        "encoding": {
-          "x": {"field": "label", "type": "ordinal"},
-          "x2": {"field": "leadLabel"},
-          "y": {"field": "cumulative", "type": "quantitative"}
-        }
+      "encoding": {
+        "x": { "field": "label", "type": "ordinal" },
+        "x2": { "field": "leadLabel" },
+        "y": { "field": "cumulative", "type": "quantitative" }
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "dy": { "expr": "datum.amount >= 0 ? -4 : 4" },
+        "baseline": { "expr": "datum.amount >= 0 ? 'bottom' : 'top'" },
+        "fontWeight": "bold",
+        "color": "#404040"
       },
-      {
-        "mark": {
-          "type": "text",
-          "dy": {"expr": "datum.amount >= 0 ? -4 : 4"},
-          "baseline": {"expr": "datum.amount >= 0 ? 'bottom' : 'top'"},
-          "fontWeight": "bold",
-          "color": "#404040"
-        },
-        "encoding": {
-          "x": {"field": "label", "type": "ordinal"},
-          "y": {"field": "cumulative", "type": "quantitative"},
-          "text": {"field": "cumulative", "type": "quantitative"}
-        }
-      },
-      {
-        "mark": {"type": "text", "fontWeight": "bold", "baseline": "middle"},
-        "encoding": {
-          "x": {"field": "label", "type": "ordinal"},
-          "y": {"field": "center", "type": "quantitative"},
-          "text": {"field": "text_amount", "type": "nominal"},
-          "color": {
-            "condition": [
-              {
-                "test": "datum.label === 'Begin' || datum.label === 'End'",
-                "value": "#725a30"
-              }
-            ],
-            "value": "white"
-          }
+      "encoding": {
+        "x": { "field": "label", "type": "ordinal" },
+        "y": { "field": "cumulative", "type": "quantitative" },
+        "text": { "field": "cumulative", "type": "quantitative" }
+      }
+    },
+    {
+      "mark": { "type": "text", "fontWeight": "bold", "baseline": "middle" },
+      "encoding": {
+        "x": { "field": "label", "type": "ordinal" },
+        "y": { "field": "center", "type": "quantitative" },
+        "text": { "field": "text_amount", "type": "nominal" },
+        "color": {
+          "condition": [
+            {
+              "test": "datum.label === 'Begin' || datum.label === 'End'",
+              "value": "#725a30"
+            }
+          ],
+          "value": "white"
         }
       }
-    ],
-    "config": {"text": {"fontWeight": "bold", "color": "#404040"}}
-  }
-  
+    }
+  ],
+  "config": { "text": { "fontWeight": "bold", "color": "#404040" } }
+}

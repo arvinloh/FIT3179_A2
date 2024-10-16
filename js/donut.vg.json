@@ -3,39 +3,129 @@
   "description": "A donut chart for visualizing births by gestational age with a filter to select each week.",
   "data": {
     "values": [
-      {"Gestational_age": 20, "Live_births_Number": 71, "Fetal_deaths_Number": 336},
-      {"Gestational_age": 21, "Live_births_Number": 91, "Fetal_deaths_Number": 341},
-      {"Gestational_age": 22, "Live_births_Number": 128, "Fetal_deaths_Number": 269},
-      {"Gestational_age": 23, "Live_births_Number": 136, "Fetal_deaths_Number": 192},
-      {"Gestational_age": 24, "Live_births_Number": 169, "Fetal_deaths_Number": 110},
-      {"Gestational_age": 25, "Live_births_Number": 192, "Fetal_deaths_Number": 112},
-      {"Gestational_age": 26, "Live_births_Number": 227, "Fetal_deaths_Number": 79},
-      {"Gestational_age": 27, "Live_births_Number": 267, "Fetal_deaths_Number": 78},
-      {"Gestational_age": 28, "Live_births_Number": 378, "Fetal_deaths_Number": 56},
-      {"Gestational_age": 29, "Live_births_Number": 406, "Fetal_deaths_Number": 35},
-      {"Gestational_age": 30, "Live_births_Number": 531, "Fetal_deaths_Number": 38},
-      {"Gestational_age": 31, "Live_births_Number": 747, "Fetal_deaths_Number": 36},
-      {"Gestational_age": 32, "Live_births_Number": 1108, "Fetal_deaths_Number": 50},
-      {"Gestational_age": 33, "Live_births_Number": 1551, "Fetal_deaths_Number": 47},
-      {"Gestational_age": 34, "Live_births_Number": 2880, "Fetal_deaths_Number": 63},
-      {"Gestational_age": 35, "Live_births_Number": 4742, "Fetal_deaths_Number": 48},
-      {"Gestational_age": 36, "Live_births_Number": 10197, "Fetal_deaths_Number": 83},
-      {"Gestational_age": 37, "Live_births_Number": 28091, "Fetal_deaths_Number": 84},
-      {"Gestational_age": 38, "Live_births_Number": 73523, "Fetal_deaths_Number": 98},
-      {"Gestational_age": 39, "Live_births_Number": 98495, "Fetal_deaths_Number": 44},
-      {"Gestational_age": 40, "Live_births_Number": 61854, "Fetal_deaths_Number": 44},
-      {"Gestational_age": 41, "Live_births_Number": 26056, "Fetal_deaths_Number": 14}
+      {
+        "Gestational_age": 20,
+        "Live_births_Number": 71,
+        "Fetal_deaths_Number": 336
+      },
+      {
+        "Gestational_age": 21,
+        "Live_births_Number": 91,
+        "Fetal_deaths_Number": 341
+      },
+      {
+        "Gestational_age": 22,
+        "Live_births_Number": 128,
+        "Fetal_deaths_Number": 269
+      },
+      {
+        "Gestational_age": 23,
+        "Live_births_Number": 136,
+        "Fetal_deaths_Number": 192
+      },
+      {
+        "Gestational_age": 24,
+        "Live_births_Number": 169,
+        "Fetal_deaths_Number": 110
+      },
+      {
+        "Gestational_age": 25,
+        "Live_births_Number": 192,
+        "Fetal_deaths_Number": 112
+      },
+      {
+        "Gestational_age": 26,
+        "Live_births_Number": 227,
+        "Fetal_deaths_Number": 79
+      },
+      {
+        "Gestational_age": 27,
+        "Live_births_Number": 267,
+        "Fetal_deaths_Number": 78
+      },
+      {
+        "Gestational_age": 28,
+        "Live_births_Number": 378,
+        "Fetal_deaths_Number": 56
+      },
+      {
+        "Gestational_age": 29,
+        "Live_births_Number": 406,
+        "Fetal_deaths_Number": 35
+      },
+      {
+        "Gestational_age": 30,
+        "Live_births_Number": 531,
+        "Fetal_deaths_Number": 38
+      },
+      {
+        "Gestational_age": 31,
+        "Live_births_Number": 747,
+        "Fetal_deaths_Number": 36
+      },
+      {
+        "Gestational_age": 32,
+        "Live_births_Number": 1108,
+        "Fetal_deaths_Number": 50
+      },
+      {
+        "Gestational_age": 33,
+        "Live_births_Number": 1551,
+        "Fetal_deaths_Number": 47
+      },
+      {
+        "Gestational_age": 34,
+        "Live_births_Number": 2880,
+        "Fetal_deaths_Number": 63
+      },
+      {
+        "Gestational_age": 35,
+        "Live_births_Number": 4742,
+        "Fetal_deaths_Number": 48
+      },
+      {
+        "Gestational_age": 36,
+        "Live_births_Number": 10197,
+        "Fetal_deaths_Number": 83
+      },
+      {
+        "Gestational_age": 37,
+        "Live_births_Number": 28091,
+        "Fetal_deaths_Number": 84
+      },
+      {
+        "Gestational_age": 38,
+        "Live_births_Number": 73523,
+        "Fetal_deaths_Number": 98
+      },
+      {
+        "Gestational_age": 39,
+        "Live_births_Number": 98495,
+        "Fetal_deaths_Number": 44
+      },
+      {
+        "Gestational_age": 40,
+        "Live_births_Number": 61854,
+        "Fetal_deaths_Number": 44
+      },
+      {
+        "Gestational_age": 41,
+        "Live_births_Number": 26056,
+        "Fetal_deaths_Number": 14
+      }
     ]
   },
   "transform": [
     {
-      "filter": {"param": "gestational_age_selector"}
+      "filter": { "param": "gestational_age_selector" }
     },
     {
-      "calculate": "'Live birth number'", "as": "Live_births"
+      "calculate": "'Live birth number'",
+      "as": "Live_births"
     },
     {
-      "calculate": "'Fetal death'", "as": "Fetal_deaths"
+      "calculate": "'Fetal death'",
+      "as": "Fetal_deaths"
     },
     {
       "fold": ["Live_births_Number", "Fetal_deaths_Number"],
@@ -64,9 +154,9 @@
       }
     }
   ],
-  "mark": {"type": "arc", "innerRadius": 50},
+  "mark": { "type": "arc", "innerRadius": 50 },
   "encoding": {
-    "theta": {"field": "Number", "type": "quantitative"},
+    "theta": { "field": "Number", "type": "quantitative" },
     "color": {
       "field": "Birth_Type",
       "type": "nominal",
@@ -79,8 +169,8 @@
       }
     },
     "tooltip": [
-      {"field": "Birth_Type", "type": "nominal", "title": "Type"},
-      {"field": "Number", "type": "quantitative", "title": "Number"}
+      { "field": "Birth_Type", "type": "nominal", "title": "Type" },
+      { "field": "Number", "type": "quantitative", "title": "Number" }
     ]
   }
 }
