@@ -1,0 +1,34 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "description": "Interactive Radial Bar Chart of Births per Month by State",
+    "width": 500,
+    "height": 500,
+    "data": {
+      "url": "https://raw.githubusercontent.com/arvinloh/FIT3179_A2/main/data/month_of_birth.csv",
+      "format": {"type": "csv"}
+    },
+    "transform": [
+      {"fold": ["NSW", "Vic", "Qld", "WA", "SA", "Tas", "ACT", "NT"], "as": ["State", "Births"]},
+      {"calculate": "month(datum.Month + ' 1, 2020')", "as": "monthNum"},
+      {"calculate": "(datum.monthNum - 1) * (360 / 12)", "as": "angle"},
+      {"calculate": "toNumber(datum.Births)", "as": "Births"}
+    ],
+    "mark": {
+      "type": "arc",
+      "innerRadius": 50,
+      "stroke": "#fff"
+    },
+    "encoding": {
+      "theta": {"field": "Births", "type": "quantitative", "stack": true},
+      "radius": {"field": "Births", "type": "quantitative"},
+      "color": {"field": "State", "type": "nominal", "legend": {"title": "State"}},
+      "tooltip": [
+        {"field": "Month", "type": "nominal"},
+        {"field": "State", "type": "nominal"},
+        {"field": "Births", "type": "quantitative"}
+      ],
+      "order": {"field": "State", "type": "nominal"}
+    },
+    "view": {"stroke": null}
+  }
+  

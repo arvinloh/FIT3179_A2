@@ -26,7 +26,7 @@
     }
   },
   "projection": {
-    "type": "mercator"
+    "type": "equirectangular"
   },
   "data": {
     "url": "https://raw.githubusercontent.com/arvinloh/FIT3179_A2/refs/heads/main/data/ne_50m_admin_1_states_provinces.json?token=GHSAT0AAAAAACXMFL3Z24WAVIF3WCL5ITHYZYF4S2Q",

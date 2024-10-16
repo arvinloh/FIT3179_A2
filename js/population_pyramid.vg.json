@@ -1,0 +1,49 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Population Pyramid of Births by Gender and State",
+  "width": 700,
+  "height": 500,
+  "data": {
+    "url": "https://raw.githubusercontent.com/arvinloh/FIT3179_A2/main/data/gender_ratio.csv",
+    "format": { "type": "csv" }
+  },
+  "transform": [
+    { "filter": "datum.Sex == 'Male' || datum.Sex == 'Female'" },
+    {
+      "fold": ["NSW", "Vic", "Qld", "WA", "SA", "Tas", "ACT", "NT"],
+      "as": ["State", "Number"]
+    },
+    { "calculate": "toNumber(replace(datum.Number, ',', ''))", "as": "Number" },
+    {
+      "calculate": "datum.Sex == 'Female' ? -datum.Number : datum.Number",
+      "as": "Value"
+    }
+  ],
+  "mark": "bar",
+  "encoding": {
+    "y": {
+      "field": "State",
+      "type": "ordinal",
+      "title": "State",
+      "axis": { "labelAngle": 0 },
+      "sort": "x" // Sort by x field in ascending order
+    },
+    "x": {
+      "field": "Value",
+      "type": "quantitative",
+      "title": "Number of Births",
+      "axis": { "format": "s" }
+    },
+    "color": {
+      "field": "Sex",
+      "type": "nominal",
+      "scale": { "range": ["#1f77b4", "#ff7f0e"] },
+      "legend": { "title": "Sex" }
+    },
+    "tooltip": [
+      { "field": "State", "type": "nominal" },
+      { "field": "Sex", "type": "nominal" },
+      { "field": "Number", "type": "quantitative" }
+    ]
+  }
+}

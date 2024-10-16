@@ -1,0 +1,37 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "description": "Isotype Dot Plot of Maternal Age Distribution by State",
+    "width": 800,
+    "height": 500,
+    "data": {
+      "url": "https://raw.githubusercontent.com/arvinloh/FIT3179_A2/refs/heads/main/data/give_birth_age.csv",
+      "format": {"type": "csv"}
+    },
+    "transform": [
+      {"calculate": "floor(datum.Number / 1000)", "as": "Icons"},
+      {"filter": "datum.Icons > 0"}
+    ],
+    "mark": "text",
+    "encoding": {
+      "y": {
+        "field": "Maternal age",
+        "type": "ordinal",
+        "title": "Maternal Age Group",
+        "sort": ["Under 20", "20–24", "25–29", "30–34", "35–39", "40 and older"]
+      },
+      "x": {
+        "aggregate": "sum",
+        "field": "Icons",
+        "type": "quantitative",
+        "title": "Number of Mothers (Each Icon Represents 1,000)"
+      },
+      "text": {"value": "👤"},
+      "color": {"field": "State", "type": "nominal", "legend": {"title": "State"}},
+      "tooltip": [
+        {"field": "State", "type": "nominal"},
+        {"field": "Maternal age", "type": "nominal", "title": "Age Group"},
+        {"field": "Number", "type": "quantitative", "title": "Number of Mothers"}
+      ]
+    }
+  }
+  

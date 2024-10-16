@@ -1,0 +1,73 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Interactive Heatmap of Maternal Age Distribution by State",
+  "width": 600,
+  "height": 400,
+  "data": {
+    "url": "https://raw.githubusercontent.com/arvinloh/FIT3179_A2/main/data/maternal_age.csv",
+    "format": {"type": "csv"}
+  },
+  "transform": [
+    {
+      "filter": "datum.AgeGroup != 'Total' && datum.AgeGroup != 'Not stated' && datum.State != 'Australia'"
+    },
+    {"calculate": "toNumber(datum.Number)", "as": "Number"},
+    {"calculate": "toNumber(datum.Percentage)", "as": "Percentage"},
+    {"filter": "isValid(datum.Number)"}
+  ],
+  "selection": {
+    "highlight": {"type": "single", "on": "mouseover", "empty": "none"},
+    "select": {"type": "multi", "on": "click"}
+  },
+  "mark": "rect",
+  "encoding": {
+    "x": {
+      "field": "AgeGroup",
+      "type": "ordinal",
+      "title": "Age Group",
+      "sort": ["Under 20", "20–24", "25–29", "30–34", "35–39", "40 and older"],
+      "axis": {"labelAngle": -45}
+    },
+    "y": {
+      "field": "State",
+      "type": "ordinal",
+      "title": "State",
+      "sort": ["NSW", "Vic", "Qld", "WA", "SA", "Tas", "ACT", "NT"]
+    },
+    "color": {
+      "field": "Number",
+      "type": "quantitative",
+      "title": "Number of Mothers",
+      "scale": {"scheme": "viridis"}
+    },
+    "strokeWidth": {
+      "condition": [
+        {
+          "test": {
+            "or": [{"selection": "highlight"}, {"selection": "select"}]
+          },
+          "value": 2
+        }
+      ],
+      "value": 0
+    },
+    "stroke": {
+      "condition": [{"selection": "select", "value": "black"}],
+      "value": null
+    },
+    "tooltip": [
+      {"field": "State", "type": "nominal"},
+      {"field": "AgeGroup", "type": "nominal"},
+      {"field": "Number", "type": "quantitative", "title": "Number of Mothers"},
+      {"field": "Percentage", "type": "quantitative", "title": "Percentage"}
+    ]
+  },
+  "config": {
+    "view": {"stroke": "transparent"},
+    "axis": {
+      "grid": false,
+      "labelFontSize": 12,
+      "titleFontSize": 14
+    }
+  }
+}
