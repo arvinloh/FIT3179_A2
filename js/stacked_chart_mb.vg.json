@@ -1,0 +1,94 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "100% Stacked Horizontal Bar Chart of Number of Births by Method of Birth and Maternal Age",
+  "title": {
+    "text": "Number of Births by Method of Birth and Maternal Age",
+    "subtitle": "Investigating the distribution of births by method of birth and maternal age",
+    "fontSize": 25,
+    "subtitleFontSize": 20,
+    "font": "Roboto",
+    "anchor": "start",
+    "color": "black"
+  },
+  "width": 900,
+  "height": 300,
+  "background": null,
+  "data": {
+    "values": [
+      {"MethodOfBirth": "Non-instrumental vaginal", "MaternalAge": "Under 20", "Number": 3085},
+      {"MethodOfBirth": "Non-instrumental vaginal", "MaternalAge": "20–24", "Number": 18182},
+      {"MethodOfBirth": "Non-instrumental vaginal", "MaternalAge": "25–29", "Number": 42153},
+      {"MethodOfBirth": "Non-instrumental vaginal", "MaternalAge": "30–34", "Number": 56281},
+      {"MethodOfBirth": "Non-instrumental vaginal", "MaternalAge": "35–39", "Number": 29895},
+      {"MethodOfBirth": "Non-instrumental vaginal", "MaternalAge": "40 and older", "Number": 5205},
+      {"MethodOfBirth": "Forceps", "MaternalAge": "Under 20", "Number": 252},
+      {"MethodOfBirth": "Forceps", "MaternalAge": "20–24", "Number": 1416},
+      {"MethodOfBirth": "Forceps", "MaternalAge": "25–29", "Number": 4337},
+      {"MethodOfBirth": "Forceps", "MaternalAge": "30–34", "Number": 6166},
+      {"MethodOfBirth": "Forceps", "MaternalAge": "35–39", "Number": 2712},
+      {"MethodOfBirth": "Forceps", "MaternalAge": "40 and older", "Number": 420},
+      {"MethodOfBirth": "Vacuum extraction", "MaternalAge": "Under 20", "Number": 400},
+      {"MethodOfBirth": "Vacuum extraction", "MaternalAge": "20–24", "Number": 2150},
+      {"MethodOfBirth": "Vacuum extraction", "MaternalAge": "25–29", "Number": 6156},
+      {"MethodOfBirth": "Vacuum extraction", "MaternalAge": "30–34", "Number": 8941},
+      {"MethodOfBirth": "Vacuum extraction", "MaternalAge": "35–39", "Number": 4003},
+      {"MethodOfBirth": "Vacuum extraction", "MaternalAge": "40 and older", "Number": 624},
+      {"MethodOfBirth": "Caesarean section", "MaternalAge": "Under 20", "Number": 1023},
+      {"MethodOfBirth": "Caesarean section", "MaternalAge": "20–24", "Number": 7853},
+      {"MethodOfBirth": "Caesarean section", "MaternalAge": "25–29", "Number": 25633},
+      {"MethodOfBirth": "Caesarean section", "MaternalAge": "30–34", "Number": 45377},
+      {"MethodOfBirth": "Caesarean section", "MaternalAge": "35–39", "Number": 31134},
+      {"MethodOfBirth": "Caesarean section", "MaternalAge": "40 and older", "Number": 7859}
+    ]
+  },
+  "transform": [
+    {
+      "window": [{"op": "sum", "field": "Number", "as": "TotalNumber"}],
+      "frame": [null, null],
+      "groupby": ["MaternalAge"]
+    },
+    {
+      "calculate": "datum.Number / datum.TotalNumber * 100",
+      "as": "Percentage"
+    }
+  ],
+  "mark": "bar",
+  "encoding": {
+    "y": {
+      "field": "MaternalAge",
+      "type": "nominal",
+      "sort": ["Under 20", "20–24", "25–29", "30–34", "35–39", "40 and older"],
+      "axis": {
+        "title": "Maternal Age",
+        "labelFontSize": 18,
+        "titleFontSize": 20
+      }
+    },
+    "x": {
+      "field": "Number",
+      "type": "quantitative",
+      "stack": "normalize",
+      "axis": {
+        "title": "Percentage",
+        "labelFontSize": 18,
+        "titleFontSize": 20
+      }
+    },
+    "color": {
+      "field": "MethodOfBirth",
+      "type": "nominal",
+      "legend": {
+        "title": "Method of Birth",
+        "labelFontSize": 15,
+        "titleFontSize": 18,
+        "labelLimit": 500,
+        "titleLimit": 500
+      }
+    },
+    "tooltip": [
+      {"field": "MethodOfBirth", "type": "nominal", "title": "Method of Birth"},
+      {"field": "Number", "type": "quantitative", "title": "Number of Births"},
+      {"field": "Percentage", "type": "quantitative", "title": "Percentage", "format": ".2f"}
+    ]
+  }
+}
