@@ -1,8 +1,18 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "description": "Interactive Heatmap of Maternal Age Distribution by State",
-  "width": 600,
-  "height": 400,
+  "width": 1000,
+  "height": 300,
+  "title": {
+    "text": "Maternal Age Distribution by State",
+    "subtitle": "Data on mother's age in Australia",
+    "fontSize": 25,
+    "subtitleFontSize": 20,
+    "font": "Roboto",
+    "anchor": "start",
+    "color": "black"
+  },
+  "background": null,
   "data": {
     "url": "https://raw.githubusercontent.com/arvinloh/FIT3179_A2/main/data/maternal_age.csv",
     "format": { "type": "csv" }
@@ -19,7 +29,9 @@
     "highlight": { "type": "single", "on": "mouseover", "empty": "none" },
     "select": { "type": "multi", "on": "click" }
   },
-  "mark": "rect",
+  "mark": {
+    "type": "rect"
+  },
   "encoding": {
     "x": {
       "field": "AgeGroup",
@@ -38,7 +50,13 @@
       "field": "Number",
       "type": "quantitative",
       "title": "Number of Mothers",
-      "scale": { "scheme": "viridis" }
+      "scale": { "scheme": "viridis" },
+      "legend": {
+        "labelFontSize": 18,        
+        "titleFontSize": 20,        
+        "titleFont": "Roboto",      
+        "labelFont": "Roboto"        
+      }
     },
     "strokeWidth": {
       "condition": [
@@ -70,8 +88,8 @@
     "view": { "stroke": "transparent" },
     "axis": {
       "grid": false,
-      "labelFontSize": 12,
-      "titleFontSize": 14
+      "labelFontSize": 18,
+      "titleFontSize": 20
     }
   }
 }

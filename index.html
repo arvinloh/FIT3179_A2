@@ -80,7 +80,7 @@
   <section>
     <h2>Seasonal Trends in Birth Rates</h2>
     <div class="highlight-message" id="highlight-message">
-      <strong>💡 Did you know? You can select 3 different visualizations to better explore birth rate trends!</strong>
+      <strong>💡 You can select 3 different visualizations to better explore birth rate trends!</strong>
     </div>
     <div class="filter-container">
       <label for="chart-select">Select Chart Type: </label>
@@ -108,9 +108,20 @@
 
   <section>
     <h2>Maternal Age and Birth Trends</h2>
-    <div class="visual-container">
-      <div id="isotype_dot_plot"></div>
+    <div class="highlight-message" id="highlight-message2">
+      <strong>💡 You can select 3 different visualizations to better explore birth rate trends!</strong>
     </div>
+    <div class="filter-container">
+      <label for="chart2-select">Select Chart Type: </label>
+      <select id="chart2-select">
+        <option value="isotype_dot_plot">Isotype Dot Plot</option>
+        <option value="radial_chart_age">Radial Chart</option>
+        <option value="heatmap_age">Heat Map</option>
+      </select>
+    </div>
+
+    <div class ="visual-container" id="chart-container2"></div>
+
     <div class="description">
       <h3>Understanding Maternal Age Trends</h3>
       <p><strong>Women aged 30-34 years</strong> accounted for the highest number of births in 2021, with a total of <strong>116,779 births</strong>. This trend reflects the growing societal shift towards having children later in life, influenced by factors such as career priorities, financial stability, and access to fertility treatments.</p>
@@ -234,6 +245,11 @@
 
       const radialChartmonthSpec = "/js/radial_chart_month.vg.json";
 
+      // Mother's Age Specification
+      const radialChartAgeSpec = "/js/radial_chart_age.vg.json";
+
+      const heatmapAgeSpec = "/js/heatmap.vg.json";
+
       // Embed all visualizations
       vegaEmbed('#choropleth_map', choroplethSpec, {actions: false}).then(function(result) {
         // Additional customization if needed
@@ -271,39 +287,80 @@
         // Additional customization if needed
       }).catch(console.error);
 
-      function embedChart(spec) {
+      vegaEmbed('#radial_chart_age', radialChartAgeSpec, {actions: false}).then(function(result) {
+        // Additional customization if needed
+      }).catch(console.error);
+
+      vegaEmbed('#heatmap_age', heatmapAgeSpec, {actions: false}).then(function(result) {
+        // Additional customization if needed
+      }).catch(console.error);
+
+      // Function to embed chart based on selection
+      function embedChart1(spec) {
         vegaEmbed('#chart-container', spec, {actions: false}).catch(console.error);
       }
 
+      // Function to embed charts for the second dropdown
+      function embedChart2(spec) {
+        vegaEmbed('#chart-container2', spec, {actions: false}).catch(console.error);
+      }
+
       // Initial chart load
-      embedChart(waterfallmonthSpec);
+      embedChart1(waterfallmonthSpec);
+      embedChart2(isotypeDotPlotSpec);
       
-      // Event listener for chart type selection
-      document.getElementById('chart-select').addEventListener('change', function() {
-        const selectedChart = this.value;
-        if (selectedChart === 'bar_chart') {
-          embedChart(barChartSpec);
-        } else if (selectedChart === 'waterfall_month') {
-          embedChart(waterfallmonthSpec);
-        } else if (selectedChart === 'radial_chart_month') {
-          embedChart(radialChartmonthSpec);
+    // Event listener for the first chart type selection (Seasonal Trends)
+    document.getElementById('chart-select').addEventListener('change', function() {
+      const selectedChart = this.value;
+      if (selectedChart === 'bar_chart') {
+        embedChart1(barChartSpec);
+      } else if (selectedChart === 'waterfall_month') {
+        embedChart1(waterfallmonthSpec);
+      } else if (selectedChart === 'radial_chart_month') {
+        embedChart1(radialChartmonthSpec);
+      }
+    });
+
+    // Event listener for the second chart type selection (Maternal Age Trends)
+    document.getElementById('chart2-select').addEventListener('change', function() {
+      const selectedChart = this.value;
+      if (selectedChart === 'isotype_dot_plot') {
+        embedChart2(isotypeDotPlotSpec);
+      } else if (selectedChart === 'radial_chart_age') {
+        embedChart2(radialChartAgeSpec);
+      } else if (selectedChart === 'heatmap_age') {
+        embedChart2(heatmapAgeSpec);
+      }
+    });
+
+    // Intersection Observer for the first highlight message
+    const highlightMessage1 = document.getElementById("highlight-message");
+    const observer1 = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          highlightMessage1.style.opacity = "1";
+          highlightMessage1.style.animation = "bounceIn 2s ease-in-out";
+          observer1.unobserve(entry.target);
         }
       });
+    }, { threshold: 0.1 });
 
-      // Intersection Observer for highlight message
-      const highlightMessage = document.getElementById("highlight-message");
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            highlightMessage.style.opacity = "1"; // Show the message
-            highlightMessage.style.animation = "bounceIn 2s ease-in-out"; // Add animation
-            observer.unobserve(entry.target); // Stop observing once it's visible
-          }
-        });
-      }, { threshold: 0.1 });
+    observer1.observe(highlightMessage1);
 
-      observer.observe(highlightMessage);
-    });
+    // Intersection Observer for the second highlight message
+    const highlightMessage2 = document.getElementById("highlight-message2");
+    const observer2 = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          highlightMessage2.style.opacity = "1";
+          highlightMessage2.style.animation = "bounceIn 2s ease-in-out";
+          observer2.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    observer2.observe(highlightMessage2);
+  });
   </script>
 </body>
 </html>

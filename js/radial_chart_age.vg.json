@@ -1,13 +1,15 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "description": "Age Group Distribution by State - Radial Bar Chart",
-  "width": 500,
-  "height": 500,
+  "width": 1150,
+  "height": 300,
   "title": {
-    "text": "Age Group Distribution by State",
-    "fontSize": 20,
+    "text": "Maternal Age Distribution by State",
+    "subtitle": "Data on mother's age in Australia",
+    "fontSize": 25,
+    "subtitleFontSize": 20,
     "font": "Roboto",
-    "anchor": "middle",
+    "anchor": "start",
     "color": "black"
   },
   "background": null,
@@ -135,8 +137,8 @@
           "legend": {
             "title": "Age Group",
             "orient": "right",
-            "titleFontSize": 14,
-            "labelFontSize": 12
+            "titleFontSize": 20,
+            "labelFontSize": 18
           },
           "scale": {
             "scheme": "category20b"
@@ -151,8 +153,8 @@
     {
       "mark": {
         "type": "text",
-        "radiusOffset": 20,
-        "fontSize": 12
+        "radiusOffset": 30,
+        "fontSize": 20
       },
       "encoding": {
         "text": { "field": "Value", "type": "quantitative" },

@@ -426,6 +426,7 @@
         transition: opacity 2s ease; /* Smooth transition */
       }
 
+
     /* Animation Keyframes */
     @keyframes bounceIn {
         0% {
