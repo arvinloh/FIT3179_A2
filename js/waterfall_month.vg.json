@@ -1,23 +1,22 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "width": 800,
-  "height": 450,
+  "width": 1200,
+  "height": 600,
   "title": {
-    "text": "Monthly Waterfall Chart by State",
-    "fontSize": 20,
-    "fontWeight": "bold",
+    "text": "Monthly Births by State in Australia",
+    "fontSize": 18,
     "anchor": "start",
-    "color": "#404040"
+    "color": "#333"
   },
   "background": null,
   "params": [
     {
-      "name": "state",
-      "value": "Australia",
+      "name": "selected_state",
+      "value": "All",
       "bind": {
         "input": "select",
         "options": [
-          "Australia",
+          "All",
           "NSW",
           "Vic",
           "Qld",
@@ -28,8 +27,8 @@
           "NT"
         ],
         "labels": [
-          "Australia",
-          "NSW",
+          "All",
+          "New South Wales",
           "Victoria",
           "Queensland",
           "Western Australia",
@@ -37,7 +36,8 @@
           "Tasmania",
           "Australian Capital Territory",
           "Northern Territory"
-        ]
+        ],
+        "name": "Select States: "
       }
     }
   ],
@@ -53,7 +53,7 @@
         "Tas": 496,
         "ACT": 551,
         "NT": 344,
-        "Australia": 25871
+        "All": 25871
       },
       {
         "label": "February",
@@ -65,7 +65,7 @@
         "Tas": 466,
         "ACT": 507,
         "NT": 338,
-        "Australia": 25872
+        "All": 25872
       },
       {
         "label": "March",
@@ -77,7 +77,7 @@
         "Tas": 543,
         "ACT": 584,
         "NT": 338,
-        "Australia": 28835
+        "All": 28835
       },
       {
         "label": "April",
@@ -89,7 +89,7 @@
         "Tas": 474,
         "ACT": 518,
         "NT": 354,
-        "Australia": 26768
+        "All": 26768
       },
       {
         "label": "May",
@@ -101,7 +101,7 @@
         "Tas": 513,
         "ACT": 558,
         "NT": 351,
-        "Australia": 25826
+        "All": 25826
       },
       {
         "label": "June",
@@ -113,7 +113,7 @@
         "Tas": 527,
         "ACT": 546,
         "NT": 305,
-        "Australia": 25429
+        "All": 25429
       },
       {
         "label": "July",
@@ -125,7 +125,7 @@
         "Tas": 504,
         "ACT": 530,
         "NT": 305,
-        "Australia": 25036
+        "All": 25036
       },
       {
         "label": "August",
@@ -137,7 +137,7 @@
         "Tas": 501,
         "ACT": 539,
         "NT": 303,
-        "Australia": 25554
+        "All": 25554
       },
       {
         "label": "September",
@@ -149,7 +149,7 @@
         "Tas": 508,
         "ACT": 541,
         "NT": 281,
-        "Australia": 25898
+        "All": 25898
       },
       {
         "label": "October",
@@ -161,7 +161,7 @@
         "Tas": 502,
         "ACT": 509,
         "NT": 325,
-        "Australia": 25827
+        "All": 25827
       },
       {
         "label": "November",
@@ -173,7 +173,7 @@
         "Tas": 539,
         "ACT": 519,
         "NT": 283,
-        "Australia": 25854
+        "All": 25854
       },
       {
         "label": "December",
@@ -185,7 +185,7 @@
         "Tas": 508,
         "ACT": 558,
         "NT": 299,
-        "Australia": 25857
+        "All": 25857
       },
       {
         "label": "Total",
@@ -197,12 +197,12 @@
         "Tas": 0,
         "ACT": 0,
         "NT": 0,
-        "Australia": 0
+        "All": 0
       }
     ]
   },
   "transform": [
-    { "calculate": "datum[state]", "as": "amount" },
+    { "calculate": "datum[selected_state]", "as": "amount" },
     { "window": [{ "op": "sum", "field": "amount", "as": "cumulative_sum" }] },
     {
       "window": [{ "op": "max", "field": "cumulative_sum", "as": "total_sum" }]
@@ -225,7 +225,7 @@
     },
     { "calculate": "(datum.sum + datum.previous_sum) / 2", "as": "center" },
     {
-      "calculate": "state == 'NSW' ? '#E69F00' : state == 'Vic' ? '#56B4E9' : state == 'Qld' ? '#009E73' : state == 'WA' ? '#F0E442' : state == 'SA' ? '#0072B2' : state == 'Tas' ? '#D55E00' : state == 'ACT' ? '#CC79A7' : state == 'NT' ? '#999999' : '#93c4aa'",
+      "calculate": "selected_state == 'NSW' ? '#E69F00' : selected_state == 'Vic' ? '#56B4E9' : selected_state == 'Qld' ? '#009E73' : selected_state == 'WA' ? '#F0E442' : selected_state == 'SA' ? '#0072B2' : selected_state == 'Tas' ? '#D55E00' : selected_state == 'ACT' ? '#CC79A7' : selected_state == 'NT' ? '#999999' : '#93c4aa'",
       "as": "state_color"
     },
     { "window": [{ "op": "lead", "field": "label", "as": "lead" }] },
@@ -268,7 +268,7 @@
         "y": {
           "field": "previous_sum",
           "type": "quantitative",
-          "title": "Amount",
+          "title": "Number of Births",
           "axis": { "labelFontSize": 12, "titleFontSize": 14 }
         },
         "y2": { "field": "sum" },

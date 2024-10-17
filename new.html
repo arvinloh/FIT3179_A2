@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chart Type Switcher</title>
+  <title>Seasonal Trends in Birth Rates</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap">
   <style>
     body {
@@ -12,19 +12,40 @@
       padding: 20px;
     }
 
-    .filter-container {
+    /* Highlight Message */
+    .highlight-message {
+      background-color: #fff7cc; /* Soft yellow background to make it pop */
+      color: #333;
+      padding: 15px;
+      border-left: 5px solid #ffd700; /* Gold color to catch attention */
+      border-radius: 5px;
       margin-bottom: 20px;
       display: flex;
-      justify-content: center;
       align-items: center;
-      gap: 10px;
+      font-size: 1.1em;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      opacity: 0; /* Initially hidden */
+      transition: opacity 2s ease; /* Smooth transition */
     }
 
+    /* Filter Container */
+    .filter-container {
+      padding: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    /* Styles for the select dropdown */
     select {
       padding: 10px 15px;
       border: 2px solid #162447;
       border-radius: 5px;
       font-size: 1em;
+      min-width: 150px;
       cursor: pointer;
     }
 
@@ -32,51 +53,105 @@
       box-shadow: 0 0 8px rgba(24, 144, 255, 0.3);
     }
 
+    /* Chart container to ensure full width */
     #chart-container {
       width: 100%;
       max-width: 800px;
       margin: 0 auto;
     }
+
+    /* Animation Keyframes */
+    @keyframes bounceIn {
+      0% {
+        transform: scale(0.9);
+        opacity: 0.5;
+      }
+      50% {
+        transform: scale(1.05);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
   </style>
+  <!-- Include Vega-Lite Library -->
   <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
 </head>
 <body>
-  <div class="filter-container">
-    <label for="chart-select">Select Chart Type: </label>
-    <select id="chart-select">
-      <option value="bar_chart">Stacked Bar Chart</option>
-      <option value="waterfall_month">Waterfall Chart</option>
-    </select>
-  </div>
 
-  <div id="chart-container"></div>
+  <section>
+    <h2>Seasonal Trends in Birth Rates</h2>
 
-  <!-- Vega-Lite Visualization Scripts -->
-  <script type="text/javascript">
-    // Bar Chart Specification
-    const barChartSpec = "/js/bar_chart.vg.json";
+    <!-- Highlight Message for Filters -->
+    <div class="highlight-message" id="highlight-message">
+      💡 Did you know? You can switch between 3 different visualizations to better explore birth rate trends!
+    </div>
 
-    // Waterfall Chart Specification
-    const waterfallmonthSpec = "/js/waterfall_month.vg.json";
+    <!-- Filter for Chart Selection -->
+    <div class="filter-container">
+      <label for="chart-select">Select Chart Type: </label>
+      <select id="chart-select">
+        <option value="waterfall_month">Waterfall Chart</option>
+        <option value="bar_chart">Stacked Bar Chart</option>
+        <option value="radial_chart_month">Radial Hierarchical Chart</option>
+      </select>
+    </div>
 
-    // Function to embed the selected chart
-    function embedChart(spec) {
-      vegaEmbed('#chart-container', spec, {actions: false}).catch(console.error);
-    }
+    <!-- Chart Container -->
+    <div id="chart-container"></div>
 
-    // Initial chart load
-    embedChart(barChartSpec);
+    <div class="description">
+      <p>March emerged as the peak month for births in 2021, with a noticeable dip occurring in December...</p>
+    </div>
 
-    // Event listener for chart type selection
-    document.getElementById('chart-select').addEventListener('change', function() {
-      const selectedChart = this.value;
-      if (selectedChart === 'bar_chart') {
-        embedChart(barChartSpec);
-      } else if (selectedChart === 'waterfall_month') {
-        embedChart(waterfallmonthSpec);
+    <div class="annotation">
+      <p>Notice the peak in March and the dip in December births, suggesting the influence of seasonal...</p>
+    </div>
+  </section>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      // Vega-Lite specifications
+      const waterfallSpec = "/path/to/waterfall_month.vg.json";
+      const stackedBarSpec = "/path/to/bar_chart.vg.json";
+      const radialChartSpec = "/path/to/radial_chart_month.vg.json";
+
+      // Initial chart embedding
+      const chartSelect = document.getElementById("chart-select");
+      embedChart(chartSelect.value);
+
+      // Event listener for changing charts
+      chartSelect.addEventListener("change", function () {
+        embedChart(this.value);
+      });
+
+      // Function to embed chart based on selection
+      function embedChart(chartType) {
+        const chartContainer = document.getElementById("chart-container");
+        if (chartType === "waterfall_month") {
+          vegaEmbed(chartContainer, waterfallSpec, { actions: false }).catch(console.error);
+        } else if (chartType === "bar_chart") {
+          vegaEmbed(chartContainer, stackedBarSpec, { actions: false }).catch(console.error);
+        } else if (chartType === "radial_chart_month") {
+          vegaEmbed(chartContainer, radialChartSpec, { actions: false }).catch(console.error);
+        }
       }
+
+      // Intersection Observer for highlight message
+      const highlightMessage = document.getElementById("highlight-message");
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            highlightMessage.style.opacity = "1"; // Show the message
+            observer.unobserve(entry.target); // Stop observing once it's visible
+          }
+        });
+      }, { threshold: 0.1 });
+
+      observer.observe(highlightMessage);
     });
   </script>
 </body>

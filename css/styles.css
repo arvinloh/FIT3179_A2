@@ -4,7 +4,7 @@
     padding: 0;
   }
   body {
-    font-family: 'Merriweather', serif;
+    font-family: 'Montserrat', sans-serif;
     line-height: 1.8;
     color: #333;
     background: #f4f4f9;
@@ -301,7 +301,7 @@
     padding: 10px;
     width: 180px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-    top: 1400px;  /* Adjusted to align better with the box */
+    top: 1500px;  /* Adjusted to align better with the box */
     left: 1235px; /* Positioned to center with respect to the box */
     z-index: 1000; /* High z-index to ensure it's above the Vega map */
   }
@@ -313,7 +313,7 @@
     border-left: 15px solid transparent;
     border-right: 15px solid transparent;
     border-top: 25px solid #333;  /* Create an actual arrow with a larger height to make it distinct */
-    top: 1450px;  /* Adjusted to align better with the box */
+    top: 1550px;  /* Adjusted to align better with the box */
     left: 1210px; /* Positioned to center with respect to the box */
     /* rotate it 90 deg */
     transform: rotate(90deg);
@@ -329,40 +329,9 @@
     font-weight: bold;
     /* italic */
     font-style: italic;
-    top: 1600px;  /* Adjusted to align better with the box */
+    top: 1740px;  /* Adjusted to align better with the box */
     left: 900px; /* Positioned to center with respect to the box */
     z-index: 1000; /* High z-index to ensure it's above the Vega map */
-  }
-
-  .annotation-icon {
-    position: absolute;
-    top: 1600px;  /* Adjusted to align better with the box */
-    left: 900px; /* Positioned to center with respect to the box */
-    z-index: 10000;
-    cursor: pointer;
-    color: #333;
-    font-size: 24px;
-  }
-
-  .tooltip-box {
-    position: absolute;
-    top: 1600px;  /* Adjusted to align better with the box */
-    left: 900px; /* Positioned to center with respect to the box */
-    width: 220px;
-    background: #ffffcc;
-    border: 1px solid #333;
-    border-radius: 5px;
-    padding: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-    visibility: hidden; /* Initially hidden */
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    z-index: 1000;
-  }
-
-  .annotation-icon:hover + .tooltip-box {
-    visibility: visible;  /* Make tooltip visible when icon is hovered */
-    opacity: 1;
   }
 
   /* Vega-lite dropdown filter looks good */
@@ -370,7 +339,7 @@
       .vega-bindings select {
         background: #fff;
         color: #333;
-        padding: 10px 15px;
+        padding: 15px 15px;
         border: 2px solid #162447;
         border-radius: 5px;
         font-size: 1em;
@@ -401,8 +370,72 @@
         align-items: center;
         gap: 10px;
         margin-bottom: 20px;
-        background-color: #f0f0f0;
         padding: 10px;
         border-radius: 8px;
       }  
+
+      
+    /* Container for the chart type filter dropdown */
+    .filter-container {
+        padding: 15px;
+        display: flex;
+        justify-content: space-between; /* Adjust items to spread across */
+        align-items: center;
+        gap: 15px;
+        width: 100%; /* Ensure it takes the full width */
+        box-sizing: border-box;
+    }
+
+    select {
+    flex: 1; /* Allows the dropdown to expand as needed */
+    padding: 10px 15px;
+    border: 2px solid #162447;
+    border-radius: 5px;
+    font-size: 1em;
+    min-width: 150px;
+    cursor: pointer;
+    /* bold */
+    }
+
+
+    select:hover {
+      box-shadow: 0 0 8px rgba(24, 144, 255, 0.3);
+    }
+
+    #chart-container {
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    /* Bulb moment */
+    /* Highlight Message */
+    .highlight-message {
+        background-color: #fff7cc; /* Soft yellow background to make it pop */
+        color: #333;
+        padding: 15px;
+        border-left: 5px solid #ffd700; /* Gold color to catch attention */
+        border-radius: 5px;
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        font-size: 1.1em;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        opacity: 0; /* Initially hidden */
+        transition: opacity 2s ease; /* Smooth transition */
+      }
+
+    /* Animation Keyframes */
+    @keyframes bounceIn {
+        0% {
+        transform: scale(0.9);
+        opacity: 0.5;
+        }
+        50% {
+        transform: scale(1.05);
+        opacity: 1;
+        }
+        100% {
+        transform: scale(1);
+        }
+    }
   

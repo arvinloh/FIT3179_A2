@@ -63,10 +63,22 @@
 
   <section>
     <h2>Seasonal Trends in Birth Rates</h2>
-    <div class="visual-container">
-      <div id="bar_chart"></div>
+    <div class="highlight-message" id="highlight-message">
+      <strong>💡 Did you know? You can select 3 different visualizations to better explore birth rate trends!</strong>
     </div>
+    <div class="filter-container">
+      <label for="chart-select">Select Chart Type: </label>
+      <select id="chart-select">
+        <option value="waterfall_month">Waterfall Chart</option>
+        <option value="bar_chart">Stacked Bar Chart</option>
+        <option value="radial_chart_month">Radial Hierarchical Chart</option>
+      </select>
+    </div>
+  
+    <div class ="visual-container" id="chart-container"></div>
+
     <div class="description">
+    </br>
       <p>March emerged as the peak month for births in 2021, with a noticeable dip occurring in December. The seasonal patterns in birth rates may be influenced by cultural, social, and biological factors. For instance, the peak in March could be linked to conception during the colder winter months, when couples might spend more time indoors. The dip in December might reflect a combination of medical scheduling and cultural behaviors around the holiday season, where fewer planned births occur due to the festivities. Understanding these seasonal variations can be important for healthcare services, allowing them to anticipate periods of higher demand for maternity services and ensure adequate staffing and resources during peak months. It also reflects broader social behaviors that impact family planning and conception timing.</p>
     </div>
     <div class="annotation">
@@ -151,55 +163,102 @@
 
   <!-- Vega-Lite Visualization Scripts -->
   <script type="text/javascript">
-    // Choropleth Map Specification
-    const choroplethSpec = "/js/choropleth_map.vg.json";
+    document.addEventListener("DOMContentLoaded", function () {
+      // Choropleth Map Specification
+      const choroplethSpec = "/js/choropleth_map.vg.json";
 
 
-    // Bar Chart Specification
-    const barChartSpec = "/js/bar_chart.vg.json";
+      // Bar Chart Specification
+      const barChartSpec = "/js/bar_chart.vg.json";
 
-    // Isotype Dot Plot Specification
-    const isotypeDotPlotSpec = "/js/isotype_dot_plot.vg.json";
+      // Isotype Dot Plot Specification
+      const isotypeDotPlotSpec = "/js/isotype_dot_plot.vg.json";
 
-    // Donut Chart Specification
-    const donutSpec = "/js/donut.vg.json";
+      // Donut Chart Specification
+      const donutSpec = "/js/donut.vg.json";
 
-    // Waterfall Chart Specification
-    const waterfallDurationSpec = "/js/waterfall_duration.vg.json";
-    // Radial Chart for Birth Weight Specification
-    const radialChartBWSpec = "/js/radial_chart_bw.vg.json";
+      // Waterfall Chart Specification
+      const waterfallDurationSpec = "/js/waterfall_duration.vg.json";
+      // Radial Chart for Birth Weight Specification
+      const radialChartBWSpec = "/js/radial_chart_bw.vg.json";
 
-    // Population Pyramid Specification
-    const populationPyramidSpec = "/js/population_pyramid.vg.json";
+      // Population Pyramid Specification
+      const populationPyramidSpec = "/js/population_pyramid.vg.json";
 
-    // Embed all visualizations
-    vegaEmbed('#choropleth_map', choroplethSpec, {actions: false}).then(function(result) {
-      // Additional customization if needed
-    }).catch(console.error);
+      const waterfallmonthSpec = "/js/waterfall_month.vg.json";
 
-    vegaEmbed('#bar_chart', barChartSpec, {actions: false}).then(function(result) {
-      // Additional customization if needed
-    }).catch(console.error);
+      const radialChartmonthSpec = "/js/radial_chart_month.vg.json";
 
-    vegaEmbed('#isotype_dot_plot', isotypeDotPlotSpec, {actions: false}).then(function(result) {
-      // Additional customization if needed
-    }).catch(console.error);
+      // Embed all visualizations
+      vegaEmbed('#choropleth_map', choroplethSpec, {actions: false}).then(function(result) {
+        // Additional customization if needed
+      }).catch(console.error);
 
-    vegaEmbed('#donut', donutSpec, {actions: false}).then(function(result) {
-      // Additional customization if needed
-    }).catch(console.error);
+      vegaEmbed('#bar_chart', barChartSpec, {actions: false}).then(function(result) {
+        // Additional customization if needed
+      }).catch(console.error);
 
-    vegaEmbed('#waterfall_duration', waterfallDurationSpec, {actions: false}).then(function(result) {
-      // Additional customization if needed
-    }).catch(console.error);
+      vegaEmbed('#isotype_dot_plot', isotypeDotPlotSpec, {actions: false}).then(function(result) {
+        // Additional customization if needed
+      }).catch(console.error);
 
-    vegaEmbed('#radial_chart_bw', radialChartBWSpec, {actions: false}).then(function(result) {
-      // Additional customization if needed
-    }).catch(console.error);
+      vegaEmbed('#donut', donutSpec, {actions: false}).then(function(result) {
+        // Additional customization if needed
+      }).catch(console.error);
 
-    vegaEmbed('#population_pyramid', populationPyramidSpec, {actions: false}).then(function(result) {
-      // Additional customization if needed
-    }).catch(console.error);
+      vegaEmbed('#waterfall_duration', waterfallDurationSpec, {actions: false}).then(function(result) {
+        // Additional customization if needed
+      }).catch(console.error);
+
+      vegaEmbed('#radial_chart_bw', radialChartBWSpec, {actions: false}).then(function(result) {
+        // Additional customization if needed
+      }).catch(console.error);
+
+      vegaEmbed('#population_pyramid', populationPyramidSpec, {actions: false}).then(function(result) {
+        // Additional customization if needed
+      }).catch(console.error);
+
+      vegaEmbed('#waterfall_month', waterfallmonthSpec, {actions: false}).then(function(result) {
+        // Additional customization if needed
+      }).catch(console.error);
+
+      vegaEmbed('#radial_chart_month', radialChartmonthSpec, {actions: false}).then(function(result) {
+        // Additional customization if needed
+      }).catch(console.error);
+
+      function embedChart(spec) {
+        vegaEmbed('#chart-container', spec, {actions: false}).catch(console.error);
+      }
+
+      // Initial chart load
+      embedChart(waterfallmonthSpec);
+      
+      // Event listener for chart type selection
+      document.getElementById('chart-select').addEventListener('change', function() {
+        const selectedChart = this.value;
+        if (selectedChart === 'bar_chart') {
+          embedChart(barChartSpec);
+        } else if (selectedChart === 'waterfall_month') {
+          embedChart(waterfallmonthSpec);
+        } else if (selectedChart === 'radial_chart_month') {
+          embedChart(radialChartmonthSpec);
+        }
+      });
+
+      // Intersection Observer for highlight message
+      const highlightMessage = document.getElementById("highlight-message");
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            highlightMessage.style.opacity = "1"; // Show the message
+            highlightMessage.style.animation = "bounceIn 2s ease-in-out"; // Add animation
+            observer.unobserve(entry.target); // Stop observing once it's visible
+          }
+        });
+      }, { threshold: 0.1 });
+
+      observer.observe(highlightMessage);
+    });
   </script>
 </body>
 </html>
