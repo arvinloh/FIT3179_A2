@@ -85,9 +85,9 @@
     <div class="filter-container">
       <label for="chart-select">Select Chart Type: </label>
       <select id="chart-select">
+        <option value="radial_chart_month">Radial Hierarchical Chart</option>
         <option value="waterfall_month">Waterfall Chart</option>
         <option value="bar_chart">Stacked Bar Chart</option>
-        <option value="radial_chart_month">Radial Hierarchical Chart</option>
       </select>
     </div>
   
@@ -331,18 +331,18 @@
       }
 
       // Initial chart load
-      embedChart1(waterfallmonthSpec);
+      embedChart1(radialChartmonthSpec);
       embedChart2(isotypeDotPlotSpec);
       
     // Event listener for the first chart type selection (Seasonal Trends)
     document.getElementById('chart-select').addEventListener('change', function() {
       const selectedChart = this.value;
-      if (selectedChart === 'bar_chart') {
-        embedChart1(barChartSpec);
+      if (selectedChart === 'radial_chart_month') {
+        embedChart1(radialChartmonthSpec);
       } else if (selectedChart === 'waterfall_month') {
         embedChart1(waterfallmonthSpec);
-      } else if (selectedChart === 'radial_chart_month') {
-        embedChart1(radialChartmonthSpec);
+      } else if (selectedChart === 'bar_chart') {
+        embedChart1(barChartSpec);
       }
     });
 
