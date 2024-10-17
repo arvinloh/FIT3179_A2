@@ -498,3 +498,28 @@
     .description ul li {
         margin-bottom: 5px;
     }
+
+    .description .columns {
+      display: flex;
+      flex-direction: row;
+      gap: 20px; /* Space between columns */
+    }
+    
+    .description .left-column, 
+    .description .right-column {
+      flex: 1; /* Equal width for both columns */
+    }
+    
+    .description .left-column p {
+      margin: 0; /* Remove default margin */
+    }
+    
+    .description .right-column ul {
+      margin: 0; /* Remove default margin */
+      padding-left: 20px; /* Add padding for list items */
+    }
+    
+    .description .right-column li {
+      margin-bottom: 5px; /* Space between list items */
+    }
+    
