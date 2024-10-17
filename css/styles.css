@@ -167,6 +167,7 @@
         transform: translateY(-8px);
         box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
       }
+
       
   
   /* Visualizations */
@@ -255,6 +256,11 @@
     .highlight-box {
       padding: 20px 30px;
       font-size: 1.2em;
+    }
+    
+    .important-box {
+        padding: 20px 30px;
+        font-size: 1.2em;
     }
   }
 
@@ -442,6 +448,25 @@
         }
     }
   
+    /* Important message */
+
+    .important-message {
+        background-color: #f9f9f9;
+        padding: 20px;
+        border-left: 5px solid #162447;
+        border-radius: 5px;
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        font-size: 1.3em;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .important-message p {
+        margin-left: 20px;
+    }
+    
+
     /* Description and annotation */
 
     .description {

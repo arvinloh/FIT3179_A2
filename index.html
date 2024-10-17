@@ -21,7 +21,7 @@
   <div class="container">
     <!-- Hero Section -->
     <div class="hero-section">
-      <h1>The Trends Around Mothers and Babies Across Australian States and Territories</h1>
+      <h1>The Trends Around New Mothers and Babies Across Australian States and Territories</h1>
       <p>Exploring the Data for 2021</p>
     </div>
 
@@ -82,6 +82,9 @@
     <div class="highlight-message" id="highlight-message">
       <strong>💡 You can select 3 different visualizations to better explore birth rate trends!</strong>
     </div>
+    <div class="important-message" id="important-message">
+      <strong>🔍 For a comprehensive view of monthly birth rate trends, I recommend using the Stacked Bar Chart</strong>.
+    </div>
     <div class="filter-container">
       <label for="chart-select">Select Chart Type: </label>
       <select id="chart-select">
@@ -107,9 +110,9 @@
   </section>
 
   <section>
-    <h2>Maternal Age and Birth Trends</h2>
+    <h2>Maternal Age Trends</h2>
     <div class="highlight-message" id="highlight-message2">
-      <strong>💡 You can select 3 different visualizations to better explore birth rate trends!</strong>
+      <strong>💡 You can select 3 different visualizations to better explore maternal age trends!</strong>
     </div>
     <div class="filter-container">
       <label for="chart2-select">Select Chart Type: </label>
@@ -385,6 +388,20 @@
     }, { threshold: 0.1 });
 
     observer2.observe(highlightMessage2);
+
+      // Intersection Observer for the first important message
+    const importantMessage = document.getElementById("important-message");
+    const observer3 = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          importantMessage.style.opacity = "1";
+          importantMessage.style.animation = "bounceIn 2s ease-in-out";
+          observer3.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    observer3.observe(importantMessage);
   });
   </script>
 </body>
