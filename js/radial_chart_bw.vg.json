@@ -1,15 +1,16 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "description": "Birth Weight Distribution by Category - Radial Bar Chart",
-  "width": 500,
-  "height": 500,
+  "width": 1000,
+  "height": 400,
   "title": {
     "text": "Birth Weight Distribution by Category",
     "fontSize": 20,
     "font": "Roboto",
-    "anchor": "middle",
+    "anchor": "start",
     "color": "black"
   },
+  "background": null,
   "data": {
     "values": [
       { "Category": "Low Birth Weight", "SubCategory": "Less than 1,000 grams", "Value": 2766 },
@@ -68,8 +69,8 @@
           "legend": {
             "title": "Birth Weight Category",
             "orient": "right",
-            "titleFontSize": 14,
-            "labelFontSize": 12
+            "labelFontSize": 15, 
+            "titleFontSize": 17  
           },
           "scale": {
             "scheme": "tableau10"

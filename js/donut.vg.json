@@ -1,6 +1,9 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "description": "A donut chart for visualizing births by gestational age with a filter to select each week.",
+  "width": 1200,
+  "height": 300,
+  "background": null,
   "data": {
     "values": [
       {
@@ -151,7 +154,8 @@
         "max": 41,
         "step": 1,
         "name": "Select Gestational Age: "
-      }
+      },
+      "value": 20
     }
   ],
   "mark": { "type": "arc", "innerRadius": 50 },
@@ -165,7 +169,10 @@
         "range": ["#1f77b4", "#ff7f0e"]
       },
       "legend": {
-        "title": "Birth Type"
+        "title": "Birth Type",
+        "orient": "middle",
+        "labelFontSize": 20, 
+        "titleFontSize": 20  
       }
     },
     "tooltip": [

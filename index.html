@@ -1,144 +1,195 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Trends of Mothers and Babies in Australia</title>
 
-  <!-- Import Vega & Vega-Lite (does not have to be from CDN) -->
+  <!-- Import Vega & Vega-Lite -->
   <script src="https://cdn.jsdelivr.net/npm/vega@5.22.1"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.5.0"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.21.0"></script>
   
-  <!-- CSS file -->
-  <link rel="stylesheet" type="text/css" href="css/styles.css" media="all">
+  <!-- Google Fonts for Enhanced Typography -->
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- Style in style.css -->
+  <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
+  <!-- Magazine-style Container -->
+  <div class="container">
+    <!-- Hero Section -->
+    <div class="hero-section">
+      <h1>The Trends Around Mothers and Babies Across Australian States and Territories</h1>
+      <p>Exploring the Data for 2021</p>
+    </div>
 
-  <!-- We aim to be magazine style -->
+  <!-- Introduction -->
+  <section>
+    <div class="description">
+      <p>Welcome to an in-depth exploration of the birth trends in Australia for the year 2021. This comprehensive analysis delves into various aspects such as the distribution of births across states, seasonal variations, maternal age demographics, gestational ages, birth weights, and gender distribution. By visualizing these data points, we aim to uncover the underlying societal patterns and provide valuable insights for healthcare planning and policy-making. The data reveals interesting correlations between demographic factors, geographic locations, and health outcomes, helping us better understand the ever-changing landscape of maternal and infant health in Australia.</p>
+    </div>
+  </section>
 
-<div class="container">
-  <!-- Header -->
-  <h1>The trends around mothers and babies across Australian states and territories</h1>
-  <!-- Concise Subtitle: What/Who is this useful for?-->
-  <h2>Explore the trends around mothers and babies across Australian states and territories in 2021</h2>
+  <!-- Highlight Box -->
+  <div class="highlight-box">
+    "Data tells a story – let’s explore how birth trends are changing in Australia."
+  </div>
 
-  <!-- Maps -->
-  <div id="choropleth_map"></div>
-  <script type="text/javascript">
-    var spec1 = "js/choropleth_map.vg.json";
-    vegaEmbed('#choropleth_map', spec1).then(function(result) {
-      // Access the Vega view instance
-    }).catch(console.error);
-  </script>
+  <!-- Visualizations -->
+  <section>
+    <h2>Birth Distribution Across States</h2>
+    <div class="visual-container">
+      <div id="choropleth_map"></div>
+    </div>
+    <div class="description">
+      <p>In 2021, New South Wales led the nation with the highest number of births, totaling 99,309, followed by Victoria with 81,789 births and Queensland with 63,383 births. This distribution clearly reflects population density, economic activity, and migration trends, as these are among the most populated regions in Australia. The data highlights areas of growth and urbanization while providing insights into regional healthcare needs. By analyzing the birth distribution across states, policymakers can identify which areas might require additional healthcare resources, maternity facilities, and family services. The differences between states also indicate socio-economic factors that influence family planning decisions, such as access to healthcare, employment opportunities, and housing availability.</p>
+    </div>
+    <div class="annotation">
+      <p>This map visualizes birth rates across Australian states, highlighting regions experiencing significant population growth. The concentration of births in certain areas points to migration trends, urbanization, and economic opportunities in major cities.</p>
+    </div>
+  </section>
 
-  <!-- Describe -->
-  <p>New South Wales has the highest total number of births (99,309), followed by Victoria (81,789) and Queensland (63,383).</p>
+  <section>
+    <h2>Seasonal Trends in Birth Rates</h2>
+    <div class="visual-container">
+      <div id="bar_chart"></div>
+    </div>
+    <div class="description">
+      <p>March emerged as the peak month for births in 2021, with a noticeable dip occurring in December. The seasonal patterns in birth rates may be influenced by cultural, social, and biological factors. For instance, the peak in March could be linked to conception during the colder winter months, when couples might spend more time indoors. The dip in December might reflect a combination of medical scheduling and cultural behaviors around the holiday season, where fewer planned births occur due to the festivities. Understanding these seasonal variations can be important for healthcare services, allowing them to anticipate periods of higher demand for maternity services and ensure adequate staffing and resources during peak months. It also reflects broader social behaviors that impact family planning and conception timing.</p>
+    </div>
+    <div class="annotation">
+      <p>Notice the peak in March and the dip in December births, suggesting the influence of seasonal, cultural, and societal factors on birth rates. These trends provide valuable insights for anticipating healthcare demands throughout the year.</p>
+    </div>
+  </section>
 
+  <section>
+    <h2>Maternal Age and Birth Trends</h2>
+    <div class="visual-container">
+      <div id="isotype_dot_plot"></div>
+    </div>
+    <div class="description">
+      <p>Women aged 30-34 years accounted for the highest number of births in 2021, with a total of 116,779 births. This trend reflects the growing societal shift towards having children later in life, influenced by factors such as career priorities, financial stability, and access to fertility treatments. Younger age groups, particularly mothers under 20, represented a much smaller proportion of total births, indicating a decrease in teenage pregnancies, which can be attributed to better sex education and access to contraception. Additionally, regional differences show that Queensland had a higher proportion of young mothers under 20 compared to other states, pointing to unique socio-cultural dynamics in certain areas. The trend towards later motherhood also presents specific healthcare challenges, as older mothers may face increased risks during pregnancy, necessitating tailored healthcare interventions.</p>
+    </div>
+    <div class="annotation">
+      <p>This chart illustrates the shifting age demographics of mothers, highlighting a trend towards later pregnancies. Factors such as career aspirations, economic stability, and improved healthcare access play significant roles in influencing maternal age.</p>
+    </div>
+  </section>
 
-  <div id="bar_chart"></div>
-  <script type="text/javascript">
-    var spec3 = "js/bar_chart.vg.json";
-    vegaEmbed('#bar_chart', spec3).then(function(result) {
-      // Access the Vega view instance
-    }).catch(console.error);
-  </script>
-  <!-- Describe -->
-  <p> The most common birth month in 2021 is March! There is a pattern in births during March and a dip in December across most states </p>
-  
+  <section>
+    <h2>Gestational Age and Birth Outcomes</h2>
+    <div class="visual-container">
+      <div id="donut"></div>
+    </div>
+    <div class="description">
+      <strong>Gestational Age and Birth Outcomes</strong>
+      <p>Gestational age is a critical determinant of birth outcomes. Most live births in Australia in 2021 occurred at 39 weeks (31.4%) and 38 weeks (23.5%), indicating that these are the most common full-term delivery points. Full-term births generally result in healthier outcomes for both mothers and babies, with lower risks of complications. On the other hand, fetal deaths were most common at early gestational ages, particularly at 20 and 21 weeks, which underscores the critical importance of prenatal care in the early stages of pregnancy. Early intervention and regular monitoring can help reduce risks during this crucial period. The data highlights the importance of supporting mothers throughout their pregnancy journey, particularly in the early weeks, to improve outcomes and reduce the likelihood of complications.</p>
+    </div>
+    <div class="annotation">
+      <p>The distribution of gestational ages underscores the significance of full-term deliveries for optimal health outcomes. Early prenatal care is essential to prevent complications during these critical early stages.</p>
+    </div>
+  </section>
 
-  <div id="isotype_dot_plot"></div>
-  <script type="text/javascript">
-    var spec4 = "js/isotype_dot_plot.vg.json";
-    vegaEmbed('#isotype_dot_plot', spec4).then(function(result) {
-      // Access the Vega view instance
-    }).catch(console.error);
-  </script>
-  <!-- Describe -->
-  <p> The age group 30-34 has the highest number of births in 2021, with a total of 116,779 births. </p>
-  <p> While the age 25-29 years old is significantly lower, with a total of 78,300 births</p>
-  <p> This could indicate a societal trend towards having children later in life. </p>
-  <p> It is extremely alarming that in Queensland, the number of births for the age group under 20 years old is the highest compared to other states, with 1,482 births out of the total of 4,769 births in the whole Australia </p>
-  <p> Even though the number of births is generally lower in Queensland compared to other states </p>
+  <section>
+    <h2>Maternal Health and Birth Outcomes</h2>
+    <div class="visual-container">
+      <div id="waterfall_duration"></div>
+    </div>
+    <div class="description">
+      <strong>Maternal BMI and Birth Outcomes</strong>
+      <p>Maternal health plays a significant role in determining birth outcomes, with Body Mass Index (BMI) being a crucial factor. Mothers with a normal BMI (18.5-24.9) had the majority of live births at 38 and 39 weeks, indicating that maintaining a healthy weight contributes positively to pregnancy duration and outcomes. However, deviations from the normal BMI range—whether underweight or overweight—can pose challenges, including increased risks of preterm birth or complications during delivery. Public health initiatives that encourage maintaining a healthy weight before and during pregnancy can be vital in improving birth outcomes. This data emphasizes the importance of nutritional counseling and regular health check-ups for expectant mothers to ensure a healthy BMI and improve the chances of favorable outcomes for both mothers and babies.</p>
+    </div>
+    <div class="annotation">
+      <p>This visualization demonstrates the correlation between maternal BMI and gestational outcomes. Maintaining a healthy BMI during pregnancy can significantly improve birth outcomes and reduce the risk of complications.</p>
+    </div>
+  </section>
 
-  <div id="donut"></div>
-  <script type="text/javascript">
-    var spec2 = "js/donut.vg.json";
-    vegaEmbed('#donut', spec2).then(function(result) {
-      // Access the Vega view instance
-    }).catch(console.error);
-  </script>
-  <!-- Describe -->
-  <strong>Peak Live Births</strong>
-  <li>The majority of live births occur at gestational ages 39 weeks (98,495 live births, 31.4%) and 38 weeks (73,523 live births, 23.5%).</li>
-  <li>These two gestational ages together account for over half of all live births. </li>
+  <section>
+    <h2>Birth Weight Distribution</h2>
+    <div class="visual-container">
+      <div id="radial_chart_bw"></div>
+    </div>
+    <div class="description">
+      <strong>Birth Weight Analysis</strong>
+      <p>Birth weight is one of the most important indicators of a newborn's health. In 2021, over 91.99% of babies in Australia were born with a healthy birthweight between 2,500 and 4,499 grams, which is optimal for infant development. The majority of these babies (37.42%) weighed between 3,000 and 3,499 grams, which is considered ideal. Low birth weight (less than 2,500 grams) and high birth weight (greater than 4,500 grams) were relatively uncommon, occurring in 6.81% and 1.2% of births, respectively. Low birth weight can be associated with preterm births and may require specialized neonatal care, whereas high birth weight can lead to delivery complications. The data underscores the need for proper prenatal care, balanced maternal nutrition, and regular health check-ups to ensure that babies are born within a healthy weight range, reducing the need for additional medical interventions.</p>
+    </div>
+    <div class="annotation">
+      <p>Birth weight is a critical health indicator. This chart showcases the prevalence of healthy birth weights in 2021, highlighting the importance of maternal health and prenatal care in ensuring optimal birth outcomes.</p>
+    </div>
+  </section>
 
-  <strong>Fetal Deaths</strong>
-  <li>The highest number of fetal deaths occurs at very early gestational ages, particularly at 20 weeks (336 fetal deaths, 14.9%) and 21 weeks (341 fetal deaths, 15.1%).</li>
-  <li>Fetal deaths significantly decrease as gestational age increases, with very few fetal deaths occurring at 39 and 40 weeks (44 fetal deaths each, 1.9%).</li>
+  <section>
+    <h2>Gender Distribution in Births</h2>
+    <div class="visual-container">
+      <div id="population_pyramid"></div>
+    </div>
+    <div class="description">
+      <strong>Gender Trends</strong>
+      <p>In 2021, male babies slightly outnumbered female babies across all states and territories in Australia, a trend observed globally due to natural biological variations. The Australian Capital Territory showed the largest difference, with 3.88% more male births, while the Northern Territory had the smallest difference at 0.98%. Understanding gender distribution is important for planning future educational, healthcare, and social services. These differences can also reflect broader trends and help in understanding the population dynamics in each state. While the gender ratio at birth tends to balance out as children grow older, tracking these numbers helps provide insights into the immediate healthcare needs for newborns and potentially the future needs of the community as these children age.</p>
+    </div>
+    <div class="annotation">
+      <p>This population pyramid highlights the gender distribution of births, revealing a higher percentage of male births in 2021. Such data helps in forecasting the need for future healthcare and educational services.</p>
+    </div>
+  </section>
 
-  <strong>Gestational Age 39 Weeks</strong>
-  <li>Gestational age 39 weeks has the highest percentage of live births (31.4%) and a very low percentage of fetal deaths (1.9%).</li>
-  <li>This indicates that gestational age 39 weeks is the safest gestational age for live births.</li>
-
-  <div id="waterfall_duration"></div>
-  <script type="text/javascript">
-    var spec4 = "js/waterfall_duration.vg.json";
-    vegaEmbed('#waterfall_duration', spec4).then(function(result) {
-      // Access the Vega view instance
-    }).catch(console.error);
-  </script>
-  <!-- Describe -->
-  <strong>Normal BMI Range (18.5-24.9)</strong>
-  <li>For mothers with a normal BMI range, the majority of live births occur at gestational ages 39 weeks and 38 weeks.</li>
-  <li>The majority of mothers fall within the normal BMI range (18.5–24.9), with a total of 140,985 mothers in Australia.</li>
-
-  <div id = "radial_chart_bw"></div>
-  <script type="text/javascript">
-    var spec5 = "js/radial_chart_bw.vg.json";
-    vegaEmbed('#radial_chart_bw', spec5).then(function(result) {
-      // Access the Vega view instance
-    }).catch(console.error);
-  </script>
-  <!-- Describe -->
-  <strong>Birth Weight</strong>
-  <li>Birthweight is an important indicator of an infant’s health. </li>
-  <li>In 2021, over 9 in 10 babies (91.99%) were born with a normal birthweight (birthweight between 2,500 and 4,499 grams); also referred to as 'healthy birthweight'.</li>
-  <li>The majority of live births have a birth weight between 3,000 and 3,499 grams (37.42%).</li>
-  <li>Very few live births have a birth weight below 2,500 grams (6.81%) or above 4,500 grams (1.2%).</li>
-
-  <div id = "donut"></div>
-  <script type="text/javascript">
-    var spec5 = "js/donut.vg.json";
-    vegaEmbed('#donut', spec5).then(function(result) {
-      // Access the Vega view instance
-    }).catch(console.error);
-  </script>
-  <!-- Describe -->
-  <strong>Gestrational Age</strong>
-  <li>Investigate the correlation between gestational age and fetal deaths in 2021.</li>
-  <li>There is a significant increase in fetal deaths at gestational ages 20 and 21 weeks.</li>
-  <li>There is a significant decrease in fetal deaths as gestational age increases, with very few fetal deaths occurring at 39 and 40 weeks.</li>
-
-
-  <div id = "population_pyramid"></div>
-  <script type="text/javascript">
-    var spec5 = "js/population_pyramid.vg.json";
-    vegaEmbed('#population_pyramid', spec5).then(function(result) {
-      // Access the Vega view instance
-    }).catch(console.error);
-  </script>
-
-  <!-- Describe -->
-   <strong>Population Pyramid</strong>
-  <li>The population pyramid shows the distribution of gender births in 2021.</li>
-  <li>There are more males born than females in every state and territory in Australia.</li>
-  <li>The state with the highest percentage difference is the Australian Capital Territory, with 3.88%. </li>
-  <li>The state with the lowest percentage difference is the Northern Territory, with 0.98%.</li>
-
-
-  <footer>
-    Data from the Australian Bureau of Statistics. Visualisation powered by Vega-Lite.
+  <!-- Footer -->
+  <footer class="footer">
+    Data sourced from the Australian Bureau of Statistics. Visualizations powered by Vega-Lite.
   </footer>
-</div>
+  </div>
 
+  <!-- Vega-Lite Visualization Scripts -->
+  <script type="text/javascript">
+    // Choropleth Map Specification
+    const choroplethSpec = "/js/choropleth_map.vg.json";
+
+
+    // Bar Chart Specification
+    const barChartSpec = "/js/bar_chart.vg.json";
+
+    // Isotype Dot Plot Specification
+    const isotypeDotPlotSpec = "/js/isotype_dot_plot.vg.json";
+
+    // Donut Chart Specification
+    const donutSpec = "/js/donut.vg.json";
+
+    // Waterfall Chart Specification
+    const waterfallDurationSpec = "/js/waterfall_duration.vg.json";
+    // Radial Chart for Birth Weight Specification
+    const radialChartBWSpec = "/js/radial_chart_bw.vg.json";
+
+    // Population Pyramid Specification
+    const populationPyramidSpec = "/js/population_pyramid.vg.json";
+
+    // Embed all visualizations
+    vegaEmbed('#choropleth_map', choroplethSpec, {actions: false}).then(function(result) {
+      // Additional customization if needed
+    }).catch(console.error);
+
+    vegaEmbed('#bar_chart', barChartSpec, {actions: false}).then(function(result) {
+      // Additional customization if needed
+    }).catch(console.error);
+
+    vegaEmbed('#isotype_dot_plot', isotypeDotPlotSpec, {actions: false}).then(function(result) {
+      // Additional customization if needed
+    }).catch(console.error);
+
+    vegaEmbed('#donut', donutSpec, {actions: false}).then(function(result) {
+      // Additional customization if needed
+    }).catch(console.error);
+
+    vegaEmbed('#waterfall_duration', waterfallDurationSpec, {actions: false}).then(function(result) {
+      // Additional customization if needed
+    }).catch(console.error);
+
+    vegaEmbed('#radial_chart_bw', radialChartBWSpec, {actions: false}).then(function(result) {
+      // Additional customization if needed
+    }).catch(console.error);
+
+    vegaEmbed('#population_pyramid', populationPyramidSpec, {actions: false}).then(function(result) {
+      // Additional customization if needed
+    }).catch(console.error);
+  </script>
 </body>
 </html>

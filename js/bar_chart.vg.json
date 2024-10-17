@@ -6,8 +6,9 @@
     "anchor": "start",
     "color": "#333"
   },
-  "width": 800,
-  "height": 500,
+  "width": 1150,
+  "height": 600,
+  "background": null,
   "data": {
     "url": "https://raw.githubusercontent.com/arvinloh/FIT3179_A2/main/data/month_of_birth.csv",
     "format": { "type": "csv" }
@@ -201,8 +202,8 @@
     },
     "legend": {
       "orient": "right",
-      "titleFontSize": 14,
-      "labelFontSize": 12
+      "labelFontSize": 14, 
+      "titleFontSize": 16  
     }
   }
 }

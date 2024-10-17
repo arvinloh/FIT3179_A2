@@ -7,6 +7,7 @@
     "url": "https://raw.githubusercontent.com/arvinloh/FIT3179_A2/main/data/month_of_birth.csv",
     "format": { "type": "csv" }
   },
+  "background": null,
   "transform": [
     {
       "fold": ["NSW", "Vic", "Qld", "WA", "SA", "Tas", "ACT", "NT"],

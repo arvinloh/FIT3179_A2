@@ -2,9 +2,9 @@
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
     "title": {
         "text": "Isotype Dot Plot of Maternal Age Distribution by State",
-        "fontSize": 16,
+        "fontSize": 20,
         "font": "Roboto",
-        "anchor": "middle",
+        "anchor": "start",
         "color": "black"
       },
       "config": { 
@@ -12,8 +12,9 @@
           "stroke": null 
         } 
       },
-      "width": 800,   
-      "height": 300,  
+    "width": 1300,
+    "height": 400,  
+    "background": null,
     "data": {
       "values": [
         { "Maternal_age": "Under 20", "State": "NSW", "Number": 1357 },
@@ -159,13 +160,15 @@
             "domain": [2000, 1000, 100],
             "range": ["#FFC0CB", "#FF69B4", "#FF1493"]
           },
-          "legend": {
-            "title": "Symbol Represents",
-            "symbolStrokeColor": null,
-            "symbolSize": 0,
-            "labelExpr": "datum.label == 2000 ? '🤰 = 2000 mothers' : datum.label == 1000 ? '👩 = 1000 mothers' : '👧 = 100 mothers'"
-          }
+        "legend": {
+          "title": "Symbol Represents",
+          "symbolStrokeColor": null,
+          "symbolSize": 0, 
+          "labelExpr": "datum.label == 2000 ? '🤰 = 2000 mothers' : datum.label == 1000 ? '👩 = 1000 mothers' : '👧 = 100 mothers'",
+          "labelFontSize": 14, 
+          "titleFontSize": 16  
         }
+    }
       },
       "autosize": {
         "type": "fit",

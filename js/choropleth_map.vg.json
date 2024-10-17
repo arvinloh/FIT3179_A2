@@ -8,9 +8,9 @@
     "anchor": "start",
     "color": "black"
   },
-  "width": 815,
-  "height": 540,
-  "background": "#f0f0f0",
+  "width": 1230,
+  "height": 600,
+  "background": null,
   "config": {
     "font": "Roboto",
     "title": {

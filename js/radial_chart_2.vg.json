@@ -10,6 +10,7 @@
     "anchor": "middle",
     "color": "black"
   },
+  "background": null,
   "data": {
     "values": [
       { "AgeGroup": "Under 20", "State": "NSW", "Value": 1357 },

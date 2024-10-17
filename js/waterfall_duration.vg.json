@@ -1,14 +1,15 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "width": 800,
+    "width": 1200,
     "height": 500,
     "title": {
-      "text": "BMI by State",
+      "text": "Body Mass Index (BMI) of Mothers by State",
       "fontSize": 20,
       "fontWeight": "bold",
       "anchor": "start",
       "color": "#404040"
     },
+    "background": null,
     "params": [
       {
         "name": "state",
@@ -36,7 +37,8 @@
             "Tasmania",
             "Australian Capital Territory",
             "Northern Territory"
-          ]
+          ],
+          "name": "Select State"
         }
       }
     ],
@@ -104,15 +106,15 @@
         },
         {
           "label": "Total",
-            "NSW": 0,
-            "Vic": 0,
-            "Qld": 0,
-            "WA": 0,
-            "SA": 0,
-            "Tas": 0,
-            "ACT": 0,
-            "NT": 0,
-            "Australia": 0
+          "NSW": 0,
+          "Vic": 0,
+          "Qld": 0,
+          "WA": 0,
+          "SA": 0,
+          "Tas": 0,
+          "ACT": 0,
+          "NT": 0,
+          "Australia": 0
         }
       ]
     },
@@ -147,6 +149,10 @@
       {
         "calculate": "datum.lead === null ? datum.label : datum.lead",
         "as": "lead"
+      },
+      {
+        "calculate": "datum.previous_sum > 0 ? (datum.cumulative_sum - datum.previous_sum) / datum.previous_sum * 100 : 0",
+        "as": "percentage_increase"
       }
     ],
     "encoding": {
@@ -155,7 +161,7 @@
         "type": "ordinal",
         "axis": {
           "labelAngle": -45,
-          "title": "BMI Category",
+          "title": "Body Mass Index (BMI) Category",
           "labelFontSize": 12,
           "titleFontSize": 14
         },
@@ -176,7 +182,7 @@
           "y": {
             "field": "previous_sum",
             "type": "quantitative",
-            "title": "Number of People",
+            "title": "Number of Mothers",
             "axis": { "labelFontSize": 12, "titleFontSize": 14 }
           },
           "y2": { "field": "sum" },
@@ -188,7 +194,13 @@
               }
             ],
             "value": { "expr": "datum.state_color" }
-          }
+          },
+          "tooltip": [
+            { "field": "label", "type": "nominal", "title": "BMI Category" },
+            { "field": "amount", "type": "quantitative", "title": "Number of People" },
+            { "field": "sum", "type": "quantitative", "title": "Cumulative Sum" },
+            { "field": "percentage_increase", "type": "quantitative", "title": "Percentage Increase (%)", "format": ".2f" }
+          ]
         }
       },
       {
@@ -203,7 +215,13 @@
         "encoding": {
           "x": { "field": "label" },
           "x2": { "field": "lead" },
-          "y": { "field": "sum", "type": "quantitative" }
+          "y": { "field": "sum", "type": "quantitative" },
+          "tooltip": [
+            { "field": "label", "type": "nominal", "title": "BMI Category" },
+            { "field": "amount", "type": "quantitative", "title": "Number of People" },
+            { "field": "sum", "type": "quantitative", "title": "Cumulative Sum" },
+            { "field": "percentage_increase", "type": "quantitative", "title": "Percentage Increase (%)", "format": ".2f" }
+          ]
         }
       },
       {
@@ -218,7 +236,13 @@
         "encoding": {
           "x": { "field": "label" },
           "y": { "field": "sum", "type": "quantitative" },
-          "text": { "field": "sum", "type": "quantitative" }
+          "text": { "field": "sum", "type": "quantitative" },
+          "tooltip": [
+            { "field": "label", "type": "nominal", "title": "BMI Category" },
+            { "field": "amount", "type": "quantitative", "title": "Number of People" },
+            { "field": "sum", "type": "quantitative", "title": "Cumulative Sum" },
+            { "field": "percentage_increase", "type": "quantitative", "title": "Percentage Increase (%)", "format": ".2f" }
+          ]
         }
       },
       {
@@ -240,7 +264,13 @@
               }
             ],
             "value": "white"
-          }
+          },
+          "tooltip": [
+            { "field": "label", "type": "nominal", "title": "BMI Category" },
+            { "field": "amount", "type": "quantitative", "title": "Number of People" },
+            { "field": "sum", "type": "quantitative", "title": "Cumulative Sum" },
+            { "field": "percentage_increase", "type": "quantitative", "title": "Percentage Increase (%)", "format": ".2f" }
+          ]
         }
       }
     ],
