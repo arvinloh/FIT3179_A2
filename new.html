@@ -3,79 +3,102 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Interactive Map Annotation Example</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <title>Animated Hero Section</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap">
   <style>
-    #choropleth_map {
+    /* Hero Section */
+    .hero-section {
+      background: linear-gradient(135deg, #1b1b2f, #162447);
+      background-size: 200% 200%; /* For smooth gradient animation */
+      animation: backgroundAnimation 10s ease infinite; /* Animation for background */
+      color: #fff;
+      padding: 80px 40px;
+      text-align: center;
+      border-radius: 15px;
+      margin-bottom: 60px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-section::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
       width: 100%;
-      height: 500px;
-      position: relative;  /* Relative positioning for containing the map */
-      background-color: #e0e0e0; /* Placeholder for the map */
+      height: 100%;
+      opacity: 0.1;
+      background: url('https://www.example.com/hero-overlay.png') no-repeat center center;
+      background-size: cover;
+      border-radius: 15px;
+      pointer-events: none;
     }
 
-    .annotation-icon {
-      position: absolute;
-      top: 150px; /* Adjust to where you want the icon to be */
-      left: 550px; /* Adjust to where you want the icon to be */
-      z-index: 1000;
-      cursor: pointer;
-      color: #333;
-      font-size: 24px;
-    }
-
-    .tooltip-box {
-      position: absolute;
-      top: 120px; /* Adjust to position above the icon */
-      left: 580px; /* Adjust to align correctly */
-      width: 220px;
-      background: #ffffcc;
-      border: 1px solid #333;
-      border-radius: 5px;
-      padding: 10px;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-      visibility: hidden; /* Initially hidden */
+    .hero-section h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 3em;
+      margin-bottom: 20px;
+      position: relative;
+      z-index: 1;
       opacity: 0;
-      transition: opacity 0.3s ease;
-      z-index: 1000;
+      transform: translateY(-20px);
+      animation: fadeInSlideDown 1.5s ease forwards 0.5s; /* Heading animation */
     }
 
-    .annotation-icon:hover + .tooltip-box {
-      visibility: visible;  /* Make tooltip visible when icon is hovered */
-      opacity: 1;
+    .hero-section p {
+      font-size: 1.3em;
+      max-width: 900px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInSlideUp 1.5s ease forwards 1s; /* Paragraph animation */
+    }
+
+    /* Background Animation */
+    @keyframes backgroundAnimation {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    /* Text Fade-in and Slide Down */
+    @keyframes fadeInSlideDown {
+      0% {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Text Fade-in and Slide Up */
+    @keyframes fadeInSlideUp {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
   </style>
-  <!-- Include Vega-Lite Library -->
-  <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
 </head>
 <body>
-
-  <section>
-    <h2>Birth Distribution Across States</h2>
-    <div class="visual-container">
-      <!-- The map container -->
-      <div id="choropleth_map"></div>
-      
-      <!-- Annotation icon - Font Awesome information icon -->
-      <i class="fas fa-info-circle annotation-icon"></i>
-
-      <!-- Tooltip box to show details on hover -->
-      <div class="tooltip-box">
-        High number of births observed in this area. Detailed analysis reveals that socio-economic factors, healthcare access, and regional support influence these birth rates.
-      </div>
-    </div>
+  <section class="hero-section">
+    <h1>Welcome to Our Platform</h1>
+    <p>Discover how we can help you unlock the potential of data, technology, and services to transform your business.</p>
   </section>
-
-  <!-- Vega-Lite Visualization Scripts -->
-  <script type="text/javascript">
-    // Choropleth Map Specification
-    const choroplethSpec = "/js/choropleth_map.vg.json";
-    
-    // Embed the choropleth map
-    vegaEmbed('#choropleth_map', choroplethSpec, {actions: false}).then(function(result) {
-      // Additional customization if needed
-    }).catch(console.error);
-  </script>    
 </body>
 </html>

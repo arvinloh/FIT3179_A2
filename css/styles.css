@@ -28,17 +28,19 @@
     border-radius: 15px;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
   }
-
-  /* Hero Section */
   .hero-section {
     background: linear-gradient(135deg, #1b1b2f, #162447);
+    background-size: 200% 200%; /* For smooth gradient animation */
+    animation: backgroundAnimation 10s ease infinite; /* Animation for background */
     color: #fff;
     padding: 80px 40px;
     text-align: center;
     border-radius: 15px;
     margin-bottom: 60px;
     position: relative;
+    overflow: hidden;
   }
+
   .hero-section::after {
     content: '';
     position: absolute;
@@ -51,21 +53,68 @@
     background: url('https://www.example.com/hero-overlay.png') no-repeat center center;
     background-size: cover;
     border-radius: 15px;
+    pointer-events: none;
   }
+
   .hero-section h1 {
     font-family: 'Montserrat', sans-serif;
     font-size: 3em;
     margin-bottom: 20px;
     position: relative;
     z-index: 1;
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: fadeInSlideDown 1.5s ease forwards 0.5s; /* Heading animation */
   }
+
   .hero-section p {
     font-size: 1.3em;
     max-width: 900px;
     margin: 0 auto;
     position: relative;
     z-index: 1;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInSlideUp 1.5s ease forwards 1s; /* Paragraph animation */
   }
+
+  /* Background Animation */
+  @keyframes backgroundAnimation {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  /* Text Fade-in and Slide Down */
+  @keyframes fadeInSlideDown {
+    0% {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Text Fade-in and Slide Up */
+  @keyframes fadeInSlideUp {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
 
   /* Section Styles */
   section {
