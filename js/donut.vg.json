@@ -4,6 +4,15 @@
   "width": 1200,
   "height": 300,
   "background": null,
+  "title": {
+    "text": "Fetal Death and Live Births by Gestational Age",
+    "subtitle": "Investigating fetal death prevalence in relation to live births by gestational age",
+    "fontSize": 25,
+    "subtitleFontSize": 20,
+    "font": "Roboto",
+    "anchor": "start",
+    "color": "black"
+  },
   "data": {
     "values": [
       {
@@ -170,9 +179,11 @@
       },
       "legend": {
         "title": "Birth Type",
-        "orient": "middle",
-        "labelFontSize": 20, 
-        "titleFontSize": 20  
+        "orient": "none",
+        "legendX": 900,
+        "legendY": 90,
+        "labelFontSize": 20,
+        "titleFontSize": 20
       }
     },
     "tooltip": [

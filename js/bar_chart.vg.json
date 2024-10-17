@@ -2,11 +2,14 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "title": {
     "text": "Monthly Births by State in Australia",
-    "fontSize": 18,
+    "subtitle": "Data on birth months in Australia",
+    "fontSize": 25,
+    "subtitleFontSize": 20,
+    "font": "Roboto",
     "anchor": "start",
-    "color": "#333"
+    "color": "black"
   },
-  "width": 1150,
+  "width": 1200,
   "height": 600,
   "background": null,
   "data": {
@@ -52,8 +55,8 @@
           ],
           "axis": {
             "labelAngle": -45,
-            "titleFontSize": 14,
-            "labelFontSize": 12
+            "labelFontSize": 18,
+            "titleFontSize": 20
           }
         },
         "y": {
@@ -61,8 +64,8 @@
           "type": "quantitative",
           "title": "Number of Births",
           "axis": {
-            "titleFontSize": 14,
-            "labelFontSize": 12
+            "labelFontSize": 18,
+            "titleFontSize": 20
           }
         },
         "color": {
@@ -83,8 +86,10 @@
             ]
           },
           "legend": {
-            "titleFontSize": 14,
-            "labelFontSize": 12
+            "labelFontSize": 18,
+            "titleFontSize": 20,
+            "orient": "top",
+            "title": null
           }
         },
         "tooltip": [
@@ -202,8 +207,8 @@
     },
     "legend": {
       "orient": "right",
-      "labelFontSize": 14, 
-      "titleFontSize": 16  
+      "labelFontSize": 14,
+      "titleFontSize": 16
     }
   }
 }

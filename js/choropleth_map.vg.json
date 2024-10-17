@@ -3,12 +3,13 @@
   "title": {
     "text": "Live Births in Australian States",
     "subtitle": "Data on New Mothers and Live Births in Australia",
-    "fontSize": 20,
+    "fontSize": 25,
+    "subtitleFontSize": 20,
     "font": "Roboto",
     "anchor": "start",
     "color": "black"
   },
-  "width": 1230,
+  "width": 1150,
   "height": 600,
   "background": null,
   "config": {
@@ -24,7 +25,9 @@
     },
     "legend": {
       "labelFont": "Roboto",
-      "titleFont": "Roboto"
+      "titleFont": "Roboto",
+      "titleFontSize": 20,
+      "labelFontSize": 18
     }
   },
   "projection": {

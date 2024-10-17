@@ -3,9 +3,12 @@
   "description": "Interactive Radial Bar Chart of Births per Month by State",
   "title": {
     "text": "Monthly Births by State in Australia",
-    "fontSize": 18,
+    "subtitle": "Data on birth months in Australia",
+    "fontSize": 25,
+    "subtitleFontSize": 20,
+    "font": "Roboto",
     "anchor": "start",
-    "color": "#333"
+    "color": "black"
   },
   "width": 1300,
   "height": 500,
@@ -92,12 +95,20 @@
               "#999999"
             ]
           },
-          "legend": { "title": "State" }
+          "legend": {
+            "labelFontSize": 18,
+            "titleFontSize": 20,
+            "orient": "left"
+          }
         },
         "tooltip": [
           { "field": "Month", "type": "ordinal", "title": "Month" },
           { "field": "State", "type": "nominal", "title": "State" },
-          { "field": "TotalBirths", "type": "quantitative", "title": "Total Births" }
+          {
+            "field": "TotalBirths",
+            "type": "quantitative",
+            "title": "Total Births"
+          }
         ]
       }
     },

@@ -1,293 +1,331 @@
 {
-    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "width": 1200,
-    "height": 500,
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 1200,
+  "height": 500,
+  "title": {
+    "text": "Body Mass Index (BMI) of Mothers by State",
+    "subtitle": "Data on BMI of Mothers in Australia",
+    "fontSize": 25,
+    "subtitleFontSize": 20,
+    "font": "Roboto",
+    "anchor": "start",
+    "color": "black"
+  },
+  "background": null,
+  "params": [
+    {
+      "name": "state",
+      "value": "Australia",
+      "bind": {
+        "input": "select",
+        "options": [
+          "Australia",
+          "NSW",
+          "Vic",
+          "Qld",
+          "WA",
+          "SA",
+          "Tas",
+          "ACT",
+          "NT"
+        ],
+        "labels": [
+          "Australia",
+          "NSW",
+          "Victoria",
+          "Queensland",
+          "Western Australia",
+          "South Australia",
+          "Tasmania",
+          "Australian Capital Territory",
+          "Northern Territory"
+        ],
+        "name": "Select State"
+      }
+    }
+  ],
+  "data": {
+    "values": [
+      {
+        "label": "Less than 18.5",
+        "NSW": 3379,
+        "Vic": 1646,
+        "Qld": 2506,
+        "WA": 749,
+        "SA": 353,
+        "Tas": 140,
+        "ACT": 113,
+        "NT": 129,
+        "Australia": 9015
+      },
+      {
+        "label": "18.5–24.9",
+        "NSW": 48073,
+        "Vic": 35530,
+        "Qld": 28608,
+        "WA": 14390,
+        "SA": 7940,
+        "Tas": 2467,
+        "ACT": 2560,
+        "NT": 1417,
+        "Australia": 140985
+      },
+      {
+        "label": "25.0–29.9",
+        "NSW": 24729,
+        "Vic": 22800,
+        "Qld": 15987,
+        "WA": 10258,
+        "SA": 5665,
+        "Tas": 1615,
+        "ACT": 1652,
+        "NT": 1008,
+        "Australia": 83714
+      },
+      {
+        "label": "30.0–39.9",
+        "NSW": 16080,
+        "Vic": 15064,
+        "Qld": 12369,
+        "WA": 7247,
+        "SA": 4256,
+        "Tas": 1267,
+        "ACT": 1131,
+        "NT": 754,
+        "Australia": 58168
+      },
+      {
+        "label": "40 and over",
+        "NSW": 2845,
+        "Vic": 2737,
+        "Qld": 2464,
+        "WA": 1024,
+        "SA": 892,
+        "Tas": 311,
+        "ACT": 277,
+        "NT": 105,
+        "Australia": 10655
+      },
+      {
+        "label": "Total",
+        "NSW": 0,
+        "Vic": 0,
+        "Qld": 0,
+        "WA": 0,
+        "SA": 0,
+        "Tas": 0,
+        "ACT": 0,
+        "NT": 0,
+        "Australia": 0
+      }
+    ]
+  },
+  "transform": [
+    { "calculate": "datum[state]", "as": "amount" },
+    { "window": [{ "op": "sum", "field": "amount", "as": "cumulative_sum" }] },
+    {
+      "window": [{ "op": "max", "field": "cumulative_sum", "as": "total_sum" }]
+    },
+    {
+      "calculate": "datum.label === 'Total' ? 0 : datum.cumulative_sum - datum.amount",
+      "as": "previous_sum"
+    },
+    {
+      "calculate": "datum.label === 'Total' ? datum.total_sum : datum.cumulative_sum",
+      "as": "sum"
+    },
+    {
+      "calculate": "datum.label === 'Total' ? datum.total_sum : datum.amount",
+      "as": "amount"
+    },
+    {
+      "calculate": "datum.label !== 'Total' && datum.amount > 0 ? '+' + datum.amount : datum.amount",
+      "as": "text_amount"
+    },
+    { "calculate": "(datum.sum + datum.previous_sum) / 2", "as": "center" },
+    {
+      "calculate": "state == 'NSW' ? '#E69F00' : state == 'Vic' ? '#56B4E9' : state == 'Qld' ? '#009E73' : state == 'WA' ? '#F0E442' : state == 'SA' ? '#0072B2' : state == 'Tas' ? '#D55E00' : state == 'ACT' ? '#CC79A7' : state == 'NT' ? '#999999' : '#93c4aa'",
+      "as": "state_color"
+    },
+    { "window": [{ "op": "lead", "field": "label", "as": "lead" }] },
+    {
+      "calculate": "datum.lead === null ? datum.label : datum.lead",
+      "as": "lead"
+    },
+    {
+      "calculate": "datum.previous_sum > 0 ? (datum.cumulative_sum - datum.previous_sum) / datum.previous_sum * 100 : 0",
+      "as": "percentage_increase"
+    }
+  ],
+  "encoding": {
+    "x": {
+      "field": "label",
+      "type": "ordinal",
+      "axis": {
+        "labelAngle": -45,
+        "title": "Body Mass Index (BMI) Category",
+        "labelFontSize": 18,
+        "titleFontSize": 20
+      },
+      "sort": [
+        "Less than 18.5",
+        "18.5–24.9",
+        "25.0–29.9",
+        "30.0–39.9",
+        "40 and over",
+        "Total"
+      ]
+    }
+  },
+  "layer": [
+    {
+      "mark": { "type": "bar", "size": 150 },
+      "encoding": {
+        "y": {
+          "field": "previous_sum",
+          "type": "quantitative",
+          "title": "Number of Mothers",
+          "axis": { "labelFontSize": 18, "titleFontSize": 20 }
+        },
+        "y2": { "field": "sum" },
+        "color": {
+          "condition": [
+            {
+              "test": "datum.label === 'Total'",
+              "value": "#f7e0b6"
+            }
+          ],
+          "value": { "expr": "datum.state_color" }
+        },
+        "tooltip": [
+          { "field": "label", "type": "nominal", "title": "BMI Category" },
+          {
+            "field": "amount",
+            "type": "quantitative",
+            "title": "Number of People"
+          },
+          { "field": "sum", "type": "quantitative", "title": "Cumulative Sum" },
+          {
+            "field": "percentage_increase",
+            "type": "quantitative",
+            "title": "Percentage Increase (%)",
+            "format": ".2f"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "rule",
+        "color": "#404040",
+        "opacity": 1,
+        "strokeWidth": 2,
+        "xOffset": -75,
+        "x2Offset": 75
+      },
+      "encoding": {
+        "x": { "field": "label" },
+        "x2": { "field": "lead" },
+        "y": { "field": "sum", "type": "quantitative" },
+        "tooltip": [
+          { "field": "label", "type": "nominal", "title": "BMI Category" },
+          {
+            "field": "amount",
+            "type": "quantitative",
+            "title": "Number of People"
+          },
+          { "field": "sum", "type": "quantitative", "title": "Cumulative Sum" },
+          {
+            "field": "percentage_increase",
+            "type": "quantitative",
+            "title": "Percentage Increase (%)",
+            "format": ".2f"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "dy": { "expr": "datum.amount >= 0 ? -10 : 15" },
+        "baseline": { "expr": "datum.amount >= 0 ? 'bottom' : 'top'" },
+        "fontWeight": "bold",
+        "color": "#404040",
+        "fontSize": 20
+      },
+      "encoding": {
+        "x": { "field": "label" },
+        "y": { "field": "sum", "type": "quantitative" },
+        "text": { "field": "sum", "type": "quantitative" },
+        "tooltip": [
+          { "field": "label", "type": "nominal", "title": "BMI Category" },
+          {
+            "field": "amount",
+            "type": "quantitative",
+            "title": "Number of People"
+          },
+          { "field": "sum", "type": "quantitative", "title": "Cumulative Sum" },
+          {
+            "field": "percentage_increase",
+            "type": "quantitative",
+            "title": "Percentage Increase (%)",
+            "format": ".2f"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "fontWeight": "bold",
+        "baseline": "middle",
+        "fontSize": 15
+      },
+      "encoding": {
+        "x": { "field": "label" },
+        "y": { "field": "center", "type": "quantitative" },
+        "text": { "field": "text_amount", "type": "nominal" },
+        "color": {
+          "condition": [
+            {
+              "test": "datum.label === 'Total'",
+              "value": "#725a30"
+            }
+          ],
+          "value": "white"
+        },
+        "tooltip": [
+          { "field": "label", "type": "nominal", "title": "BMI Category" },
+          {
+            "field": "amount",
+            "type": "quantitative",
+            "title": "Number of People"
+          },
+          { "field": "sum", "type": "quantitative", "title": "Cumulative Sum" },
+          {
+            "field": "percentage_increase",
+            "type": "quantitative",
+            "title": "Percentage Increase (%)",
+            "format": ".2f"
+          }
+        ]
+      }
+    }
+  ],
+  "config": {
+    "axis": {
+      "labelFontSize": 18,
+      "titleFontSize": 20
+    },
     "title": {
-      "text": "Body Mass Index (BMI) of Mothers by State",
       "fontSize": 20,
       "fontWeight": "bold",
       "anchor": "start",
       "color": "#404040"
     },
-    "background": null,
-    "params": [
-      {
-        "name": "state",
-        "value": "Australia",
-        "bind": {
-          "input": "select",
-          "options": [
-            "Australia",
-            "NSW",
-            "Vic",
-            "Qld",
-            "WA",
-            "SA",
-            "Tas",
-            "ACT",
-            "NT"
-          ],
-          "labels": [
-            "Australia",
-            "NSW",
-            "Victoria",
-            "Queensland",
-            "Western Australia",
-            "South Australia",
-            "Tasmania",
-            "Australian Capital Territory",
-            "Northern Territory"
-          ],
-          "name": "Select State"
-        }
-      }
-    ],
-    "data": {
-      "values": [
-        {
-          "label": "Less than 18.5",
-          "NSW": 3379,
-          "Vic": 1646,
-          "Qld": 2506,
-          "WA": 749,
-          "SA": 353,
-          "Tas": 140,
-          "ACT": 113,
-          "NT": 129,
-          "Australia": 9015
-        },
-        {
-          "label": "18.5–24.9",
-          "NSW": 48073,
-          "Vic": 35530,
-          "Qld": 28608,
-          "WA": 14390,
-          "SA": 7940,
-          "Tas": 2467,
-          "ACT": 2560,
-          "NT": 1417,
-          "Australia": 140985
-        },
-        {
-          "label": "25.0–29.9",
-          "NSW": 24729,
-          "Vic": 22800,
-          "Qld": 15987,
-          "WA": 10258,
-          "SA": 5665,
-          "Tas": 1615,
-          "ACT": 1652,
-          "NT": 1008,
-          "Australia": 83714
-        },
-        {
-          "label": "30.0–39.9",
-          "NSW": 16080,
-          "Vic": 15064,
-          "Qld": 12369,
-          "WA": 7247,
-          "SA": 4256,
-          "Tas": 1267,
-          "ACT": 1131,
-          "NT": 754,
-          "Australia": 58168
-        },
-        {
-          "label": "40 and over",
-          "NSW": 2845,
-          "Vic": 2737,
-          "Qld": 2464,
-          "WA": 1024,
-          "SA": 892,
-          "Tas": 311,
-          "ACT": 277,
-          "NT": 105,
-          "Australia": 10655
-        },
-        {
-          "label": "Total",
-          "NSW": 0,
-          "Vic": 0,
-          "Qld": 0,
-          "WA": 0,
-          "SA": 0,
-          "Tas": 0,
-          "ACT": 0,
-          "NT": 0,
-          "Australia": 0
-        }
-      ]
-    },
-    "transform": [
-      { "calculate": "datum[state]", "as": "amount" },
-      { "window": [{ "op": "sum", "field": "amount", "as": "cumulative_sum" }] },
-      {
-        "window": [{ "op": "max", "field": "cumulative_sum", "as": "total_sum" }]
-      },
-      {
-        "calculate": "datum.label === 'Total' ? 0 : datum.cumulative_sum - datum.amount",
-        "as": "previous_sum"
-      },
-      {
-        "calculate": "datum.label === 'Total' ? datum.total_sum : datum.cumulative_sum",
-        "as": "sum"
-      },
-      {
-        "calculate": "datum.label === 'Total' ? datum.total_sum : datum.amount",
-        "as": "amount"
-      },
-      {
-        "calculate": "datum.label !== 'Total' && datum.amount > 0 ? '+' + datum.amount : datum.amount",
-        "as": "text_amount"
-      },
-      { "calculate": "(datum.sum + datum.previous_sum) / 2", "as": "center" },
-      {
-        "calculate": "state == 'NSW' ? '#E69F00' : state == 'Vic' ? '#56B4E9' : state == 'Qld' ? '#009E73' : state == 'WA' ? '#F0E442' : state == 'SA' ? '#0072B2' : state == 'Tas' ? '#D55E00' : state == 'ACT' ? '#CC79A7' : state == 'NT' ? '#999999' : '#93c4aa'",
-        "as": "state_color"
-      },
-      { "window": [{ "op": "lead", "field": "label", "as": "lead" }] },
-      {
-        "calculate": "datum.lead === null ? datum.label : datum.lead",
-        "as": "lead"
-      },
-      {
-        "calculate": "datum.previous_sum > 0 ? (datum.cumulative_sum - datum.previous_sum) / datum.previous_sum * 100 : 0",
-        "as": "percentage_increase"
-      }
-    ],
-    "encoding": {
-      "x": {
-        "field": "label",
-        "type": "ordinal",
-        "axis": {
-          "labelAngle": -45,
-          "title": "Body Mass Index (BMI) Category",
-          "labelFontSize": 12,
-          "titleFontSize": 14
-        },
-        "sort": [
-          "Less than 18.5",
-          "18.5–24.9",
-          "25.0–29.9",
-          "30.0–39.9",
-          "40 and over",
-          "Total"
-        ]
-      }
-    },
-    "layer": [
-      {
-        "mark": { "type": "bar", "size": 45 },
-        "encoding": {
-          "y": {
-            "field": "previous_sum",
-            "type": "quantitative",
-            "title": "Number of Mothers",
-            "axis": { "labelFontSize": 12, "titleFontSize": 14 }
-          },
-          "y2": { "field": "sum" },
-          "color": {
-            "condition": [
-              {
-                "test": "datum.label === 'Total'",
-                "value": "#f7e0b6"
-              }
-            ],
-            "value": { "expr": "datum.state_color" }
-          },
-          "tooltip": [
-            { "field": "label", "type": "nominal", "title": "BMI Category" },
-            { "field": "amount", "type": "quantitative", "title": "Number of People" },
-            { "field": "sum", "type": "quantitative", "title": "Cumulative Sum" },
-            { "field": "percentage_increase", "type": "quantitative", "title": "Percentage Increase (%)", "format": ".2f" }
-          ]
-        }
-      },
-      {
-        "mark": {
-          "type": "rule",
-          "color": "#404040",
-          "opacity": 1,
-          "strokeWidth": 2,
-          "xOffset": -22.5,
-          "x2Offset": 22.5
-        },
-        "encoding": {
-          "x": { "field": "label" },
-          "x2": { "field": "lead" },
-          "y": { "field": "sum", "type": "quantitative" },
-          "tooltip": [
-            { "field": "label", "type": "nominal", "title": "BMI Category" },
-            { "field": "amount", "type": "quantitative", "title": "Number of People" },
-            { "field": "sum", "type": "quantitative", "title": "Cumulative Sum" },
-            { "field": "percentage_increase", "type": "quantitative", "title": "Percentage Increase (%)", "format": ".2f" }
-          ]
-        }
-      },
-      {
-        "mark": {
-          "type": "text",
-          "dy": { "expr": "datum.amount >= 0 ? -10 : 15" },
-          "baseline": { "expr": "datum.amount >= 0 ? 'bottom' : 'top'" },
-          "fontWeight": "bold",
-          "color": "#404040",
-          "fontSize": 12
-        },
-        "encoding": {
-          "x": { "field": "label" },
-          "y": { "field": "sum", "type": "quantitative" },
-          "text": { "field": "sum", "type": "quantitative" },
-          "tooltip": [
-            { "field": "label", "type": "nominal", "title": "BMI Category" },
-            { "field": "amount", "type": "quantitative", "title": "Number of People" },
-            { "field": "sum", "type": "quantitative", "title": "Cumulative Sum" },
-            { "field": "percentage_increase", "type": "quantitative", "title": "Percentage Increase (%)", "format": ".2f" }
-          ]
-        }
-      },
-      {
-        "mark": {
-          "type": "text",
-          "fontWeight": "bold",
-          "baseline": "middle",
-          "fontSize": 10
-        },
-        "encoding": {
-          "x": { "field": "label" },
-          "y": { "field": "center", "type": "quantitative" },
-          "text": { "field": "text_amount", "type": "nominal" },
-          "color": {
-            "condition": [
-              {
-                "test": "datum.label === 'Total'",
-                "value": "#725a30"
-              }
-            ],
-            "value": "white"
-          },
-          "tooltip": [
-            { "field": "label", "type": "nominal", "title": "BMI Category" },
-            { "field": "amount", "type": "quantitative", "title": "Number of People" },
-            { "field": "sum", "type": "quantitative", "title": "Cumulative Sum" },
-            { "field": "percentage_increase", "type": "quantitative", "title": "Percentage Increase (%)", "format": ".2f" }
-          ]
-        }
-      }
-    ],
-    "config": {
-      "axis": {
-        "labelFontSize": 12,
-        "titleFontSize": 14
-      },
-      "title": {
-        "fontSize": 20,
-        "fontWeight": "bold",
-        "anchor": "start",
-        "color": "#404040"
-      },
-      "text": {
-        "fontWeight": "bold",
-        "color": "#404040"
-      }
+    "text": {
+      "fontWeight": "bold",
+      "color": "#404040"
     }
   }
+}

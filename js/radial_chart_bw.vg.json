@@ -5,7 +5,9 @@
   "height": 400,
   "title": {
     "text": "Birth Weight Distribution by Category",
-    "fontSize": 20,
+    "subtitle": "Data on birth weight distribution",
+    "fontSize": 25,
+    "subtitleFontSize": 20,
     "font": "Roboto",
     "anchor": "start",
     "color": "black"
@@ -13,20 +15,56 @@
   "background": null,
   "data": {
     "values": [
-      { "Category": "Low Birth Weight", "SubCategory": "Less than 1,000 grams", "Value": 2766 },
-      { "Category": "Low Birth Weight", "SubCategory": "1,000–1,499 grams", "Value": 1800 },
-      { "Category": "Low Birth Weight", "SubCategory": "1,500–1,999 grams", "Value": 3799 },
-      { "Category": "Low Birth Weight", "SubCategory": "2,000–2,499 grams", "Value": 13126 },
-      { "Category": "Normal Birth Weight", "SubCategory": "2,500–2,999 grams", "Value": 51377 },
-      { "Category": "Normal Birth Weight", "SubCategory": "3,000–3,499 grams", "Value": 118040 },
-      { "Category": "Normal Birth Weight", "SubCategory": "3,500–3,999 grams", "Value": 93887 },
-      { "Category": "Normal Birth Weight", "SubCategory": "4,000–4,499 grams", "Value": 26890 },
-      { "Category": "High Birth Weight", "SubCategory": "4,500 and over", "Value": 3785 }
+      {
+        "Category": "Low Birth Weight",
+        "SubCategory": "Less than 1,000 grams",
+        "Value": 2766
+      },
+      {
+        "Category": "Low Birth Weight",
+        "SubCategory": "1,000–1,499 grams",
+        "Value": 1800
+      },
+      {
+        "Category": "Low Birth Weight",
+        "SubCategory": "1,500–1,999 grams",
+        "Value": 3799
+      },
+      {
+        "Category": "Low Birth Weight",
+        "SubCategory": "2,000–2,499 grams",
+        "Value": 13126
+      },
+      {
+        "Category": "Normal Birth Weight",
+        "SubCategory": "2,500–2,999 grams",
+        "Value": 51377
+      },
+      {
+        "Category": "Normal Birth Weight",
+        "SubCategory": "3,000–3,499 grams",
+        "Value": 118040
+      },
+      {
+        "Category": "Normal Birth Weight",
+        "SubCategory": "3,500–3,999 grams",
+        "Value": 93887
+      },
+      {
+        "Category": "Normal Birth Weight",
+        "SubCategory": "4,000–4,499 grams",
+        "Value": 26890
+      },
+      {
+        "Category": "High Birth Weight",
+        "SubCategory": "4,500 and over",
+        "Value": 3785
+      }
     ]
   },
   "transform": [
     {
-      "window": [{"op": "sum", "field": "Value", "as": "TotalValue"}],
+      "window": [{ "op": "sum", "field": "Value", "as": "TotalValue" }],
       "frame": [null, null]
     },
     {
@@ -38,7 +76,7 @@
     {
       "mark": {
         "type": "arc",
-        "innerRadius": 50,
+        "innerRadius": 100,
         "stroke": "#fff",
         "strokeWidth": 1
       },
@@ -68,26 +106,39 @@
           "type": "nominal",
           "legend": {
             "title": "Birth Weight Category",
-            "orient": "right",
-            "labelFontSize": 15, 
-            "titleFontSize": 17  
+            "orient": "none",
+            "labelFontSize": 16,
+            "titleFontSize": 18,
+            "titleLimit": 200,
+            "labelLimit": 200,
+            "legendX": 800,
+            "legendY": -60
           },
           "scale": {
             "scheme": "tableau10"
           }
         },
         "tooltip": [
-          { "field": "SubCategory", "type": "nominal", "title": "Birth Weight Category" },
+          {
+            "field": "SubCategory",
+            "type": "nominal",
+            "title": "Birth Weight Category"
+          },
           { "field": "Value", "type": "quantitative", "title": "Total" },
-          { "field": "Percentage", "type": "quantitative", "title": "Percentage", "format": ".2f" }
+          {
+            "field": "Percentage",
+            "type": "quantitative",
+            "title": "Percentage",
+            "format": ".2f"
+          }
         ]
       }
     },
     {
       "mark": {
         "type": "text",
-        "radiusOffset": 20,
-        "fontSize": 12
+        "radiusOffset": 30,
+        "fontSize": 18
       },
       "encoding": {
         "text": { "field": "Value", "type": "quantitative" },
@@ -109,7 +160,7 @@
         "radius": {
           "field": "Value",
           "type": "quantitative",
-          "scale": { "type": "linear", "zero": true, "rangeMin": 50 },
+          "scale": { "type": "linear", "zero": true, "rangeMin": 100 },
           "offset": 10
         },
         "color": { "value": "#000" }

@@ -4,9 +4,12 @@
   "height": 600,
   "title": {
     "text": "Monthly Births by State in Australia",
-    "fontSize": 18,
+    "subtitle": "Data on birth months in Australia",
+    "fontSize": 25,
+    "subtitleFontSize": 20,
+    "font": "Roboto",
     "anchor": "start",
-    "color": "#333"
+    "color": "black"
   },
   "background": null,
   "params": [
@@ -15,17 +18,7 @@
       "value": "All",
       "bind": {
         "input": "select",
-        "options": [
-          "All",
-          "NSW",
-          "Vic",
-          "Qld",
-          "WA",
-          "SA",
-          "Tas",
-          "ACT",
-          "NT"
-        ],
+        "options": ["All", "NSW", "Vic", "Qld", "WA", "SA", "Tas", "ACT", "NT"],
         "labels": [
           "All",
           "New South Wales",
@@ -241,8 +234,8 @@
       "axis": {
         "labelAngle": -45,
         "title": "Months",
-        "labelFontSize": 12,
-        "titleFontSize": 14
+        "labelFontSize": 18,
+        "titleFontSize": 20
       },
       "sort": [
         "January",
@@ -263,13 +256,13 @@
   },
   "layer": [
     {
-      "mark": { "type": "bar", "size": 45 },
+      "mark": { "type": "bar", "size": 60 },
       "encoding": {
         "y": {
           "field": "previous_sum",
           "type": "quantitative",
           "title": "Number of Births",
-          "axis": { "labelFontSize": 12, "titleFontSize": 14 }
+          "axis": { "labelFontSize": 18, "titleFontSize": 20 }
         },
         "y2": { "field": "sum" },
         "color": {
@@ -289,8 +282,8 @@
         "color": "#404040",
         "opacity": 1,
         "strokeWidth": 2,
-        "xOffset": -22.5,
-        "x2Offset": 22.5
+        "xOffset": -30,
+        "x2Offset": 30
       },
       "encoding": {
         "x": { "field": "label" },
@@ -305,7 +298,7 @@
         "baseline": { "expr": "datum.amount >= 0 ? 'bottom' : 'top'" },
         "fontWeight": "bold",
         "color": "#404040",
-        "fontSize": 12
+        "fontSize": 18
       },
       "encoding": {
         "x": { "field": "label" },
@@ -318,7 +311,7 @@
         "type": "text",
         "fontWeight": "bold",
         "baseline": "middle",
-        "fontSize": 12
+        "fontSize": 15
       },
       "encoding": {
         "x": { "field": "label" },
@@ -350,6 +343,12 @@
     "text": {
       "fontWeight": "bold",
       "color": "#404040"
+    },
+    "padding": {
+      "top": 10,
+      "left": 10,
+      "right": 10,
+      "bottom": 10
     }
   }
 }
