@@ -3,102 +3,81 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Animated Hero Section</title>
+  <title>Chart Type Switcher</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap">
   <style>
-    /* Hero Section */
-    .hero-section {
-      background: linear-gradient(135deg, #1b1b2f, #162447);
-      background-size: 200% 200%; /* For smooth gradient animation */
-      animation: backgroundAnimation 10s ease infinite; /* Animation for background */
-      color: #fff;
-      padding: 80px 40px;
-      text-align: center;
-      border-radius: 15px;
-      margin-bottom: 60px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero-section::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 100%;
-      height: 100%;
-      opacity: 0.1;
-      background: url('https://www.example.com/hero-overlay.png') no-repeat center center;
-      background-size: cover;
-      border-radius: 15px;
-      pointer-events: none;
-    }
-
-    .hero-section h1 {
+    body {
       font-family: 'Montserrat', sans-serif;
-      font-size: 3em;
+      background-color: #f4f4f9;
+      padding: 20px;
+    }
+
+    .filter-container {
       margin-bottom: 20px;
-      position: relative;
-      z-index: 1;
-      opacity: 0;
-      transform: translateY(-20px);
-      animation: fadeInSlideDown 1.5s ease forwards 0.5s; /* Heading animation */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
     }
 
-    .hero-section p {
-      font-size: 1.3em;
-      max-width: 900px;
+    select {
+      padding: 10px 15px;
+      border: 2px solid #162447;
+      border-radius: 5px;
+      font-size: 1em;
+      cursor: pointer;
+    }
+
+    select:hover {
+      box-shadow: 0 0 8px rgba(24, 144, 255, 0.3);
+    }
+
+    #chart-container {
+      width: 100%;
+      max-width: 800px;
       margin: 0 auto;
-      position: relative;
-      z-index: 1;
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeInSlideUp 1.5s ease forwards 1s; /* Paragraph animation */
-    }
-
-    /* Background Animation */
-    @keyframes backgroundAnimation {
-      0% {
-        background-position: 0% 50%;
-      }
-      50% {
-        background-position: 100% 50%;
-      }
-      100% {
-        background-position: 0% 50%;
-      }
-    }
-
-    /* Text Fade-in and Slide Down */
-    @keyframes fadeInSlideDown {
-      0% {
-        opacity: 0;
-        transform: translateY(-20px);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    /* Text Fade-in and Slide Up */
-    @keyframes fadeInSlideUp {
-      0% {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0);
-      }
     }
   </style>
+  <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
 </head>
 <body>
-  <section class="hero-section">
-    <h1>Welcome to Our Platform</h1>
-    <p>Discover how we can help you unlock the potential of data, technology, and services to transform your business.</p>
-  </section>
+  <div class="filter-container">
+    <label for="chart-select">Select Chart Type: </label>
+    <select id="chart-select">
+      <option value="bar_chart">Stacked Bar Chart</option>
+      <option value="waterfall_month">Waterfall Chart</option>
+    </select>
+  </div>
+
+  <div id="chart-container"></div>
+
+  <!-- Vega-Lite Visualization Scripts -->
+  <script type="text/javascript">
+    // Bar Chart Specification
+    const barChartSpec = "/js/bar_chart.vg.json";
+
+    // Waterfall Chart Specification
+    const waterfallmonthSpec = "/js/waterfall_month.vg.json";
+
+    // Function to embed the selected chart
+    function embedChart(spec) {
+      vegaEmbed('#chart-container', spec, {actions: false}).catch(console.error);
+    }
+
+    // Initial chart load
+    embedChart(barChartSpec);
+
+    // Event listener for chart type selection
+    document.getElementById('chart-select').addEventListener('change', function() {
+      const selectedChart = this.value;
+      if (selectedChart === 'bar_chart') {
+        embedChart(barChartSpec);
+      } else if (selectedChart === 'waterfall_month') {
+        embedChart(waterfallmonthSpec);
+      }
+    });
+  </script>
 </body>
 </html>

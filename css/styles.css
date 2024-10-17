@@ -28,19 +28,22 @@
     border-radius: 15px;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
   }
-  .hero-section {
-    background: linear-gradient(135deg, #1b1b2f, #162447);
-    background-size: 200% 200%; /* For smooth gradient animation */
-    animation: backgroundAnimation 10s ease infinite; /* Animation for background */
+/* Hero Section */
+.hero-section {
+    background: linear-gradient(135deg, #1b1b2f, #162447, #1f4068);
+    background-size: 300% 300%;
+    animation: backgroundAnimation 15s ease infinite;
     color: #fff;
-    padding: 80px 40px;
+    padding: 100px 50px;
     text-align: center;
-    border-radius: 15px;
-    margin-bottom: 60px;
+    border-radius: 20px;
+    margin-bottom: 80px;
     position: relative;
     overflow: hidden;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    transition: box-shadow 0.3s ease;
   }
-
+  
   .hero-section::after {
     content: '';
     position: absolute;
@@ -50,36 +53,38 @@
     width: 100%;
     height: 100%;
     opacity: 0.1;
-    background: url('https://www.example.com/hero-overlay.png') no-repeat center center;
-    background-size: cover;
-    border-radius: 15px;
+    background: url('/img/baby.png') no-repeat center center;
+    background-size: 300px 200px;
+    border-radius: 20px;
     pointer-events: none;
   }
-
+  
   .hero-section h1 {
     font-family: 'Montserrat', sans-serif;
-    font-size: 3em;
-    margin-bottom: 20px;
+    font-size: 3.5em;
+    margin-bottom: 30px;
     position: relative;
     z-index: 1;
     opacity: 0;
-    transform: translateY(-20px);
-    animation: fadeInSlideDown 1.5s ease forwards 0.5s; /* Heading animation */
+    transform: translateY(-30px);
+    animation: fadeInSlideDown 1.8s ease forwards 0.5s;
+    letter-spacing: 1.5px;
   }
-
+  
   .hero-section p {
-    font-size: 1.3em;
-    max-width: 900px;
+    font-size: 1.5em;
+    max-width: 1000px;
     margin: 0 auto;
     position: relative;
     z-index: 1;
     opacity: 0;
-    transform: translateY(20px);
-    animation: fadeInSlideUp 1.5s ease forwards 1s; /* Paragraph animation */
+    transform: translateY(30px);
+    animation: fadeInSlideUp 2s ease forwards 1s;
+    color: #dcdde1;
   }
 
-  /* Background Animation */
-  @keyframes backgroundAnimation {
+/* Background Animation */
+@keyframes backgroundAnimation {
     0% {
       background-position: 0% 50%;
     }
@@ -90,36 +95,37 @@
       background-position: 0% 50%;
     }
   }
-
+  
   /* Text Fade-in and Slide Down */
   @keyframes fadeInSlideDown {
     0% {
       opacity: 0;
-      transform: translateY(-20px);
+      transform: translateY(-30px);
     }
     100% {
       opacity: 1;
       transform: translateY(0);
     }
   }
-
+  
   /* Text Fade-in and Slide Up */
   @keyframes fadeInSlideUp {
     0% {
       opacity: 0;
-      transform: translateY(20px);
+      transform: translateY(30px);
     }
     100% {
       opacity: 1;
       transform: translateY(0);
     }
-  }
-
+  }  
 
   /* Section Styles */
   section {
     margin-bottom: 70px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
   }
+  
   section h2 {
     font-family: 'Montserrat', sans-serif;
     font-size: 2.5em;
@@ -143,18 +149,26 @@
     text-align: justify;
     line-height: 1.8;
   }
-  .highlight-box {
-    background: #162447;
-    color: #ffffff;
-    padding: 25px 40px;
-    border-radius: 10px;
-    text-align: center;
-    font-size: 1.4em;
-    font-weight: 600;
-    margin: 50px 0;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-  }
+    /* Highlight Box */
+    .highlight-box {
+        background: linear-gradient(135deg, #162447, #1b1b2f);
+        color: #ffffff;
+        padding: 30px 50px;
+        border-radius: 15px;
+        text-align: center;
+        font-size: 1.5em;
+        font-weight: 700;
+        margin: 60px 0;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
 
+    .highlight-box:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+      }
+      
+  
   /* Visualizations */
   .visual-container {
     background: #f9f9f9;
@@ -173,29 +187,37 @@
     height: auto;
   }
 
-  /* Annotations */
-  .annotation {
+/* Annotations */
+.annotation {
     background: #e6f7ff;
-    border-left: 5px solid #1890ff;
-    padding: 15px 20px;
-    border-radius: 5px;
-    font-size: 1em;
+    border-left: 6px solid #1890ff;
+    padding: 20px 25px;
+    border-radius: 10px;
+    font-size: 1.1em;
     color: #333;
-    margin-top: 15px;
+    margin-top: 20px;
     position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
+  
+  .annotation:hover {
+    transform: translateX(10px);
+    box-shadow: 0 6px 15px rgba(24, 144, 255, 0.3);
+  }
+  
   .annotation::before {
     content: 'ℹ️';
     position: absolute;
-    left: 10px;
+    left: 15px;
     top: 50%;
     transform: translateY(-50%);
+    font-size: 1.5em;
   }
+  
   .annotation p {
-    margin-left: 30px;
+    margin-left: 40px;
   }
-
-  /* Footer */
+    /* Footer */
   .footer {
     text-align: center;
     padding: 25px;
@@ -342,3 +364,45 @@
     visibility: visible;  /* Make tooltip visible when icon is hovered */
     opacity: 1;
   }
+
+  /* Vega-lite dropdown filter looks good */
+      /* Custom styling for the Vega-Lite dropdown filters */
+      .vega-bindings select {
+        background: #fff;
+        color: #333;
+        padding: 10px 15px;
+        border: 2px solid #162447;
+        border-radius: 5px;
+        font-size: 1em;
+        min-width: 200px;
+        cursor: pointer;
+        transition: transform 0.2s, box-shadow 0.2s;
+      }
+  
+      .vega-bindings select:hover {
+        box-shadow: 0 0 10px rgba(24, 144, 255, 0.3);
+      }
+  
+      .vega-bindings select:focus {
+        outline: none;
+        border-color: #e94560;
+        box-shadow: 0 0 8px rgba(24, 144, 255, 0.6);
+      }
+  
+      .vega-bindings label {
+        font-weight: 600;
+        color: #162447;
+        margin-right: 8px;
+        font-size: 1.1em;
+      }
+  
+      .vega-bindings {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 20px;
+        background-color: #f0f0f0;
+        padding: 10px;
+        border-radius: 8px;
+      }  
+  
