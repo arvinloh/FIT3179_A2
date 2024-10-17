@@ -307,7 +307,7 @@
     padding: 10px;
     width: 180px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-    top: 1800px;  /* Adjusted to align better with the box */
+    top: 1100px;  /* Adjusted to align better with the box */
     left: 1215px; /* Positioned to center with respect to the box */
     z-index: 1000; /* High z-index to ensure it's above the Vega map */
   }
@@ -319,7 +319,7 @@
     border-left: 15px solid transparent;
     border-right: 15px solid transparent;
     border-top: 25px solid #333;  /* Create an actual arrow with a larger height to make it distinct */
-    top: 1850px;  /* Adjusted to align better with the box */
+    top: 1150px;  /* Adjusted to align better with the box */
     left: 1190px; /* Positioned to center with respect to the box */
     /* rotate it 90 deg */
     transform: rotate(90deg);
@@ -336,7 +336,7 @@
     font-weight: bold;
     /* italic */
     font-style: italic;
-    top: 2040px;  /* Adjusted to align better with the box */
+    top: 1340px;  /* Adjusted to align better with the box */
     left: 900px; /* Positioned to center with respect to the box */
     z-index: 1000; /* High z-index to ensure it's above the Vega map */
   }
