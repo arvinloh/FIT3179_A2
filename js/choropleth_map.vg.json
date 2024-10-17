@@ -95,7 +95,7 @@
         "color": {
           "field": "live_births",
           "type": "quantitative",
-          "scale": { "scheme": "blues" },
+          "scale": { "scheme": "goldgreen" },
           "legend": { "title": "Live Births" }
         },
         "tooltip": [

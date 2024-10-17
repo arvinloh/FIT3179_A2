@@ -336,7 +336,7 @@
     font-weight: bold;
     /* italic */
     font-style: italic;
-    top: 1340px;  /* Adjusted to align better with the box */
+    top: 1240px;  /* Adjusted to align better with the box */
     left: 900px; /* Positioned to center with respect to the box */
     z-index: 1000; /* High z-index to ensure it's above the Vega map */
   }

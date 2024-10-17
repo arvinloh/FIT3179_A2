@@ -144,7 +144,7 @@
     },
     { "calculate": "(datum.sum + datum.previous_sum) / 2", "as": "center" },
     {
-      "calculate": "state == 'NSW' ? '#E69F00' : state == 'Vic' ? '#56B4E9' : state == 'Qld' ? '#009E73' : state == 'WA' ? '#F0E442' : state == 'SA' ? '#0072B2' : state == 'Tas' ? '#D55E00' : state == 'ACT' ? '#CC79A7' : state == 'NT' ? '#999999' : '#93c4aa'",
+      "calculate": "state == 'NSW' ? '#E69F00' : state == 'Vic' ? '#56B4E9' : state == 'Qld' ? '#009E73' : state == 'WA' ? '#F0E442' : state == 'SA' ? '#0072B2' : state == 'Tas' ? '#D55E00' : state == 'ACT' ? '#CC79A7' : state == 'NT' ? '#999999' : '#bada55'",
       "as": "state_color"
     },
     { "window": [{ "op": "lead", "field": "label", "as": "lead" }] },
@@ -289,10 +289,10 @@
           "condition": [
             {
               "test": "datum.label === 'Total'",
-              "value": "#725a30"
+              "value": "#00008B"
             }
           ],
-          "value": "white"
+          "value": "f7e0b6"
         },
         "tooltip": [
           { "field": "label", "type": "nominal", "title": "BMI Category" },
